@@ -622,6 +622,17 @@ textarea {
   color: var(--gold-light);
 }
 
+.offer-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  align-items: center;
+}
+
+.offer-cta .brochure-link {
+  margin-top: 0;
+}
+
 /* ——— Proof ——— */
 .proof {
   padding: 108px 0;
@@ -986,6 +997,147 @@ textarea {
 
   .metrics {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+.offer h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.offer h3 a:hover,
+.offer h3 a:focus-visible {
+  color: var(--gold);
+}
+
+/* ——— Offer pages ——— */
+.page-hero {
+  padding: 48px 0 40px;
+}
+
+.page-hero h1 {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 300;
+  font-size: clamp(2.1rem, 4.2vw, 3.4rem);
+  line-height: 1.15;
+  color: var(--black);
+  max-width: 18ch;
+  margin: 14px 0 18px;
+}
+
+.page-hero .lede {
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  line-height: 1.75;
+  max-width: 40rem;
+}
+
+.page-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(40px, 6vw, 88px);
+  align-items: start;
+  padding: 24px 0 96px;
+}
+
+.page-block {
+  margin-bottom: 40px;
+}
+
+.page-block .kicker {
+  margin-bottom: 12px;
+}
+
+.page-block p,
+.page-block li {
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.source-note {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.page-aside {
+  background: var(--paper);
+  padding: 32px 28px;
+  border-top: 1px solid var(--gold-light);
+}
+
+.page-aside h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 400;
+  font-size: 1.6rem;
+  margin: 0 0 18px;
+}
+
+.page-aside .offer-points {
+  margin-bottom: 0;
+}
+
+.page-aside .offer-points li {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.page-stats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+}
+
+.page-stats .stat {
+  text-align: left;
+  padding: 0;
+  border-left: 0;
+}
+
+.page-stats .stat-num {
+  font-size: clamp(1.45rem, 2.4vw, 2rem);
+}
+
+.page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 22px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.page-actions .brochure-link {
+  margin-top: 0;
+}
+
+.source-note a {
+  color: var(--gold);
+}
+
+.page-cta {
+  background: var(--paper);
+  padding: 80px 0;
+  text-align: center;
+}
+
+.page-cta h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 300;
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  margin: 0 auto 16px;
+  max-width: 22ch;
+}
+
+.page-cta p {
+  max-width: 36rem;
+  margin: 0 auto 32px;
+}
+
+@media (max-width: 980px) {
+  .page-grid {
+    grid-template-columns: 1fr;
   }
 }
 
