@@ -24,11 +24,15 @@
 
 :root {
   --black: #0A0A0A;
+  --black-alt: #141414;
   --text: #1A1A1A;
   --gold: #B8860B;
   --gold-light: #C9A84C;
+  --gold-lighter: #E8C87A;
+  --cream: #F5F0E8;
   --white: #FFFFFF;
   --muted: #6B6B6B;
+  --text-muted: #6B6B6B;
   --rule: #E6E4DE;
   --paper: #F7F7F5;
   --ease: cubic-bezier(.22, .61, .36, 1);
@@ -448,6 +452,13 @@ textarea {
   margin-top: 18px;
 }
 
+.about-geo {
+  margin-top: 22px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text);
+}
+
 .about-photo {
   max-width: 300px;
   margin-bottom: 24px;
@@ -595,6 +606,22 @@ textarea {
   font-size: 14px;
 }
 
+.brochure-link {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: Inter, sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.brochure-link:hover,
+.brochure-link:focus-visible {
+  color: var(--gold-light);
+}
+
 /* ——— Proof ——— */
 .proof {
   padding: 108px 0;
@@ -618,6 +645,15 @@ textarea {
   gap: 28px;
   max-width: 900px;
   margin: 0 auto;
+}
+
+.metrics-note {
+  margin: 28px auto 0;
+  max-width: 36rem;
+  font-size: 13px;
+  line-height: 1.6;
+  font-weight: 300;
+  color: var(--text-muted);
 }
 
 /* ——— Band CTA ——— */
@@ -834,6 +870,14 @@ textarea {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   border-top: 1px solid var(--gold-light);
+}
+
+.footer-updated {
+  margin: 12px 0 0;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: none;
+  color: rgba(255, 255, 255, 0.55);
 }
 
 /* ——— Reveal ——— */
