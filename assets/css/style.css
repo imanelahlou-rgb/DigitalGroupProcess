@@ -117,6 +117,15 @@ textarea {
   color: var(--gold);
 }
 
+.hero-kicker {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  line-height: 1.55;
+  margin: 0 0 20px;
+  max-width: 38rem;
+}
+
 .rule {
   height: 1px;
   background: var(--rule);
@@ -433,6 +442,23 @@ textarea {
   font-size: clamp(1.05rem, 1.5vw, 1.18rem);
   line-height: 1.8;
   text-wrap: pretty;
+}
+
+.about-bio + .about-bio {
+  margin-top: 18px;
+}
+
+.about-photo {
+  max-width: 300px;
+  margin-bottom: 24px;
+}
+
+.about-photo img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #F5F0E8;
 }
 
 .founder {
@@ -844,6 +870,10 @@ textarea {
     aspect-ratio: 4 / 3;
   }
 
+  .about-photo {
+    max-width: min(300px, 100%);
+  }
+
   .stats-row,
   .metrics {
     grid-template-columns: 1fr 1fr;
@@ -890,6 +920,11 @@ textarea {
 
   .hero-copy h1 {
     font-size: clamp(1.85rem, 8vw, 2.4rem);
+  }
+
+  .hero-kicker {
+    font-size: 12px;
+    letter-spacing: 0.08em;
   }
 
   .about,
