@@ -77,7 +77,7 @@
       var fd = new FormData(form);
       var body = "Nom: " + (fd.get("name") || "") + "\nEmail: " + (fd.get("email") || "") +
         "\nOrganisation: " + (fd.get("org") || "") + "\n\n" + (fd.get("message") || "");
-      window.location.href = "mailto:imanelahlou9703@outlook.com?subject=" +
+      window.location.href = "mailto:contact@digitalprocessgrp.com?subject=" +
         encodeURIComponent("Contact Digital Process Group") + "&body=" + encodeURIComponent(body);
     });
   }
