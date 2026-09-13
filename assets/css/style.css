@@ -477,7 +477,9 @@ textarea {
 .about-balance {
   flex: 1 1 auto;
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
   margin-top: 28px;
   min-height: 120px;
   pointer-events: none;
@@ -487,6 +489,16 @@ textarea {
   width: min(100%, 280px);
   height: auto;
   display: block;
+}
+
+.about-balance-caption {
+  margin: 8px 0 0;
+  font-family: Inter, system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-light);
 }
 
 .about-photo {
