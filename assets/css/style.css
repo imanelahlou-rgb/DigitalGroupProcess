@@ -458,6 +458,17 @@ textarea {
   text-wrap: pretty;
 }
 
+.about-bio a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.about-bio a:hover,
+.about-bio a:focus-visible {
+  color: #8B6508;
+}
+
 .about-bio + .about-bio {
   margin-top: 18px;
 }
