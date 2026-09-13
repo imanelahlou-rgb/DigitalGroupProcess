@@ -426,6 +426,12 @@ textarea {
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
   gap: clamp(40px, 6vw, 96px);
+  align-items: stretch;
+}
+
+.about-grid > div:first-child {
+  display: flex;
+  flex-direction: column;
 }
 
 .about h2 {
@@ -466,6 +472,21 @@ textarea {
 .about-grid > div:first-child .founder {
   margin-top: 14px;
   margin-bottom: 0;
+}
+
+.about-balance {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: flex-end;
+  margin-top: 28px;
+  min-height: 120px;
+  pointer-events: none;
+}
+
+.about-balance-mark {
+  width: min(100%, 280px);
+  height: auto;
+  display: block;
 }
 
 .about-photo {
@@ -936,6 +957,10 @@ textarea {
 
   .about-photo {
     max-width: min(300px, 100%);
+  }
+
+  .about-balance {
+    display: none;
   }
 
   .stats-row,
