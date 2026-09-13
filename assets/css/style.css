@@ -442,6 +442,10 @@ textarea {
   margin-bottom: 22px;
 }
 
+.about-founder-label {
+  margin-bottom: 16px;
+}
+
 .about-bio {
   font-size: clamp(1.05rem, 1.5vw, 1.18rem);
   line-height: 1.8;
@@ -457,6 +461,11 @@ textarea {
   font-size: 15px;
   line-height: 1.7;
   color: var(--text);
+}
+
+.about-grid > div:first-child .founder {
+  margin-top: 14px;
+  margin-bottom: 0;
 }
 
 .about-photo {
