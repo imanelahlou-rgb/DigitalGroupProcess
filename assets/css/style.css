@@ -827,6 +827,10 @@ textarea {
   gap: clamp(40px, 6vw, 96px);
 }
 
+.contact-grid > * {
+  min-width: 0;
+}
+
 .contact h2 {
   font-family: "Cormorant Garamond", serif;
   font-weight: 300;
@@ -917,6 +921,41 @@ textarea {
 .form .btn {
   justify-content: center;
   margin-top: 8px;
+}
+
+.hero-copy .btn,
+.contact-aside > .btn {
+  max-width: 100%;
+  white-space: normal;
+  text-align: center;
+  justify-content: center;
+  line-height: 1.45;
+}
+
+.contact-booking-lead {
+  margin: 0 0 20px;
+  max-width: 36rem;
+}
+
+.contact-aside > .btn {
+  margin-bottom: 20px;
+}
+
+.calendly-embed {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.calendly-embed .calendly-inline-widget {
+  min-width: 0 !important;
+  width: 100% !important;
+  height: 700px;
+  max-width: 100%;
+}
+
+.contact-form {
+  margin-top: 36px;
 }
 
 .form-note {
