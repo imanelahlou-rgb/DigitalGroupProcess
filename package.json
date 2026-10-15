@@ -1,0 +1,21 @@
+{
+  "name": "digital-process-group-site",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Site Digital Process Group + quiz d'évaluation intégré",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "uuid": "^11.1.0"
+  }
+}

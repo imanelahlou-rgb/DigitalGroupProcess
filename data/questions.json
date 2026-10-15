@@ -1,0 +1,392 @@
+{
+  "quizTitle": "Quiz d'évaluation de niveau — Digital Process Group",
+  "totalQuestions": 25,
+  "scoring": {
+    "freeTextCorrect": 1,
+    "correctAfter4Choices": 0.5,
+    "correctAfter2Choices": 0.25,
+    "incorrect": 0,
+    "levelBands": [
+      { "min": 0, "max": 8, "level": "Débutant", "recommendation": "Démarrage approfondi au Module 1 — Fondamentaux de l'IA" },
+      { "min": 9, "max": 16, "level": "Intermédiaire", "recommendation": "Rappel rapide du Module 1, accent sur les modules IA agentique et sécurité" },
+      { "min": 17, "max": 25, "level": "Avancé", "recommendation": "Survol des fondamentaux, démarrage rapide sur le cas métier réel" }
+    ]
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "category": "Fondamentaux de l'IA",
+      "difficulty": "facile",
+      "question": "Que signifie LLM ?",
+      "referenceAnswer": "Large Language Model",
+      "explanation": "LLM signifie Large Language Model : un modèle entraîné sur d'énormes volumes de texte pour prédire et générer du langage. C'est la famille de modèles la plus répandue en IA générative aujourd'hui, à la base de GPT, Claude, Gemini, Llama, etc.",
+      "options": [
+        { "id": "a", "text": "Large Language Model" },
+        { "id": "b", "text": "Logical Learning Machine" },
+        { "id": "c", "text": "Linear Language Mapping" },
+        { "id": "d", "text": "Large Logic Model" }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "q2",
+      "category": "Fondamentaux de l'IA",
+      "difficulty": "facile",
+      "question": "Quel événement a déclenché l'adoption massive de l'IA générative grand public ?",
+      "referenceAnswer": "Le lancement de ChatGPT",
+      "explanation": "Le lancement public de ChatGPT fin 2022 a fait passer l'IA générative d'un sujet de laboratoire à un outil utilisé quotidiennement par le grand public et les entreprises. C'est ce tournant qui a lancé la vague d'adoption qu'on observe depuis.",
+      "options": [
+        { "id": "a", "text": "Le lancement de ChatGPT" },
+        { "id": "b", "text": "La création d'internet" },
+        { "id": "c", "text": "La sortie de Windows 95" },
+        { "id": "d", "text": "L'arrivée de la 5G" }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "q3",
+      "category": "Fondamentaux de l'IA",
+      "difficulty": "facile",
+      "question": "Un modèle « open-weight » signifie que :",
+      "referenceAnswer": "Ses poids sont publiés et peuvent être auto-hébergés",
+      "explanation": "Un modèle open-weight (comme Llama, Mistral, DeepSeek ou Qwen) publie ses paramètres entraînés : n'importe qui peut l'héberger sur sa propre infrastructure, le personnaliser et garder ses données en interne. C'est l'opposé d'un modèle propriétaire accessible uniquement via API.",
+      "options": [
+        { "id": "a", "text": "Ses poids sont publiés et peuvent être auto-hébergés" },
+        { "id": "b", "text": "Il est gratuit mais fermé" },
+        { "id": "c", "text": "Il fonctionne uniquement dans le cloud du fournisseur" },
+        { "id": "d", "text": "Il n'a pas de paramètres" }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "q4",
+      "category": "Fondamentaux de l'IA",
+      "difficulty": "moyen",
+      "question": "Quelle est la différence principale entre un modèle propriétaire (GPT, Claude, Gemini) et un modèle open-weight (Llama, Mistral) ?",
+      "referenceAnswer": "Accès via API uniquement vs poids publiés et auto-hébergeables",
+      "explanation": "Un modèle propriétaire n'est accessible que via une API — on ne voit ni les poids ni l'architecture interne, mais l'infrastructure est gérée par le fournisseur. Un modèle open-weight publie ses poids : on peut l'auto-héberger, le personnaliser en profondeur et garder toutes les données en interne, au prix d'une gestion technique plus lourde.",
+      "options": [
+        { "id": "a", "text": "Accès via API uniquement vs poids publiés et auto-hébergeables" },
+        { "id": "b", "text": "Le propriétaire est toujours gratuit" },
+        { "id": "c", "text": "L'open-weight ne peut jamais être personnalisé" },
+        { "id": "d", "text": "Aucune différence" }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "q5",
+      "category": "Fondamentaux de l'IA",
+      "difficulty": "moyen",
+      "question": "Qu'est-ce qu'une « hallucination » dans un LLM ?",
+      "referenceAnswer": "Une réponse fausse formulée avec assurance",
+      "explanation": "Une hallucination est une réponse incorrecte produite par le modèle, mais formulée avec la même fluidité et la même assurance qu'une réponse vraie — puisque le modèle calcule la suite la plus probable d'un texte, sans vérifier des faits contre une base vérifiée. C'est une limite structurelle, pas un simple bug ponctuel.",
+      "options": [
+        { "id": "a", "text": "Une réponse fausse formulée avec assurance" },
+        { "id": "b", "text": "Un bug qui bloque le modèle" },
+        { "id": "c", "text": "Une image générée par erreur" },
+        { "id": "d", "text": "Un message d'erreur système" }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "q6",
+      "category": "Fondamentaux de l'IA",
+      "difficulty": "moyen",
+      "question": "Que signifie RAG ?",
+      "referenceAnswer": "Retrieval-Augmented Generation",
+      "explanation": "RAG signifie Retrieval-Augmented Generation (génération augmentée par récupération) : une technique qui combine une étape de recherche documentaire avec la génération du LLM, pour que la réponse s'appuie sur des sources précises plutôt que sur la seule mémoire d'entraînement du modèle.",
+      "options": [
+        { "id": "a", "text": "Retrieval-Augmented Generation" },
+        { "id": "b", "text": "Random Access Generation" },
+        { "id": "c", "text": "Rapid AI Gateway" },
+        { "id": "d", "text": "Reasoning Agent Graph" }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "q7",
+      "category": "Fondamentaux de l'IA",
+      "difficulty": "moyen",
+      "question": "Pourquoi utilise-t-on le RAG ?",
+      "referenceAnswer": "Pour connecter l'IA à des données externes, privées ou récentes, absentes de son entraînement",
+      "explanation": "Le RAG répond directement à une limite fondamentale des LLM : les données privées de l'entreprise ou les événements récents, postérieurs à l'entraînement, sont absents de ce que le modèle a appris. Le RAG va chercher les passages pertinents dans une base documentaire au moment de la question, et les injecte dans le contexte donné au modèle avant qu'il génère sa réponse.",
+      "options": [
+        { "id": "a", "text": "Pour connecter l'IA à des données externes, privées ou récentes, absentes de son entraînement" },
+        { "id": "b", "text": "Pour accélérer le GPU" },
+        { "id": "c", "text": "Pour remplacer totalement le fine-tuning, dans tous les cas" },
+        { "id": "d", "text": "Pour chiffrer les réponses du modèle" }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "q8",
+      "category": "Fondamentaux de l'IA",
+      "difficulty": "moyen",
+      "question": "Dans l'architecture décodeur des LLM actuels, le texte est généré :",
+      "referenceAnswer": "Token après token, à partir de ce qui précède",
+      "explanation": "Un décodeur génère le texte de façon séquentielle, un token à la fois, en se basant sur tout ce qui a été généré avant. C'est l'architecture derrière la quasi-totalité des LLM actuels (GPT, Claude inclus), car elle passe mieux à l'échelle et généralise mieux sur des tâches inédites qu'un encodeur ou un encodeur-décodeur.",
+      "options": [
+        { "id": "a", "text": "Token après token, à partir de ce qui précède" },
+        { "id": "b", "text": "En une seule fois, phrase entière" },
+        { "id": "c", "text": "Par recherche en base de données uniquement" },
+        { "id": "d", "text": "Aléatoirement, sans contexte" }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "q9",
+      "category": "Fondamentaux de l'IA",
+      "difficulty": "moyen-difficile",
+      "question": "Que dit la littérature sur le choix entre fine-tuning et RAG ?",
+      "referenceAnswer": "Pas de règle universelle, ça dépend du domaine — et l'hybride des deux donne souvent la meilleure performance",
+      "explanation": "Il n'existe pas de règle simple du type « comportement = fine-tuning, connaissances = RAG ». Selon le domaine, le RAG l'emporte parfois largement (connaissances factuelles rares et spécialisées), le fine-tuning parfois (comportement stable et bien représenté dans les données) — mais ce qui ressort le plus clairement des études, c'est que combiner les deux donne presque toujours la performance la plus robuste.",
+      "options": [
+        { "id": "a", "text": "Pas de règle universelle, ça dépend du domaine — et l'hybride des deux donne souvent la meilleure performance" },
+        { "id": "b", "text": "Le fine-tuning est toujours plus efficace" },
+        { "id": "c", "text": "Le RAG est toujours plus efficace" },
+        { "id": "d", "text": "Les deux ne peuvent jamais être combinés" }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "q10",
+      "category": "Fondamentaux de l'IA",
+      "difficulty": "difficile",
+      "question": "Qu'est-ce qui distingue une vraie solution IA d'un simple LLM isolé ?",
+      "referenceAnswer": "La combinaison de plusieurs briques : modèle, données, RAG, outils, règles, parfois agents",
+      "explanation": "Un LLM seul n'est pas une solution — c'est un moteur, pas une voiture. Une vraie solution combine le modèle, les données de l'entreprise, un système RAG, des outils que le modèle peut appeler pour agir, des règles métier qui encadrent ce qu'il produit, et parfois des agents capables d'enchaîner plusieurs étapes de façon autonome. L'architecture se choisit à partir du besoin métier, jamais l'inverse.",
+      "options": [
+        { "id": "a", "text": "La combinaison de plusieurs briques : modèle, données, RAG, outils, règles, parfois agents" },
+        { "id": "b", "text": "Rien, un LLM seul suffit toujours" },
+        { "id": "c", "text": "Uniquement la taille du modèle en milliards de paramètres" },
+        { "id": "d", "text": "Le prix de l'abonnement à l'API" }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "q11",
+      "category": "Fondamentaux de l'IA agentique",
+      "difficulty": "moyen",
+      "question": "Qu'est-ce qui distingue un agent d'un simple chatbot ?",
+      "referenceAnswer": "L'agent décide, utilise des outils et agit pour atteindre un objectif",
+      "explanation": "Un chatbot se contente de répondre en texte à une question. Un agent va plus loin : il perçoit une situation, décide d'une action, utilise des outils (API, fonctions, bases de données) et exécute des étapes de façon autonome pour atteindre un objectif donné, pas seulement produire une réponse.",
+      "options": [
+        { "id": "a", "text": "L'agent décide, utilise des outils et agit pour atteindre un objectif" },
+        { "id": "b", "text": "Il ne fait que répondre en texte, comme un chatbot" },
+        { "id": "c", "text": "Il est toujours plus lent" },
+        { "id": "d", "text": "Aucune différence" }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "q12",
+      "category": "Fondamentaux de l'IA agentique",
+      "difficulty": "moyen",
+      "question": "Le raisonnement agentique repose typiquement sur :",
+      "referenceAnswer": "Une boucle perception → décision → action, avec appel d'outils",
+      "explanation": "Le raisonnement agentique s'organise en boucle : l'agent perçoit l'état actuel, décide de la prochaine action (souvent en appelant un outil externe), exécute cette action, puis réévalue la situation avant de décider de l'étape suivante. C'est cette boucle itérative qui permet de traiter des tâches complexes en plusieurs étapes.",
+      "options": [
+        { "id": "a", "text": "Une boucle perception → décision → action, avec appel d'outils" },
+        { "id": "b", "text": "Une simple recherche Google" },
+        { "id": "c", "text": "Un fichier Excel statique" },
+        { "id": "d", "text": "Un script exécuté une seule fois sans retour" }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "q13",
+      "category": "Fondamentaux de l'IA agentique",
+      "difficulty": "moyen-difficile",
+      "question": "Que signifie « self-evolving » pour un agent ?",
+      "referenceAnswer": "Sa capacité à s'auto-corriger et s'améliorer au fil de son exécution",
+      "explanation": "Un agent self-evolving est capable d'évaluer ses propres résultats, de détecter ses erreurs et d'ajuster sa stratégie sans intervention humaine à chaque étape. Cette capacité d'auto-correction continue le distingue d'un agent purement scripté qui suit toujours exactement la même procédure.",
+      "options": [
+        { "id": "a", "text": "Sa capacité à s'auto-corriger et s'améliorer au fil de l'exécution" },
+        { "id": "b", "text": "Sa capacité à changer de langage de programmation seul" },
+        { "id": "c", "text": "Le fait qu'il se supprime automatiquement après usage" },
+        { "id": "d", "text": "Sa capacité à fonctionner sans connexion internet" }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "q14",
+      "category": "Fondamentaux de l'IA agentique",
+      "difficulty": "moyen-difficile",
+      "question": "Dans une architecture multi-agents Superviseur/Planificateur/Exécuteur, le rôle du Planificateur est de :",
+      "referenceAnswer": "Décomposer l'objectif global en étapes exécutables",
+      "explanation": "Dans ce type d'architecture, le Superviseur coordonne l'ensemble, le Planificateur décompose l'objectif global en sous-étapes concrètes et ordonnées, et l'Exécuteur réalise chaque étape (souvent via des outils). Cette séparation des rôles permet de traiter des tâches complexes de façon plus fiable qu'un agent unique qui ferait tout en même temps.",
+      "options": [
+        { "id": "a", "text": "Décomposer l'objectif global en étapes exécutables" },
+        { "id": "b", "text": "Exécuter directement les actions finales" },
+        { "id": "c", "text": "Surveiller uniquement les coûts d'API" },
+        { "id": "d", "text": "Chiffrer les communications entre agents" }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "q15",
+      "category": "Fondamentaux de l'IA agentique",
+      "difficulty": "difficile",
+      "question": "Pourquoi le Function/Tool Calling est-il essentiel pour transformer un LLM en agent ?",
+      "referenceAnswer": "Il permet au modèle d'appeler des outils externes pour agir, pas seulement répondre en texte",
+      "explanation": "Le Function Calling (ou Tool Calling) est le mécanisme qui permet à un LLM d'invoquer des fonctions ou API externes — bases de données, calculateurs, systèmes métier — plutôt que de se limiter à produire du texte. C'est cette capacité à agir sur le monde réel, pas seulement à décrire une action, qui transforme un simple modèle de langage en agent opérationnel.",
+      "options": [
+        { "id": "a", "text": "Il permet au modèle d'appeler des outils externes pour agir, pas seulement répondre en texte" },
+        { "id": "b", "text": "Il sert uniquement à formater le texte en HTML" },
+        { "id": "c", "text": "Il remplace le besoin de prompt" },
+        { "id": "d", "text": "Il sert à chiffrer les données" }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "q16",
+      "category": "Fondamentaux de l'IA agentique",
+      "difficulty": "difficile",
+      "question": "Un benchmark sert, pour un système agentique, à :",
+      "referenceAnswer": "Mesurer et comparer objectivement sa performance sur des tâches types",
+      "explanation": "Un benchmark est un ensemble de tâches standardisées utilisé pour évaluer et comparer objectivement la performance d'un système — précision, fiabilité, coût, vitesse — plutôt que de se fier à une impression subjective. C'est indispensable pour savoir si une architecture agentique est réellement prête pour la production.",
+      "options": [
+        { "id": "a", "text": "Mesurer et comparer objectivement sa performance sur des tâches types" },
+        { "id": "b", "text": "Décorer l'interface utilisateur" },
+        { "id": "c", "text": "Remplacer les tests de sécurité" },
+        { "id": "d", "text": "Chiffrer les sorties du modèle" }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "q17",
+      "category": "Fondamentaux de l'IA agentique",
+      "difficulty": "moyen",
+      "question": "Pourquoi fait-on souvent collaborer plusieurs agents spécialisés plutôt qu'un seul agent généraliste ?",
+      "referenceAnswer": "Chaque agent se concentre sur une tâche précise, ce qui améliore la fiabilité et structure le travail complexe",
+      "explanation": "Un agent unique chargé de tout faire multiplie les occasions d'erreur et perd en précision sur chaque sous-tâche. En répartissant le travail entre agents spécialisés — chacun expert d'un périmètre restreint — et en les faisant collaborer, on obtient un système plus fiable, plus facile à déboguer et plus facile à faire évoluer qu'un agent généraliste unique.",
+      "options": [
+        { "id": "a", "text": "Chaque agent se concentre sur une tâche précise, ce qui améliore la fiabilité et structure le travail complexe" },
+        { "id": "b", "text": "Pour que le système coûte plus cher en API" },
+        { "id": "c", "text": "Parce qu'un seul agent ne peut techniquement jamais exister" },
+        { "id": "d", "text": "Pour ralentir volontairement le système" }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "q18",
+      "category": "Fondamentaux de l'IA agentique",
+      "difficulty": "moyen-difficile",
+      "question": "À quoi sert la mémoire (court terme et long terme) dans un système agentique ?",
+      "referenceAnswer": "Elle permet à l'agent de conserver le contexte entre les étapes et d'apprendre de ses interactions passées",
+      "explanation": "La mémoire court terme garde le fil d'une tâche en cours — ce qui a déjà été fait, décidé, observé — pour que l'agent n'ait pas à tout redemander à chaque étape. La mémoire long terme conserve des informations au-delà d'une seule session, permettant à l'agent de s'appuyer sur des interactions ou préférences passées plutôt que de repartir de zéro à chaque fois.",
+      "options": [
+        { "id": "a", "text": "Elle permet à l'agent de conserver le contexte entre les étapes et d'apprendre de ses interactions passées" },
+        { "id": "b", "text": "Elle sert uniquement à stocker le code source de l'agent" },
+        { "id": "c", "text": "Elle remplace totalement le besoin de prompt système" },
+        { "id": "d", "text": "Elle n'a aucun effet sur le comportement de l'agent" }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "q19",
+      "category": "Fondamentaux de l'IA agentique",
+      "difficulty": "moyen-difficile",
+      "question": "Que sont les « guardrails » (garde-fous) d'un système agentique ?",
+      "referenceAnswer": "Des règles et limites qui encadrent les actions autorisées de l'agent",
+      "explanation": "Les guardrails sont des règles explicites — techniques ou métier — qui définissent ce qu'un agent a le droit de faire et ce qu'il doit refuser ou escalader : quelles actions sont permises, quelles données il peut toucher, quelles limites ne jamais dépasser. Ils encadrent l'autonomie de l'agent pour éviter qu'une erreur de raisonnement ne se traduise par une action dangereuse ou hors périmètre.",
+      "options": [
+        { "id": "a", "text": "Des règles et limites qui encadrent les actions autorisées de l'agent" },
+        { "id": "b", "text": "Un type de carte graphique nécessaire pour faire tourner l'agent" },
+        { "id": "c", "text": "Une technique pour accélérer les réponses du modèle" },
+        { "id": "d", "text": "Un format de fichier de sauvegarde" }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "q20",
+      "category": "Fondamentaux de l'IA agentique",
+      "difficulty": "difficile",
+      "question": "Qu'est-ce que le « human-in-the-loop » dans un système agentique ?",
+      "referenceAnswer": "Un point de validation humaine avant qu'une action sensible ou irréversible ne soit exécutée",
+      "explanation": "Le human-in-the-loop insère un point d'arrêt où une personne doit valider ou peut bloquer une action avant qu'elle ne soit exécutée par l'agent — typiquement pour des actions sensibles, coûteuses ou irréversibles (envoi d'un email à un client, paiement, suppression de données). C'est un garde-fou organisationnel qui complète les guardrails techniques, particulièrement important tant que la confiance dans l'autonomie du système n'est pas pleinement établie.",
+      "options": [
+        { "id": "a", "text": "Un point de validation humaine avant qu'une action sensible ou irréversible ne soit exécutée" },
+        { "id": "b", "text": "Un agent qui imite parfaitement un humain" },
+        { "id": "c", "text": "Une boucle infinie dans le code de l'agent" },
+        { "id": "d", "text": "Un mode de fonctionnement sans aucune supervision" }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "q21",
+      "category": "Confidentialité et chiffrement",
+      "difficulty": "moyen",
+      "question": "Pourquoi ne jamais stocker une clé API en clair dans un code versionné sur GitHub ?",
+      "referenceAnswer": "Elle serait exposée à quiconque a accès au dépôt et pourrait être utilisée frauduleusement",
+      "explanation": "Une clé API versionnée en clair reste visible dans l'historique Git même si elle est supprimée plus tard, et devient accessible à quiconque consulte le dépôt — y compris s'il devient public par erreur. Une clé exposée peut être utilisée par un tiers, générant des coûts ou des accès non autorisés, d'où la règle de toujours passer par des variables d'environnement.",
+      "options": [
+        { "id": "a", "text": "Parce qu'elle serait exposée (ou à quiconque a accès au dépôt) et pourrait être utilisée frauduleusement" },
+        { "id": "b", "text": "Parce que GitHub la supprime automatiquement" },
+        { "id": "c", "text": "Parce que cela ralentit le code" },
+        { "id": "d", "text": "Ce n'est pas un problème si le dépôt est privé un jour" }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "q22",
+      "category": "Confidentialité et chiffrement",
+      "difficulty": "difficile",
+      "question": "Quelle est la différence entre chiffrement « au repos » et chiffrement « en transit » ?",
+      "referenceAnswer": "Au repos protège les données stockées, en transit protège les données pendant leur transfert réseau",
+      "explanation": "Le chiffrement au repos protège les données pendant qu'elles sont stockées (sur un disque, une base de données), pour qu'elles restent illisibles en cas d'accès non autorisé au stockage. Le chiffrement en transit protège les données pendant leur déplacement sur le réseau (ex. HTTPS), pour empêcher leur interception en cours de transfert. Les deux sont complémentaires, pas interchangeables.",
+      "options": [
+        { "id": "a", "text": "Au repos protège les données stockées, en transit protège les données pendant leur transfert réseau" },
+        { "id": "b", "text": "Ce sont deux noms pour la même chose" },
+        { "id": "c", "text": "Au repos concerne uniquement les mots de passe" },
+        { "id": "d", "text": "En transit ne s'applique qu'aux emails" }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "q23",
+      "category": "Confidentialité et chiffrement",
+      "difficulty": "difficile",
+      "question": "Dans un projet manipulant des données sensibles d'un opérateur télécom, quel principe consiste à ne donner à chaque composant que les accès strictement nécessaires à sa tâche ?",
+      "referenceAnswer": "Le principe du moindre privilège",
+      "explanation": "Le principe du moindre privilège consiste à n'accorder à chaque utilisateur, agent ou service que les droits et accès strictement nécessaires à l'accomplissement de sa tâche — rien de plus. Cela limite l'impact d'une faille ou d'une erreur : si un composant est compromis, les dégâts restent cantonnés à son périmètre d'accès limité.",
+      "options": [
+        { "id": "a", "text": "Le principe du moindre privilège" },
+        { "id": "b", "text": "Le principe de transparence totale" },
+        { "id": "c", "text": "Le principe d'accès maximal par défaut" },
+        { "id": "d", "text": "Le principe de redondance" }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "q24",
+      "category": "Confidentialité et chiffrement",
+      "difficulty": "moyen-difficile",
+      "question": "Qu'apporte l'anonymisation (ou la pseudonymisation) des données avant de les transmettre à une IA externe ?",
+      "referenceAnswer": "Elle retire ou masque les informations identifiant une personne, réduisant le risque en cas d'exposition",
+      "explanation": "Anonymiser ou pseudonymiser consiste à retirer ou remplacer les éléments qui permettraient d'identifier une personne (nom, numéro, email) avant d'envoyer des données à un service tiers, y compris un fournisseur d'IA. Même en cas de fuite, d'erreur de configuration ou d'usage non prévu des données par le fournisseur, le dommage reste limité puisque les données ne sont plus directement rattachables à un individu.",
+      "options": [
+        { "id": "a", "text": "Elle retire ou masque les informations identifiant une personne, réduisant le risque en cas d'exposition" },
+        { "id": "b", "text": "Elle accélère systématiquement les réponses du modèle" },
+        { "id": "c", "text": "Elle remplace le besoin de chiffrement" },
+        { "id": "d", "text": "Elle n'a d'effet que sur les fichiers images" }
+      ],
+      "correctOptionId": "a"
+    },
+    {
+      "id": "q25",
+      "category": "Confidentialité et chiffrement",
+      "difficulty": "difficile",
+      "question": "Pourquoi un opérateur télécom pourrait-il privilégier un modèle auto-hébergé ou un fournisseur sous contrat strict pour traiter ses données sensibles ?",
+      "referenceAnswer": "Pour garder le contrôle sur où et comment les données sont traitées, et éviter qu'elles servent à entraîner un modèle tiers",
+      "explanation": "Avec un modèle propriétaire accessible via API grand public, l'entreprise ne maîtrise ni l'infrastructure ni, parfois, l'usage ultérieur des données envoyées (entraînement du fournisseur, par exemple). Un modèle auto-hébergé, ou un fournisseur lié par un contrat strict excluant explicitement l'usage des données pour l'entraînement, permet de garder le contrôle sur la localisation, le traitement et la confidentialité des données sensibles — un enjeu particulièrement sensible pour un opérateur télécom qui manipule des données clients.",
+      "options": [
+        { "id": "a", "text": "Pour garder le contrôle sur où et comment les données sont traitées, et éviter qu'elles servent à entraîner un modèle tiers" },
+        { "id": "b", "text": "Parce que c'est toujours moins cher" },
+        { "id": "c", "text": "Parce que cela supprime le besoin de chiffrement" },
+        { "id": "d", "text": "Parce que la loi l'interdit dans tous les pays" }
+      ],
+      "correctOptionId": "a"
+    }
+  ]
+}

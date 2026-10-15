@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Quiz DPG — Évaluation de niveau</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+  <div class="page">
+    <!-- Accueil -->
+    <section id="welcome" class="shell welcome-shell">
+      <div class="welcome-hero">
+        <div class="hero-glow hero-glow-tr" aria-hidden="true"></div>
+        <div class="hero-glow hero-glow-bl" aria-hidden="true"></div>
+        <a href="/" class="logo-mark logo-mark-lg" aria-label="Retour au site Digital Process Group">D</a>
+        <div class="hero-eyebrow">Digital Process Group</div>
+        <h1 class="hero-title">Quiz d'évaluation<br>de niveau IA</h1>
+        <p class="hero-tagline">TRANSFORM. OPTIMIZE. INNOVATE.</p>
+      </div>
+
+      <div class="welcome-body">
+        <p class="welcome-intro">
+          <span class="welcome-hello">Bienvenue.</span><br><br>
+          Avant notre session, ce court échange nous permet de comprendre où vous en êtes — pour construire une formation qui s'adresse exactement à votre niveau, pas à une moyenne. Répondez simplement, avec vos mots : il n'y a pas de piège, seulement une photographie honnête de vos connaissances.
+        </p>
+
+        <div class="info-strip">
+          <div class="info-cell">
+            <div class="info-num">25</div>
+            <div class="info-label">Questions</div>
+          </div>
+          <div class="info-sep" aria-hidden="true"></div>
+          <div class="info-cell">
+            <div class="info-num">~15</div>
+            <div class="info-label">Minutes</div>
+          </div>
+          <div class="info-sep" aria-hidden="true"></div>
+          <div class="info-cell">
+            <div class="info-num">3</div>
+            <div class="info-label">Niveaux</div>
+          </div>
+        </div>
+
+        <div class="values-block">
+          <div class="values-title">Ce en quoi nous croyons</div>
+          <div class="value-card">
+            <div class="value-icon">R</div>
+            <div>
+              <div class="value-name">Rigueur</div>
+              <div class="value-desc">L'IA expliquée avec précision — jamais avec des raccourcis.</div>
+            </div>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">I</div>
+            <div>
+              <div class="value-name">Impact concret</div>
+              <div class="value-desc">Chaque mission se mesure en résultats réels et documentés.</div>
+            </div>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">É</div>
+            <div>
+              <div class="value-name">Élévation</div>
+              <div class="value-desc">Hausser le niveau des équipes — pas seulement livrer un outil.</div>
+            </div>
+          </div>
+        </div>
+
+        <form id="start-form" class="start-form">
+          <label for="name-input" class="name-label">Prénom <span class="optional">(optionnel)</span></label>
+          <input id="name-input" type="text" maxlength="80" placeholder="Votre prénom" autocomplete="given-name" />
+          <button type="submit" class="btn-cta" id="start-btn">
+            Commencer le quiz
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="#0A0A0A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </form>
+
+        <p class="privacy-note">Vos réponses restent confidentielles — usage interne DPG uniquement</p>
+      </div>
+    </section>
+
+    <!-- Conversation / choix -->
+    <section id="chat-screen" class="shell chat-shell" hidden>
+      <header class="chat-header">
+        <div class="chat-brand">
+          <div class="logo-mark">D</div>
+          <div>
+            <div class="chat-title">Quiz d'évaluation de niveau</div>
+            <div class="chat-subtitle">Digital Process Group</div>
+          </div>
+        </div>
+        <div class="progress-badge" id="progress-badge" aria-live="polite">
+          <span class="progress-num" id="progress-num">1</span>
+          <span class="progress-of">sur 25</span>
+        </div>
+      </header>
+
+      <div class="progress-track-wrap">
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill" style="width: 4%"></div>
+        </div>
+      </div>
+
+      <div id="messages" class="messages" role="log" aria-live="polite"></div>
+
+      <div id="thinking" class="thinking" hidden>
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="thinking-label">L'agent réfléchit…</span>
+      </div>
+
+      <div id="choices-wrap" class="choices-wrap" hidden>
+        <div id="choices" class="choices"></div>
+        <p id="choice-hint" class="choice-hint"></p>
+      </div>
+
+      <div id="composer" class="composer">
+        <form id="free-form" class="free-form">
+          <input
+            id="free-input"
+            type="text"
+            placeholder="Écrivez votre réponse…"
+            maxlength="2000"
+            autocomplete="off"
+            aria-label="Réponse libre"
+          />
+          <button type="submit" class="btn-send" id="send-btn" aria-label="Envoyer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 12L20 4L13 20L11 13L4 12Z" stroke="#FFFFFF" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Résultat -->
+    <section id="result-screen" class="shell result-shell" hidden>
+      <header class="chat-header result-header">
+        <div class="chat-brand">
+          <div class="logo-mark">D</div>
+          <div>
+            <div class="chat-title">Quiz d'évaluation de niveau</div>
+            <div class="chat-subtitle">Digital Process Group</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="result-body">
+        <div id="result-closing" class="msg-row agent"></div>
+
+        <div class="score-hero">
+          <div class="score-glow" aria-hidden="true"></div>
+          <div class="score-eyebrow">Niveau estimé</div>
+          <div class="score-level" id="result-level">—</div>
+          <div class="score-pill">
+            <span id="result-score">— / 25 points</span>
+          </div>
+        </div>
+
+        <div class="categories-block">
+          <div class="categories-title">Détail par catégorie</div>
+          <div id="result-categories" class="categories-list"></div>
+        </div>
+
+        <div id="result-advice" class="msg-row agent"></div>
+      </div>
+    </section>
+  </div>
+  <script src="js/app.js"></script>
+</body>
+</html>
