@@ -54,10 +54,14 @@ app.get(['/evaluation', '/evaluation/'], (_req, res) => {
   res.sendFile(path.join(ROOT, 'evaluation', 'index.html'));
 });
 
-// Marketing site (static) — exclude sensitive / server paths
+// Marketing site (static)
+app.get(['/', '/index.html'], (_req, res) => {
+  res.sendFile(path.join(ROOT, 'index.html'));
+});
+
 app.use(
   express.static(ROOT, {
-    index: 'index.html',
+    index: false,
     dotfiles: 'ignore',
     setHeaders(res, filePath) {
       if (filePath.endsWith('.html')) {
