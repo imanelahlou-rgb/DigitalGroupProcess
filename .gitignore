@@ -2,6 +2,7 @@
 .env
 .env.local
 .env.*.local
+!.env.example
 .vercel/
 dist/
 build/
@@ -12,6 +13,7 @@ Thumbs.db
 credentials*.json
 service-account*.json
 
-# Copies de travail obsolètes (code actif : src/ + evaluation/ + api/)
-quiz/
-lib/
+# Copie de travail obsolète à la racine (code actif : src/ + evaluation/ + api/)
+/quiz/
+/lib/
+/server.js

@@ -328,4 +328,6 @@ module.exports = {
   startQuiz,
   submitAnswer,
   getSession,
+  exportSessionToken,
+  importSessionToken,
 };
