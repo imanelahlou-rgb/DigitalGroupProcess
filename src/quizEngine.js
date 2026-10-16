@@ -151,14 +151,11 @@ function parseLead(body) {
 
 async function startQuiz(body) {
   const lead = parseLead(typeof body === 'string' ? { prenom: body } : body);
-  // CRM Airtable : best-effort — ne bloque jamais le démarrage du quiz
   try {
     await saveEvaluationLead(lead);
   } catch (err) {
-    console.error(
-      'airtable lead error (quiz continues):',
-      err.airtableType || err.status || err.message
-    );
+    console.error('airtable lead error:', err.airtableType || (err.status === 500 ? 'config-missing' : err.status));
+    throw httpError(502, "Impossible d'enregistrer vos coordonnées pour le moment. Réessayez.");
   }
   const session = createSession(lead.prenom);
   const q = getQuestionByIndex(0);

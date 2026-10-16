@@ -19,6 +19,7 @@ app.get('/api/health', (_req, res) => {
     title: getQuizTitle(),
     questions: getQuestions().length,
     hasGeminiKey: Boolean(process.env.GEMINI_API_KEY),
+    hasAirtable: Boolean(process.env.AIRTABLE_API_KEY && process.env.AIRTABLE_BASE_ID),
   });
 });
 
