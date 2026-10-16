@@ -1,5 +1,4 @@
 const crypto = require('crypto');
-const { getScoring } = require('./knowledge');
 
 function getSecret() {
   return process.env.SESSION_SECRET || process.env.GEMINI_API_KEY || 'dpg-quiz-dev-secret';
@@ -12,17 +11,12 @@ function sign(body) {
 function exportSessionToken(session) {
   const payload = {
     id: session.id,
-    name: session.name,
     createdAt: session.createdAt,
-    currentIndex: session.currentIndex,
-    stage: session.stage,
-    scores: session.scores,
-    categoryScores: session.categoryScores,
-    choice4Options: session.choice4Options,
-    choice2Options: session.choice2Options,
-    clarificationCount: session.clarificationCount || 0,
+    profile: session.profile,
+    answers: session.answers,
     completed: session.completed,
-    totalQuestions: session.totalQuestions,
+    recorded: session.recorded,
+    summary: session.summary,
   };
   const body = Buffer.from(JSON.stringify(payload), 'utf8').toString('base64url');
   return `${body}.${sign(body)}`;
@@ -39,9 +33,9 @@ function importSessionToken(token) {
   if (a.length !== b.length || !crypto.timingSafeEqual(a, b)) return null;
   try {
     const payload = JSON.parse(Buffer.from(body, 'base64url').toString('utf8'));
+    if (!payload || typeof payload !== 'object' || !payload.id) return null;
     return {
       ...payload,
-      scoring: getScoring(),
       updatedAt: Date.now(),
     };
   } catch {

@@ -19,3 +19,6 @@ service-account*.json
 /server.js
 .vercel
 .env*
+
+# Résultats d'évaluation (données personnelles)
+data/results.csv

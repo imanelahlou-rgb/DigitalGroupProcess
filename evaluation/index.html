@@ -12,7 +12,6 @@
 </head>
 <body>
   <div class="page">
-    <!-- Accueil -->
     <section id="welcome" class="shell welcome-shell">
       <div class="welcome-hero">
         <div class="hero-glow hero-glow-tr" aria-hidden="true"></div>
@@ -26,17 +25,17 @@
       <div class="welcome-body">
         <p class="welcome-intro">
           <span class="welcome-hello">Bienvenue.</span><br><br>
-          Avant notre session, ce court échange nous permet de comprendre où vous en êtes — pour construire une formation qui s'adresse exactement à votre niveau, pas à une moyenne. Répondez simplement, avec vos mots : il n'y a pas de piège, seulement une photographie honnête de vos connaissances.
+          Quelques informations nous permettent d'orienter le questionnaire — profil technique ou non technique — puis 20 questions à choix unique dressent une photographie honnête de votre niveau.
         </p>
 
         <div class="info-strip">
           <div class="info-cell">
-            <div class="info-num">25</div>
+            <div class="info-num">20</div>
             <div class="info-label">Questions</div>
           </div>
           <div class="info-sep" aria-hidden="true"></div>
           <div class="info-cell">
-            <div class="info-num">~15</div>
+            <div class="info-num">~10</div>
             <div class="info-label">Minutes</div>
           </div>
           <div class="info-sep" aria-hidden="true"></div>
@@ -71,11 +70,56 @@
           </div>
         </div>
 
-        <form id="start-form" class="start-form">
-          <label for="name-input" class="name-label">Prénom <span class="optional">(optionnel)</span></label>
-          <input id="name-input" type="text" maxlength="80" placeholder="Votre prénom" autocomplete="given-name" />
+        <form id="start-form" class="qual-form" novalidate>
+          <p id="form-error" class="form-error" hidden></p>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="prenom" class="name-label">Prénom <span class="req">*</span></label>
+              <input id="prenom" name="prenom" type="text" maxlength="80" autocomplete="given-name" required />
+            </div>
+            <div class="field">
+              <label for="nom" class="name-label">Nom <span class="req">*</span></label>
+              <input id="nom" name="nom" type="text" maxlength="80" autocomplete="family-name" required />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="email" class="name-label">Email professionnel <span class="req">*</span></label>
+            <input id="email" name="email" type="email" maxlength="120" autocomplete="email" required />
+          </div>
+
+          <div class="field">
+            <label for="telephone" class="name-label">Téléphone <span class="req">*</span></label>
+            <input id="telephone" name="telephone" type="tel" maxlength="30" autocomplete="tel" placeholder="+212 612 345678" required />
+            <p class="field-hint">Format international, avec l'indicatif. Ex. +212 612 345678</p>
+          </div>
+
+          <div class="field">
+            <label for="metier" class="name-label">Métier / fonction actuelle <span class="req">*</span></label>
+            <input id="metier" name="metier" type="text" maxlength="160" autocomplete="organization-title" required />
+          </div>
+
+          <fieldset class="qual-set">
+            <legend class="qual-legend" id="niveau-label">Niveau de connaissance en IA <span class="req">*</span></legend>
+            <div class="option-grid" role="radiogroup" aria-labelledby="niveau-label">
+              <label class="option-card"><input type="radio" name="niveauDeclare" value="Débutant" required /> <span>Débutant</span></label>
+              <label class="option-card"><input type="radio" name="niveauDeclare" value="Notions de base" /> <span>Notions de base</span></label>
+              <label class="option-card"><input type="radio" name="niveauDeclare" value="Confortable" /> <span>Confortable</span></label>
+              <label class="option-card"><input type="radio" name="niveauDeclare" value="Avancé" /> <span>Avancé</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="qual-set">
+            <legend class="qual-legend" id="route-label">Votre rôle implique-t-il des compétences techniques (développement, administration systèmes, réseaux, data) ? <span class="req">*</span></legend>
+            <div class="option-grid two" role="radiogroup" aria-labelledby="route-label">
+              <label class="option-card"><input type="radio" name="technique" value="oui" required /> <span>Oui</span></label>
+              <label class="option-card"><input type="radio" name="technique" value="non" /> <span>Non</span></label>
+            </div>
+          </fieldset>
+
           <button type="submit" class="btn-cta" id="start-btn">
-            Commencer le quiz
+            Commencer l'évaluation
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="#0A0A0A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -86,67 +130,46 @@
       </div>
     </section>
 
-    <!-- Conversation / choix -->
-    <section id="chat-screen" class="shell chat-shell" hidden>
+    <section id="quiz-screen" class="shell quiz-shell" hidden>
       <header class="chat-header">
         <div class="chat-brand">
           <div class="logo-mark">D</div>
           <div>
             <div class="chat-title">Quiz d'évaluation de niveau</div>
-            <div class="chat-subtitle">Digital Process Group</div>
+            <div class="chat-subtitle" id="quiz-subtitle">Digital Process Group</div>
           </div>
         </div>
         <div class="progress-badge" id="progress-badge" aria-live="polite">
           <span class="progress-num" id="progress-num">1</span>
-          <span class="progress-of">sur 25</span>
+          <span class="progress-of">sur 20</span>
         </div>
       </header>
 
       <div class="progress-track-wrap">
         <div class="progress-track">
-          <div class="progress-fill" id="progress-fill" style="width: 4%"></div>
+          <div class="progress-fill" id="progress-fill" style="width: 5%"></div>
         </div>
       </div>
 
-      <div id="messages" class="messages" role="log" aria-live="polite"></div>
-
-      <div id="thinking" class="thinking" hidden>
-        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-        <span class="thinking-label">L'agent réfléchit…</span>
-      </div>
-
-      <div id="choices-wrap" class="choices-wrap" hidden>
-        <div id="choices" class="choices"></div>
-        <p id="choice-hint" class="choice-hint"></p>
-      </div>
-
-      <div id="composer" class="composer">
-        <form id="free-form" class="free-form">
-          <input
-            id="free-input"
-            type="text"
-            placeholder="Écrivez votre réponse…"
-            maxlength="2000"
-            autocomplete="off"
-            aria-label="Réponse libre"
-          />
-          <button type="submit" class="btn-send" id="send-btn" aria-label="Envoyer">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M4 12L20 4L13 20L11 13L4 12Z" stroke="#FFFFFF" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
-            </svg>
-          </button>
-        </form>
+      <div class="quiz-body">
+        <div class="quiz-category" id="q-category"></div>
+        <h2 class="quiz-question" id="q-text"></h2>
+        <div id="choices" class="choices" role="listbox" aria-label="Réponses"></div>
+        <div id="feedback" class="feedback" hidden>
+          <p id="feedback-status" class="feedback-status"></p>
+          <p id="feedback-explanation" class="feedback-explanation"></p>
+          <button type="button" class="btn-cta" id="next-btn">Question suivante</button>
+        </div>
       </div>
     </section>
 
-    <!-- Résultat -->
     <section id="result-screen" class="shell result-shell" hidden>
       <header class="chat-header result-header">
         <div class="chat-brand">
           <div class="logo-mark">D</div>
           <div>
             <div class="chat-title">Quiz d'évaluation de niveau</div>
-            <div class="chat-subtitle">Digital Process Group</div>
+            <div class="chat-subtitle" id="result-subtitle">Digital Process Group</div>
           </div>
         </div>
       </header>
@@ -156,10 +179,10 @@
 
         <div class="score-hero">
           <div class="score-glow" aria-hidden="true"></div>
-          <div class="score-eyebrow">Niveau estimé</div>
+          <div class="score-eyebrow" id="result-eyebrow">Niveau estimé</div>
           <div class="score-level" id="result-level">—</div>
           <div class="score-pill">
-            <span id="result-score">— / 25 points</span>
+            <span id="result-score">— / 20 points</span>
           </div>
         </div>
 
@@ -169,6 +192,8 @@
         </div>
 
         <div id="result-advice" class="msg-row agent"></div>
+
+        <button type="button" class="btn-cta btn-ghost" id="restart-btn">Nouvelle évaluation</button>
       </div>
     </section>
   </div>

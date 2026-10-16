@@ -1,75 +1,55 @@
 const path = require('path');
 const fs = require('fs');
 
-const knowledgePath = path.join(__dirname, '..', 'data', 'questions.json');
-const knowledge = JSON.parse(fs.readFileSync(knowledgePath, 'utf8'));
-
-function getQuestions() {
-  return knowledge.questions;
-}
-
-function getScoring() {
-  return knowledge.scoring;
-}
-
-function getQuizTitle() {
-  return knowledge.quizTitle;
-}
-
-function getQuestionByIndex(index) {
-  return knowledge.questions[index] || null;
-}
-
-function getLevelBand(totalScore) {
-  const bands = knowledge.scoring.levelBands;
-  return bands.find((b) => totalScore >= b.min && totalScore <= b.max) || bands[0];
-}
-
-function getCategories() {
-  const cats = [];
-  for (const q of knowledge.questions) {
-    if (!cats.includes(q.category)) cats.push(q.category);
+function load(name) {
+  const file = path.join(__dirname, '..', 'data', `${name}.json`);
+  const quiz = JSON.parse(fs.readFileSync(file, 'utf8'));
+  if (!Array.isArray(quiz.questions) || quiz.questions.length !== 20) {
+    throw new Error(`${name}: 20 questions attendues, reçu ${quiz.questions?.length}`);
   }
-  return cats;
-}
-
-/** Display label for the results UI (aligned with resultat.html). */
-function categoryDisplayName(category) {
-  if (category === 'Confidentialité et chiffrement') {
-    return 'Confidentialité & chiffrement';
+  if (!Array.isArray(quiz.scoring?.levelBands) || quiz.scoring.levelBands.length === 0) {
+    throw new Error(`${name}: levelBands manquants`);
   }
-  return category;
+  return quiz;
 }
 
-/** Distractors in original options order (excluding correct). */
-function getDistractors(question) {
-  return question.options.filter((o) => o.id !== question.correctOptionId);
-}
+const quizzes = {
+  technique: load('quiz_technique'),
+  'non-technique': load('quiz_non_technique'),
+};
 
-function getCorrectOption(question) {
-  return question.options.find((o) => o.id === question.correctOptionId);
-}
-
-/** Shuffle array (Fisher–Yates), returns new array. */
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
+function getQuiz(profile) {
+  const quiz = quizzes[profile];
+  if (!quiz) {
+    const err = new Error('Profil de QCM inconnu');
+    err.status = 400;
+    throw err;
   }
-  return a;
+  return quiz;
+}
+
+function getLevelBand(profile, totalScore) {
+  const bands = getQuiz(profile).scoring.levelBands;
+  return bands.find((b) => totalScore >= b.min && totalScore <= b.max) || bands[bands.length - 1];
+}
+
+function publicQuestion(question) {
+  return {
+    id: question.id,
+    category: question.category,
+    difficulty: question.difficulty,
+    question: question.question,
+    options: question.options.map((o) => ({ id: o.id, text: o.text })),
+  };
+}
+
+function listProfiles() {
+  return Object.fromEntries(Object.entries(quizzes).map(([key, quiz]) => [key, quiz.questions.length]));
 }
 
 module.exports = {
-  getQuestions,
-  getScoring,
-  getQuizTitle,
-  getQuestionByIndex,
+  getQuiz,
   getLevelBand,
-  getCategories,
-  categoryDisplayName,
-  getDistractors,
-  getCorrectOption,
-  shuffle,
-  knowledge,
+  publicQuestion,
+  listProfiles,
 };
