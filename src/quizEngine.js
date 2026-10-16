@@ -4,16 +4,16 @@ const {
   getScoring,
   getQuestionByIndex,
   getLevelBand,
-  getDistractors,
-  getCorrectOption,
   shuffle,
+  categoryDisplayName,
 } = require('./knowledge');
-const gemini = require('./gemini');
 const { exportSessionToken, importSessionToken } = require('./sessionToken');
-const { saveEvaluationLead } = require('./airtable');
+const { saveEvaluationLead, saveEvaluationResult } = require('./airtable');
 
 const sessions = new Map();
 const SESSION_TTL_MS = 4 * 60 * 60 * 1000;
+
+const NIVEAUX_DECLARES = ['Débutant', 'Notions de base', 'Confortable', 'Avancé'];
 
 function cleanupSessions() {
   const now = Date.now();
@@ -23,23 +23,66 @@ function cleanupSessions() {
 }
 setInterval(cleanupSessions, 30 * 60 * 1000).unref();
 
-function createSession(name = '') {
-  const scoring = getScoring();
-  const questions = getQuestions();
+function cleanText(value, max) {
+  return String(value || '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, max);
+}
+
+function httpError(status, message) {
+  const err = new Error(message);
+  err.status = status;
+  return err;
+}
+
+function parseLead(body) {
+  const src = body || {};
+  const prenom = cleanText(src.prenom || src.name, 80);
+  const nom = cleanText(src.nom, 80);
+  const email = cleanText(src.email, 120).toLowerCase();
+  const telephone = cleanText(src.telephone, 30);
+  const metier = cleanText(src.metier, 160);
+  const niveauDeclare = cleanText(src.niveauDeclare || src.niveau_declare, 40);
+  const roleRaw = cleanText(src.roleTechnique || src.role_technique || src.routing, 10).toLowerCase();
+
+  if (!prenom) throw httpError(400, 'Le prénom est obligatoire.');
+  if (!nom) throw httpError(400, 'Le nom est obligatoire.');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+    throw httpError(400, 'Indiquez un email professionnel valide.');
+  }
+  const digits = telephone.replace(/\D/g, '');
+  if (!/^\+[1-9][\d\s().-]{7,20}$/.test(telephone) || digits.length < 8 || digits.length > 15) {
+    throw httpError(400, 'Indiquez un téléphone au format international, par exemple +212 612 345678.');
+  }
+  if (!metier) throw httpError(400, 'Le métier ou la fonction est obligatoire.');
+  if (!NIVEAUX_DECLARES.includes(niveauDeclare)) {
+    throw httpError(400, 'Indiquez votre niveau de connaissance en IA.');
+  }
+
+  let roleTechnique;
+  if (roleRaw === 'oui' || roleRaw === 'yes' || roleRaw === 'true') roleTechnique = true;
+  else if (roleRaw === 'non' || roleRaw === 'no' || roleRaw === 'false') roleTechnique = false;
+  else throw httpError(400, 'Indiquez si votre rôle implique des compétences techniques.');
+
+  const profilQcm = roleTechnique ? 'technique' : 'non-technique';
+  return { prenom, nom, email, telephone, metier, niveauDeclare, roleTechnique, profilQcm };
+}
+
+function createSession(profile) {
+  const scoring = getScoring(profile.profilQcm);
+  const questions = getQuestions(profile.profilQcm);
   const session = {
     id: uuidv4(),
-    name: (name || '').trim().slice(0, 80),
+    name: profile.prenom,
+    profile,
+    profilQcm: profile.profilQcm,
     createdAt: Date.now(),
     updatedAt: Date.now(),
     currentIndex: 0,
-    /** free | choice4 | choice2 | finished */
-    stage: 'free',
-    scores: {}, // qId -> number
+    stage: 'choice',
+    scores: {},
     categoryScores: {},
-    choice4Options: null,
-    choice2Options: null,
-    /** How many times the user asked to rephrase the current question */
-    clarificationCount: 0,
     completed: false,
     totalQuestions: questions.length,
     scoring,
@@ -68,14 +111,22 @@ function getSession(id, sessionToken) {
 }
 
 function progress(session) {
-  // Advances only when a question is definitively resolved
   return {
     current: Math.min(session.currentIndex + (session.completed ? 1 : 0), session.totalQuestions),
-    // Show "Question N/25" for the question being answered; when finished show 25/25
     displayCurrent: session.completed
       ? session.totalQuestions
       : session.currentIndex + 1,
     total: session.totalQuestions,
+  };
+}
+
+function publicQuestion(question) {
+  return {
+    id: question.id,
+    category: categoryDisplayName(question.category),
+    difficulty: question.difficulty,
+    text: question.question,
+    options: shuffle(question.options).map((o) => ({ id: o.id, text: o.text })),
   };
 }
 
@@ -84,284 +135,132 @@ function publicState(session, extra = {}) {
     sessionId: session.id,
     sessionToken: exportSessionToken(session),
     name: session.name,
+    profilQcm: session.profilQcm,
     stage: session.stage,
     completed: session.completed,
     progress: progress(session),
+    inputMode: session.completed ? 'done' : 'choice',
     ...extra,
   };
-}
-
-function buildChoice4(question) {
-  return shuffle(question.options).map((o) => ({ id: o.id, text: o.text }));
-}
-
-function buildChoice2(question) {
-  const correct = getCorrectOption(question);
-  const distractors = getDistractors(question);
-  // Deterministic: correct + first distractor from original distractor list
-  const pair = [correct, distractors[0]];
-  return shuffle(pair).map((o) => ({ id: o.id, text: o.text }));
-}
-
-function awardPoints(session, question, points) {
-  session.scores[question.id] = points;
-  session.categoryScores[question.category].score += points;
 }
 
 function totalScore(session) {
   return Object.values(session.scores).reduce((a, b) => a + b, 0);
 }
 
-function roundScore(n) {
-  return Math.round(n * 100) / 100;
-}
-
-function cleanText(value, max) {
-  return String(value || '')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .slice(0, max);
-}
-
-function httpError(status, message) {
-  const err = new Error(message);
-  err.status = status;
-  return err;
-}
-
-function parseLead(body) {
-  const src = body || {};
-  const prenom = cleanText(src.prenom || src.name, 80);
-  const nom = cleanText(src.nom, 80);
-  const email = cleanText(src.email, 120).toLowerCase();
-  const telephone = cleanText(src.telephone, 30);
-  const metier = cleanText(src.metier, 160);
-  if (!prenom) throw httpError(400, 'Le prénom est obligatoire.');
-  if (!nom) throw httpError(400, 'Le nom est obligatoire.');
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
-    throw httpError(400, 'Indiquez un email professionnel valide.');
+function buildSummary(session) {
+  const total = totalScore(session);
+  const band = getLevelBand(session.profilQcm, total);
+  const byCategory = {};
+  for (const [cat, data] of Object.entries(session.categoryScores)) {
+    byCategory[categoryDisplayName(cat)] = {
+      score: data.score,
+      max: data.max,
+    };
   }
-  const digits = telephone.replace(/\D/g, '');
-  if (!/^\+[1-9][\d\s().-]{7,20}$/.test(telephone) || digits.length < 8 || digits.length > 15) {
-    throw httpError(400, 'Indiquez un téléphone au format international, par exemple +212 612 345678.');
-  }
-  if (!metier) throw httpError(400, 'Le métier ou la fonction est obligatoire.');
-  return { prenom, nom, email, telephone, metier };
+  return {
+    totalScore: total,
+    maxScore: session.totalQuestions,
+    level: band.level,
+    recommendation: band.recommendation,
+    advice: band.recommendation,
+    byCategory,
+  };
 }
 
 async function startQuiz(body) {
   const lead = parseLead(typeof body === 'string' ? { prenom: body } : body);
   try {
-    await saveEvaluationLead(lead);
+    await saveEvaluationLead({
+      prenom: lead.prenom,
+      nom: lead.nom,
+      email: lead.email,
+      telephone: lead.telephone,
+      metier: lead.metier,
+      niveauDeclare: lead.niveauDeclare,
+      profilQcm: lead.profilQcm,
+      dateDernierPassage: new Date().toISOString(),
+    });
   } catch (err) {
-    console.error('airtable lead error:', err.airtableType || (err.status === 500 ? 'config-missing' : err.status));
+    console.error('airtable lead error:', err.airtableType || (err.status === 500 ? 'config-missing' : err.status), err.message);
     throw httpError(502, "Impossible d'enregistrer vos coordonnées pour le moment. Réessayez.");
   }
-  const session = createSession(lead.prenom);
-  const q = getQuestionByIndex(0);
-  const greeting = session.name
-    ? `Bonjour ${session.name} — bienvenue dans le quiz d'évaluation Digital Process Group. Je vais vous poser 25 questions, une par une. Répondez d'abord librement avec vos propres mots ; si besoin, je vous proposerai des choix. On commence.`
-    : `Bonjour — bienvenue dans le quiz d'évaluation Digital Process Group. Je vais vous poser 25 questions, une par une. Répondez d'abord librement avec vos propres mots ; si besoin, je vous proposerai des choix. On commence.`;
+
+  const session = createSession(lead);
+  const q = getQuestionByIndex(lead.profilQcm, 0);
+  return publicState(session, {
+    question: publicQuestion(q),
+    options: null,
+  });
+}
+
+async function finishSession(session, lastAnswer) {
+  session.completed = true;
+  session.stage = 'finished';
+  session.currentIndex = session.totalQuestions;
+  const summary = buildSummary(session);
+  session.summary = summary;
+
+  try {
+    await saveEvaluationResult({
+      prenom: session.profile.prenom,
+      nom: session.profile.nom,
+      email: session.profile.email,
+      telephone: session.profile.telephone,
+      metier: session.profile.metier,
+      niveauDeclare: session.profile.niveauDeclare,
+      profilQcm: session.profilQcm,
+      score: summary.totalScore,
+      niveauCalcule: summary.level,
+      recommandation: summary.recommendation,
+      dateDernierPassage: new Date().toISOString(),
+    });
+  } catch (err) {
+    console.error('airtable result error:', err.airtableType || err.status, err.message);
+  }
 
   return publicState(session, {
-    messages: [
-      { role: 'agent', text: greeting },
-      { role: 'agent', text: q.question },
-    ],
-    inputMode: 'free',
+    question: null,
     options: null,
+    lastAnswer,
+    summary,
   });
 }
 
 async function submitAnswer(sessionId, payload) {
   const session = getSession(sessionId, payload?.sessionToken);
-  if (!session) {
-    const err = new Error('Session introuvable');
-    err.status = 404;
-    throw err;
-  }
-  if (session.completed) {
-    const err = new Error('Quiz déjà terminé');
-    err.status = 400;
-    throw err;
-  }
+  if (!session) throw httpError(404, 'Session introuvable');
+  if (session.completed) throw httpError(400, 'Quiz déjà terminé');
 
-  const question = getQuestionByIndex(session.currentIndex);
-  if (!question) {
-    const err = new Error('Question introuvable');
-    err.status = 400;
-    throw err;
-  }
+  const optionId = cleanText(payload?.optionId, 8).toLowerCase();
+  if (!/^[a-d]$/.test(optionId)) throw httpError(400, 'Choisissez une des quatre options.');
 
-  const scoring = getScoring();
-  const messages = [];
-  let inputMode = 'free';
-  let options = null;
+  const question = getQuestionByIndex(session.profilQcm, session.currentIndex);
+  if (!question) throw httpError(400, 'Question introuvable');
 
-  if (session.stage === 'free') {
-    const text = (payload.text || '').trim();
-    if (!text) {
-      const err = new Error('Réponse vide');
-      err.status = 400;
-      throw err;
-    }
-    messages.push({ role: 'user', text });
+  const correct = optionId === question.correctOptionId;
+  const points = correct ? session.scoring.correct : session.scoring.incorrect;
+  session.scores[question.id] = points;
+  session.categoryScores[question.category].score += points;
 
-    // Clarification request: rephrase, do not judge, do not advance progress
-    if (gemini.isClarificationRequest(text)) {
-      const attempt = session.clarificationCount || 0;
-      session.clarificationCount = attempt + 1;
-      const rephrased = await gemini.rephraseQuestion(question, attempt);
-      messages.push({ role: 'agent', text: rephrased });
-      return publicState(session, {
-        messages,
-        inputMode: 'free',
-        options: null,
-      });
-    }
-
-    const evaluation = await gemini.evaluateFreeText(question, text);
-    if (evaluation.correct) {
-      awardPoints(session, question, scoring.freeTextCorrect);
-      messages.push({ role: 'agent', text: evaluation.feedback || 'Exactement.' });
-      return await advanceOrFinish(session, messages);
-    }
-
-    // Wrong free text → 4 choices
-    session.stage = 'choice4';
-    session.choice4Options = buildChoice4(question);
-    messages.push({
-      role: 'agent',
-      text:
-        evaluation.feedback ||
-        'Pas tout à fait, mais on y est presque — regardez ces options.',
-    });
-    inputMode = 'choice';
-    options = session.choice4Options;
-    return publicState(session, { messages, inputMode, options });
-  }
-
-  if (session.stage === 'choice4') {
-    const optionId = payload.optionId;
-    const chosen = session.choice4Options?.find((o) => o.id === optionId);
-    if (!chosen) {
-      const err = new Error('Choix invalide');
-      err.status = 400;
-      throw err;
-    }
-    messages.push({ role: 'user', text: chosen.text });
-
-    if (optionId === question.correctOptionId) {
-      awardPoints(session, question, scoring.correctAfter4Choices);
-      const fb = await gemini.feedbackCorrectChoice(question, 'choice4');
-      messages.push({ role: 'agent', text: fb });
-      return await advanceOrFinish(session, messages);
-    }
-
-    session.stage = 'choice2';
-    session.choice2Options = buildChoice2(question);
-    messages.push({
-      role: 'agent',
-      text: 'Ce n\'est pas encore ça — on affine : deux options restantes. Vous y êtes presque.',
-    });
-    inputMode = 'choice';
-    options = session.choice2Options;
-    return publicState(session, { messages, inputMode, options });
-  }
-
-  if (session.stage === 'choice2') {
-    const optionId = payload.optionId;
-    const chosen = session.choice2Options?.find((o) => o.id === optionId);
-    if (!chosen) {
-      const err = new Error('Choix invalide');
-      err.status = 400;
-      throw err;
-    }
-    messages.push({ role: 'user', text: chosen.text });
-
-    if (optionId === question.correctOptionId) {
-      awardPoints(session, question, scoring.correctAfter2Choices);
-      const fb = await gemini.feedbackCorrectChoice(question, 'choice2');
-      messages.push({ role: 'agent', text: fb });
-      return await advanceOrFinish(session, messages);
-    }
-
-    awardPoints(session, question, scoring.incorrect);
-    const reveal = await gemini.feedbackReveal(question);
-    messages.push({ role: 'agent', text: reveal });
-    return await advanceOrFinish(session, messages);
-  }
-
-  const err = new Error('État de session invalide');
-  err.status = 400;
-  throw err;
-}
-
-async function advanceOrFinish(session, messages) {
-  session.choice4Options = null;
-  session.choice2Options = null;
+  const lastAnswer = {
+    questionId: question.id,
+    optionId,
+    correct,
+    explanation: question.explanation || '',
+  };
 
   const nextIndex = session.currentIndex + 1;
   if (nextIndex >= session.totalQuestions) {
-    session.completed = true;
-    session.stage = 'finished';
-    session.currentIndex = session.totalQuestions;
-
-    const total = roundScore(totalScore(session));
-    const band = getLevelBand(total);
-    const byCategory = {};
-    for (const [cat, data] of Object.entries(session.categoryScores)) {
-      byCategory[cat] = {
-        score: roundScore(data.score),
-        max: data.max,
-      };
-    }
-
-    const summaryText = await gemini.generateSummary({
-      name: session.name,
-      totalScore: total,
-      maxScore: session.totalQuestions,
-      level: band.level,
-      recommendation: band.recommendation,
-      byCategory,
-    });
-
-    const closing =
-      typeof summaryText === 'string'
-        ? summaryText
-        : summaryText.closing || 'Voici votre synthèse.';
-    const advice =
-      typeof summaryText === 'string'
-        ? band.recommendation
-        : summaryText.advice || band.recommendation;
-
-    messages.push({ role: 'agent', text: closing });
-
-    return publicState(session, {
-      messages,
-      inputMode: 'done',
-      options: null,
-      summary: {
-        totalScore: total,
-        maxScore: session.totalQuestions,
-        level: band.level,
-        recommendation: band.recommendation,
-        advice,
-        byCategory,
-      },
-    });
+    return finishSession(session, lastAnswer);
   }
 
   session.currentIndex = nextIndex;
-  session.stage = 'free';
-  session.clarificationCount = 0;
-  const nextQ = getQuestionByIndex(nextIndex);
-  messages.push({ role: 'agent', text: nextQ.question });
-
+  session.stage = 'choice';
+  const nextQ = getQuestionByIndex(session.profilQcm, nextIndex);
   return publicState(session, {
-    messages,
-    inputMode: 'free',
-    options: null,
+    question: publicQuestion(nextQ),
+    lastAnswer,
   });
 }
 
@@ -369,4 +268,5 @@ module.exports = {
   startQuiz,
   submitAnswer,
   getSession,
+  NIVEAUX_DECLARES,
 };

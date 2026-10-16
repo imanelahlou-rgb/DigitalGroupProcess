@@ -4,7 +4,7 @@ const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const { startQuiz, submitAnswer } = require('./quizEngine');
-const { getQuestions, getQuizTitle } = require('./knowledge');
+const { getQuizTitle } = require('./knowledge');
 
 const app = express();
 const ROOT = path.join(__dirname, '..');
@@ -17,7 +17,9 @@ app.get('/api/health', (_req, res) => {
   res.json({
     ok: true,
     title: getQuizTitle(),
-    questions: getQuestions().length,
+    questions: 20,
+    profiles: ['technique', 'non-technique'],
+    format: 'qcm',
     hasGeminiKey: Boolean(process.env.GEMINI_API_KEY),
     hasAirtable: Boolean(process.env.AIRTABLE_API_KEY && process.env.AIRTABLE_BASE_ID),
   });
@@ -37,7 +39,6 @@ app.post('/api/session/start', async (req, res) => {
 app.post('/api/session/:id/answer', async (req, res) => {
   try {
     const state = await submitAnswer(req.params.id, {
-      text: req.body?.text,
       optionId: req.body?.optionId,
       sessionToken: req.body?.sessionToken,
     });
@@ -80,8 +81,8 @@ app.get('/evaluation/*', (_req, res) => {
 if (require.main === module) {
   app.listen(PORT, () => {
     console.log(`DPG site + quiz listening on port ${PORT}`);
-    if (!process.env.GEMINI_API_KEY) {
-      console.warn('WARNING: GEMINI_API_KEY is not set');
+    if (!process.env.AIRTABLE_API_KEY || !process.env.AIRTABLE_BASE_ID) {
+      console.warn('WARNING: Airtable credentials are not set');
     }
   });
 }

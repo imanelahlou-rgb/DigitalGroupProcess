@@ -1,56 +1,48 @@
 const path = require('path');
 const fs = require('fs');
 
-const knowledgePath = path.join(__dirname, '..', 'data', 'questions.json');
-const knowledge = JSON.parse(fs.readFileSync(knowledgePath, 'utf8'));
+const DATA_DIR = path.join(__dirname, '..', 'data');
 
-function getQuestions() {
-  return knowledge.questions;
+const banks = {
+  technique: JSON.parse(
+    fs.readFileSync(path.join(DATA_DIR, 'quiz_technique.json'), 'utf8')
+  ),
+  'non-technique': JSON.parse(
+    fs.readFileSync(path.join(DATA_DIR, 'quiz_non_technique.json'), 'utf8')
+  ),
+};
+
+function getBank(profilQcm) {
+  const key = profilQcm === 'technique' ? 'technique' : 'non-technique';
+  return banks[key];
 }
 
-function getScoring() {
-  return knowledge.scoring;
+function getQuestions(profilQcm) {
+  return getBank(profilQcm).questions;
 }
 
-function getQuizTitle() {
-  return knowledge.quizTitle;
+function getScoring(profilQcm) {
+  return getBank(profilQcm).scoring;
 }
 
-function getQuestionByIndex(index) {
-  return knowledge.questions[index] || null;
+function getQuizTitle(profilQcm) {
+  if (profilQcm) return getBank(profilQcm).quizTitle;
+  return 'Quiz d\'évaluation de niveau — Digital Process Group';
 }
 
-function getLevelBand(totalScore) {
-  const bands = knowledge.scoring.levelBands;
+function getQuestionByIndex(profilQcm, index) {
+  return getQuestions(profilQcm)[index] || null;
+}
+
+function getLevelBand(profilQcm, totalScore) {
+  const bands = getScoring(profilQcm).levelBands;
   return bands.find((b) => totalScore >= b.min && totalScore <= b.max) || bands[0];
-}
-
-function getCategories() {
-  const cats = [];
-  for (const q of knowledge.questions) {
-    if (!cats.includes(q.category)) cats.push(q.category);
-  }
-  return cats;
-}
-
-/** Display label for the results UI (aligned with resultat.html). */
-function categoryDisplayName(category) {
-  if (category === 'Confidentialité et chiffrement') {
-    return 'Confidentialité & chiffrement';
-  }
-  return category;
-}
-
-/** Distractors in original options order (excluding correct). */
-function getDistractors(question) {
-  return question.options.filter((o) => o.id !== question.correctOptionId);
 }
 
 function getCorrectOption(question) {
   return question.options.find((o) => o.id === question.correctOptionId);
 }
 
-/** Shuffle array (Fisher–Yates), returns new array. */
 function shuffle(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -60,16 +52,21 @@ function shuffle(arr) {
   return a;
 }
 
+function categoryDisplayName(category) {
+  if (category === 'Confidentialité et chiffrement') {
+    return 'Confidentialité & chiffrement';
+  }
+  return category;
+}
+
 module.exports = {
+  getBank,
   getQuestions,
   getScoring,
   getQuizTitle,
   getQuestionByIndex,
   getLevelBand,
-  getCategories,
-  categoryDisplayName,
-  getDistractors,
   getCorrectOption,
   shuffle,
-  knowledge,
+  categoryDisplayName,
 };

@@ -1,0 +1,551 @@
+{
+  "quizTitle": "Évaluation de niveau IA — Profil non-technique",
+  "format": "qcm",
+  "totalQuestions": 20,
+  "scoring": {
+    "correct": 1,
+    "incorrect": 0,
+    "levelBands": [
+      {
+        "min": 0,
+        "max": 6,
+        "level": "Débutant",
+        "recommendation": "Démarrage approfondi au Module 1 — Fondamentaux de l'IA"
+      },
+      {
+        "min": 7,
+        "max": 13,
+        "level": "Intermédiaire",
+        "recommendation": "Rappel rapide du Module 1, accent sur les modules IA agentique et sécurité"
+      },
+      {
+        "min": 14,
+        "max": 20,
+        "level": "Avancé",
+        "recommendation": "Survol des fondamentaux, démarrage rapide sur le cas métier réel"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "nt_f1",
+      "category": "Fondamentaux de l'IA",
+      "difficulty": "facile",
+      "question": "Qu'est-ce qu'une IA générative, en langage simple ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Un outil qui produit du texte, des images ou du son à la demande"
+        },
+        {
+          "id": "b",
+          "text": "Une machine qui remplace tous les employés d'un service"
+        },
+        {
+          "id": "c",
+          "text": "Un logiciel qui se contente de ranger des fichiers existants"
+        },
+        {
+          "id": "d",
+          "text": "Un programme qui fonctionne seulement sans connexion internet"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "L'IA générative crée un contenu nouveau (texte, image, son, vidéo) à partir d'une instruction, plutôt que de simplement analyser ou classer ce qui existe déjà. C'est la famille à laquelle appartiennent ChatGPT, Claude ou Midjourney."
+    },
+    {
+      "id": "nt_f2",
+      "category": "Fondamentaux de l'IA",
+      "difficulty": "facile",
+      "question": "Pourquoi faut-il rester prudent face à une réponse donnée par une IA ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Parce qu'elle ne peut traiter qu'une seule langue à la fois"
+        },
+        {
+          "id": "b",
+          "text": "Parce qu'elle peut affirmer une erreur avec la même assurance qu'une vérité"
+        },
+        {
+          "id": "c",
+          "text": "Parce qu'elle met plusieurs heures à produire chaque réponse"
+        },
+        {
+          "id": "d",
+          "text": "Parce qu'elle refuse systématiquement de répondre aux questions difficiles"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Une IA peut « halluciner » : produire une information fausse ou inventée, formulée avec le même aplomb qu'une réponse exacte. D'où l'importance de vérifier les faits importants avant de les utiliser."
+    },
+    {
+      "id": "nt_f3",
+      "category": "Fondamentaux de l'IA",
+      "difficulty": "moyen",
+      "question": "Que change concrètement un abonnement payant à un outil comme ChatGPT ou Claude par rapport à la version gratuite ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "La garantie que l'outil ne se trompera plus jamais"
+        },
+        {
+          "id": "b",
+          "text": "Le droit exclusif d'utiliser l'outil pour un usage personnel uniquement"
+        },
+        {
+          "id": "c",
+          "text": "Un accès à des modèles plus performants et davantage d'usages par jour"
+        },
+        {
+          "id": "d",
+          "text": "La possibilité d'utiliser l'outil sans jamais avoir besoin d'une connexion"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Les offres payantes donnent généralement accès aux modèles les plus avancés, à plus de requêtes, et parfois à des fonctions supplémentaires — pas à une IA infaillible."
+    },
+    {
+      "id": "nt_f4",
+      "category": "Fondamentaux de l'IA",
+      "difficulty": "moyen",
+      "question": "Qu'apporte une IA « connectée » à vos documents d'entreprise (via le RAG) par rapport à une IA classique ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Elle n'a plus besoin d'aucune instruction de la part de l'utilisateur"
+        },
+        {
+          "id": "b",
+          "text": "Elle remplace entièrement le besoin de former les équipes à l'outil"
+        },
+        {
+          "id": "c",
+          "text": "Elle devient automatiquement plus rapide pour tous les types de tâches"
+        },
+        {
+          "id": "d",
+          "text": "Elle peut répondre en s'appuyant sur vos données internes et récentes"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Le RAG (recherche documentaire + génération) permet à l'IA d'aller chercher l'information dans vos propres documents avant de répondre, plutôt que de se limiter à ce qu'elle a appris pendant son entraînement — souvent ancien et générique."
+    },
+    {
+      "id": "nt_f5",
+      "category": "Fondamentaux de l'IA",
+      "difficulty": "moyen",
+      "question": "Un modèle d'IA « propriétaire » (GPT, Claude, Gemini) et un modèle « ouvert » (Llama, Mistral) se distinguent surtout par :",
+      "options": [
+        {
+          "id": "a",
+          "text": "L'accès via un service en ligne géré par le fournisseur, contre la possibilité d'héberger le modèle soi-même"
+        },
+        {
+          "id": "b",
+          "text": "Le fait qu'un seul des deux puisse comprendre le français"
+        },
+        {
+          "id": "c",
+          "text": "Le fait que l'un soit toujours payant et l'autre toujours gratuit"
+        },
+        {
+          "id": "d",
+          "text": "Le fait qu'un seul des deux puisse être utilisé en entreprise"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Un modèle propriétaire s'utilise via l'interface ou l'API du fournisseur, qui gère toute l'infrastructure. Un modèle ouvert peut être installé sur les serveurs de l'entreprise, ce qui donne plus de contrôle sur les données mais demande des compétences techniques."
+    },
+    {
+      "id": "nt_f6",
+      "category": "Fondamentaux de l'IA",
+      "difficulty": "moyen",
+      "question": "Pourquoi une entreprise choisirait-elle de combiner plusieurs briques d'IA plutôt que de tout miser sur un seul modèle ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Parce que la loi impose d'utiliser au moins trois fournisseurs différents"
+        },
+        {
+          "id": "b",
+          "text": "Parce qu'une vraie solution combine souvent modèle, données internes et règles métier"
+        },
+        {
+          "id": "c",
+          "text": "Parce qu'un seul modèle ne peut jamais répondre en français"
+        },
+        {
+          "id": "d",
+          "text": "Parce que cela réduit systématiquement les coûts d'abonnement"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Un modèle seul n'est qu'un moteur. Une solution utile combine ce moteur avec les données de l'entreprise, des règles métier et parfois des outils externes adaptés au besoin réel — le choix se fait selon le problème à résoudre, pas l'inverse."
+    },
+    {
+      "id": "nt_f7",
+      "category": "Fondamentaux de l'IA",
+      "difficulty": "moyen",
+      "question": "Que signifie dire qu'un outil d'IA « n'a pas connaissance » des événements récents ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Il doit être redémarré chaque jour pour continuer à fonctionner"
+        },
+        {
+          "id": "b",
+          "text": "Il ne peut traiter que des questions posées à l'oral"
+        },
+        {
+          "id": "c",
+          "text": "Son apprentissage s'arrête à une date donnée, après laquelle il ignore ce qui s'est passé"
+        },
+        {
+          "id": "d",
+          "text": "Il refuse par principe de parler de l'actualité"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Un modèle est entraîné sur des données arrêtées à une certaine date (sa « date de coupure »). Au-delà, il n'a aucune connaissance des faits récents, sauf s'il est connecté à une recherche web ou à une base documentaire à jour."
+    },
+    {
+      "id": "nt_f8",
+      "category": "Fondamentaux de l'IA",
+      "difficulty": "moyen",
+      "question": "Dans le choix d'un outil d'IA pour l'entreprise, quel critère pèse le plus lourd en pratique ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "La couleur et le design de l'interface de l'outil"
+        },
+        {
+          "id": "b",
+          "text": "Le nombre de langues que l'outil prétend maîtriser"
+        },
+        {
+          "id": "c",
+          "text": "Le nombre total de paramètres annoncé par le fournisseur"
+        },
+        {
+          "id": "d",
+          "text": "Ce que l'outil doit accomplir concrètement pour l'équipe qui l'utilisera"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Le choix d'un outil ou d'une architecture d'IA doit toujours partir du besoin métier réel — gain de temps, qualité, conformité — et non de critères techniques impressionnants mais peu pertinents pour l'usage visé."
+    },
+    {
+      "id": "nt_a1",
+      "category": "Fondamentaux de l'IA agentique",
+      "difficulty": "moyen",
+      "question": "Quelle est la différence concrète entre un chatbot classique et un agent IA ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "L'agent peut utiliser des outils et agir, pas seulement répondre par écrit"
+        },
+        {
+          "id": "b",
+          "text": "Il n'existe aucune différence réelle entre les deux"
+        },
+        {
+          "id": "c",
+          "text": "L'agent ne peut fonctionner que pendant les heures de bureau"
+        },
+        {
+          "id": "d",
+          "text": "Le chatbot peut agir sur des systèmes, l'agent se contente de discuter"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Un chatbot répond à une question en texte. Un agent peut, en plus, consulter un calendrier, envoyer un email, interroger une base de données ou déclencher une action — il agit, pas seulement il répond."
+    },
+    {
+      "id": "nt_a2",
+      "category": "Fondamentaux de l'IA agentique",
+      "difficulty": "moyen-difficile",
+      "question": "Pourquoi un projet d'agent IA en entreprise prévoit-il souvent une étape de validation humaine avant une action sensible ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Parce que les agents sont systématiquement plus lents qu'un humain"
+        },
+        {
+          "id": "b",
+          "text": "Pour éviter qu'une erreur de raisonnement ne déclenche une action coûteuse ou irréversible"
+        },
+        {
+          "id": "c",
+          "text": "Parce que la loi interdit à une IA d'agir seule, en toute circonstance"
+        },
+        {
+          "id": "d",
+          "text": "Pour que l'agent n'ait jamais accès à aucun outil externe"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "C'est le principe du « human-in-the-loop » : un point d'arrêt où une personne valide ou bloque une action avant exécution — typiquement pour un envoi d'email important, un paiement, ou toute action difficile à annuler."
+    },
+    {
+      "id": "nt_a3",
+      "category": "Fondamentaux de l'IA agentique",
+      "difficulty": "moyen-difficile",
+      "question": "Qu'apportent des règles claires (« guardrails ») fixées à un agent IA dans un contexte professionnel ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Elles accélèrent uniquement la vitesse de calcul de l'agent"
+        },
+        {
+          "id": "b",
+          "text": "Elles remplacent le besoin de former les équipes à l'outil"
+        },
+        {
+          "id": "c",
+          "text": "Elles définissent ce que l'agent a le droit de faire et ce qu'il doit refuser"
+        },
+        {
+          "id": "d",
+          "text": "Elles servent uniquement à faciliter l'installation technique"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "Les guardrails encadrent l'autonomie de l'agent : quelles actions sont permises, quelles données il peut consulter, où s'arrêter et escalader vers un humain. C'est une protection, pas une option technique secondaire."
+    },
+    {
+      "id": "nt_a4",
+      "category": "Fondamentaux de l'IA agentique",
+      "difficulty": "moyen",
+      "question": "Pourquoi fait-on parfois travailler plusieurs agents IA spécialisés ensemble plutôt qu'un seul agent généraliste ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pour ralentir volontairement le traitement des demandes"
+        },
+        {
+          "id": "b",
+          "text": "Parce qu'un agent unique est toujours interdit en entreprise"
+        },
+        {
+          "id": "c",
+          "text": "Pour multiplier artificiellement le coût d'utilisation de l'IA"
+        },
+        {
+          "id": "d",
+          "text": "Chaque agent se concentre sur une tâche précise, ce qui limite les erreurs"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Répartir le travail entre agents spécialisés (chacun expert d'une tâche précise) donne un système plus fiable et plus facile à corriger qu'un agent unique censé tout faire à la fois."
+    },
+    {
+      "id": "nt_a5",
+      "category": "Fondamentaux de l'IA agentique",
+      "difficulty": "moyen-difficile",
+      "question": "À quoi sert la « mémoire » d'un agent IA, pour un usage professionnel courant ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Elle garde le contexte d'un échange en cours et des préférences déjà exprimées"
+        },
+        {
+          "id": "b",
+          "text": "Elle sert uniquement à stocker le code informatique de l'agent"
+        },
+        {
+          "id": "c",
+          "text": "Elle permet à l'agent de fonctionner sans jamais recevoir d'instruction"
+        },
+        {
+          "id": "d",
+          "text": "Elle n'a aucun effet observable sur ce que produit l'agent"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "La mémoire permet à l'agent de ne pas tout redemander à chaque étape (contexte court terme) et de s'appuyer sur des échanges ou préférences passés (mémoire longue), plutôt que de repartir de zéro à chaque conversation."
+    },
+    {
+      "id": "nt_a6",
+      "category": "Fondamentaux de l'IA agentique",
+      "difficulty": "difficile",
+      "question": "Comment vérifier, avant de déployer un agent IA en production, qu'il fait correctement son travail ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "En évitant tout test pour ne pas ralentir le lancement du projet"
+        },
+        {
+          "id": "b",
+          "text": "En le testant sur des tâches types et en mesurant ses résultats objectivement"
+        },
+        {
+          "id": "c",
+          "text": "En demandant uniquement l'avis du fournisseur de l'outil"
+        },
+        {
+          "id": "d",
+          "text": "En se fiant uniquement à l'impression générale laissée par une démonstration"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Un test structuré (benchmark) sur des cas représentatifs — précision, fiabilité, coût — donne une mesure objective de la performance, bien plus fiable qu'une impression subjective tirée d'une seule démonstration."
+    },
+    {
+      "id": "nt_a7",
+      "category": "Fondamentaux de l'IA agentique",
+      "difficulty": "moyen",
+      "question": "Dans un projet d'automatisation par IA, pourquoi commence-t-on toujours par définir précisément l'objectif métier ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Parce que la technologie choisie détermine ensuite l'objectif de l'entreprise"
+        },
+        {
+          "id": "b",
+          "text": "Parce que cette étape n'a en réalité aucune incidence sur le résultat"
+        },
+        {
+          "id": "c",
+          "text": "Parce que l'architecture technique (outils, règles, agents) se choisit à partir de ce besoin"
+        },
+        {
+          "id": "d",
+          "text": "Parce que la loi impose de rédiger un objectif avant tout projet informatique"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "On part toujours du besoin métier réel (gagner du temps sur telle tâche, fiabiliser tel processus) pour choisir ensuite les briques techniques adaptées — jamais l'inverse, au risque de construire une solution qui ne sert à rien de concret."
+    },
+    {
+      "id": "nt_c1",
+      "category": "Confidentialité et chiffrement",
+      "difficulty": "moyen",
+      "question": "Pourquoi faut-il éviter de copier des informations confidentielles de l'entreprise dans un outil d'IA grand public ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Parce que l'outil se bloque automatiquement dès qu'il lit une information sensible"
+        },
+        {
+          "id": "b",
+          "text": "Parce que la loi interdit totalement l'usage de l'IA par les entreprises"
+        },
+        {
+          "id": "c",
+          "text": "Parce que cela ralentit systématiquement la vitesse de réponse de l'outil"
+        },
+        {
+          "id": "d",
+          "text": "Parce qu'on perd le contrôle sur où ces informations peuvent être traitées ou conservées"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Selon le contrat du fournisseur, les données envoyées peuvent être stockées, voire réutilisées pour entraîner d'autres modèles. Sans garantie explicite contraire, mieux vaut ne jamais y transmettre d'informations confidentielles ou personnelles sensibles."
+    },
+    {
+      "id": "nt_c2",
+      "category": "Confidentialité et chiffrement",
+      "difficulty": "moyen",
+      "question": "Qu'apporte le fait de retirer les noms et informations identifiantes d'un document avant de le soumettre à une IA externe ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Cela réduit le risque en cas de fuite ou de mauvais usage des données transmises"
+        },
+        {
+          "id": "b",
+          "text": "Cela supprime totalement le besoin de vérifier les réponses obtenues"
+        },
+        {
+          "id": "c",
+          "text": "Cela permet à l'IA de comprendre mieux le contenu du document"
+        },
+        {
+          "id": "d",
+          "text": "Cela rend automatiquement les réponses de l'IA plus rapides"
+        }
+      ],
+      "correctOptionId": "a",
+      "explanation": "Anonymiser ou pseudonymiser un document (retirer noms, emails, numéros) limite les conséquences si les données venaient à fuiter ou à être mal utilisées — même si le contenu de fond reste exploitable par l'IA."
+    },
+    {
+      "id": "nt_c3",
+      "category": "Confidentialité et chiffrement",
+      "difficulty": "moyen",
+      "question": "Pourquoi un mot de passe ou une clé d'accès ne doit-il jamais être partagé en clair dans un email, un chat ou un fichier partagé ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Parce que la loi marocaine interdit l'usage des mots de passe"
+        },
+        {
+          "id": "b",
+          "text": "Parce qu'il devient accessible à toute personne ayant accès à ce canal"
+        },
+        {
+          "id": "c",
+          "text": "Parce qu'un mot de passe en clair ne fonctionne techniquement plus"
+        },
+        {
+          "id": "d",
+          "text": "Parce que cela ralentit la connexion au service concerné"
+        }
+      ],
+      "correctOptionId": "b",
+      "explanation": "Toute information envoyée en clair reste consultable par quiconque a accès au canal utilisé (boîte mail, outil de chat, fichier partagé) — y compris longtemps après l'envoi. Un accès doit toujours passer par un canal sécurisé dédié."
+    },
+    {
+      "id": "nt_c4",
+      "category": "Confidentialité et chiffrement",
+      "difficulty": "moyen-difficile",
+      "question": "Dans un projet impliquant des données clients sensibles, à quoi sert le principe « ne donner que l'accès nécessaire à chaque personne ou outil » ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Il ne concerne que les équipes techniques, jamais les équipes métier"
+        },
+        {
+          "id": "b",
+          "text": "Il remplace totalement le besoin de chiffrer les données"
+        },
+        {
+          "id": "c",
+          "text": "Il limite les dégâts possibles si un accès est un jour compromis"
+        },
+        {
+          "id": "d",
+          "text": "Il accélère le traitement des données pour tout le monde"
+        }
+      ],
+      "correctOptionId": "c",
+      "explanation": "C'est le principe du moindre privilège : chaque personne ou système ne reçoit que les accès strictement nécessaires à sa tâche. Si un accès est compromis, les conséquences restent limitées à ce périmètre réduit."
+    },
+    {
+      "id": "nt_c5",
+      "category": "Confidentialité et chiffrement",
+      "difficulty": "moyen-difficile",
+      "question": "Pourquoi un fournisseur d'IA garantissant par contrat de ne jamais réutiliser les données pour l'entraînement est-il préférable pour des données sensibles ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Il dispense l'entreprise de toute autre mesure de sécurité"
+        },
+        {
+          "id": "b",
+          "text": "Il rend l'abonnement automatiquement gratuit pour l'entreprise"
+        },
+        {
+          "id": "c",
+          "text": "Il garantit que l'outil ne commettra plus jamais d'erreur de réponse"
+        },
+        {
+          "id": "d",
+          "text": "Il permet de garder le contrôle sur l'usage réel qui sera fait des données transmises"
+        }
+      ],
+      "correctOptionId": "d",
+      "explanation": "Sans garantie contractuelle explicite, rien n'empêche un fournisseur d'utiliser les données transmises pour améliorer ses modèles. Un contrat excluant cet usage donne un contrôle réel sur la confidentialité des données envoyées."
+    }
+  ]
+}

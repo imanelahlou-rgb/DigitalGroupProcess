@@ -27,7 +27,7 @@ async function airtableRequest(pathAndQuery, options = {}) {
   });
   const data = await response.json().catch(() => ({}));
   if (!response.ok) {
-    const err = new Error(data?.error?.message || 'Airtable a refusé l\'enregistrement');
+    const err = new Error(data?.error?.message || "Airtable a refusé l'enregistrement");
     err.status = response.status;
     err.airtableType = data?.error?.type || '';
     throw err;
@@ -51,14 +51,23 @@ async function writeFields(method, recordPath, fields) {
   const dropped = [];
   while (Object.keys(remaining).length) {
     try {
-      return await airtableRequest(recordPath, {
+      const result = await airtableRequest(recordPath, {
         method,
-        body: method === 'POST' ? { records: [{ fields: remaining }], typecast: true } : { fields: remaining, typecast: true },
+        body:
+          method === 'POST'
+            ? { records: [{ fields: remaining }], typecast: true }
+            : { fields: remaining, typecast: true },
       });
+      if (dropped.length) {
+        console.warn('Airtable fields skipped (missing in base):', dropped.join(', '));
+      }
+      return { result, dropped };
     } catch (error) {
       const missing = unknownField(error);
       const choice = rejectedChoice(error);
-      const dropSource = choice === 'evaluation' || /select option/i.test(error.message || '') && /evaluation/.test(error.message || '');
+      const dropSource =
+        choice === 'evaluation' ||
+        (/select option/i.test(error.message || '') && /evaluation/.test(error.message || ''));
       const key = missing || (dropSource && 'source' in remaining ? 'source' : null);
       if (!key || !(key in remaining) || error.status !== 422) throw error;
       delete remaining[key];
@@ -77,27 +86,43 @@ async function findByEmail(email) {
   return data.records?.[0] || null;
 }
 
+function pickDefined(fields) {
+  const out = {};
+  for (const [key, value] of Object.entries(fields)) {
+    if (value !== undefined && value !== null && value !== '') out[key] = value;
+  }
+  return out;
+}
+
 /**
- * Create or refresh a Prospects row from the evaluation form.
- * Existing sales status is left unchanged.
+ * Upsert Prospects by email.
+ * Form "métier" maps to existing Airtable column "poste".
  */
-async function saveEvaluationLead(profile) {
+async function upsertProspect(profile) {
   const table = encodeURIComponent(config().table);
-  const contact = {
+  const fields = pickDefined({
     prenom: profile.prenom,
     nom: profile.nom,
-    nom_complet: `${profile.prenom} ${profile.nom}`.trim(),
+    nom_complet: `${profile.prenom || ''} ${profile.nom || ''}`.trim() || undefined,
     email: profile.email,
     telephone: profile.telephone,
     poste: profile.metier,
-  };
+    niveau_declare: profile.niveauDeclare,
+    profil_qcm: profile.profilQcm,
+    score: profile.score,
+    niveau_calcule: profile.niveauCalcule,
+    recommandation: profile.recommandation,
+    date_dernier_passage: profile.dateDernierPassage,
+  });
+
   const existing = await findByEmail(profile.email);
   if (existing) {
-    await writeFields('PATCH', `${table}/${existing.id}`, contact);
-    return { id: existing.id, created: false };
+    const { dropped } = await writeFields('PATCH', `${table}/${existing.id}`, fields);
+    return { id: existing.id, created: false, dropped };
   }
-  const created = await writeFields('POST', table, {
-    ...contact,
+
+  const { result: created, dropped } = await writeFields('POST', table, {
+    ...fields,
     statut: 'nouveau',
     offre_cible: 'Formation IA',
     source: 'evaluation',
@@ -109,7 +134,26 @@ async function saveEvaluationLead(profile) {
     err.status = 502;
     throw err;
   }
-  return { id, created: true };
+  return { id, created: true, dropped };
 }
 
-module.exports = { saveEvaluationLead };
+async function saveEvaluationLead(profile) {
+  return upsertProspect({
+    ...profile,
+    dateDernierPassage: profile.dateDernierPassage || new Date().toISOString(),
+  });
+}
+
+async function saveEvaluationResult(profile) {
+  return upsertProspect({
+    ...profile,
+    dateDernierPassage: profile.dateDernierPassage || new Date().toISOString(),
+  });
+}
+
+module.exports = {
+  saveEvaluationLead,
+  saveEvaluationResult,
+  upsertProspect,
+  findByEmail,
+};

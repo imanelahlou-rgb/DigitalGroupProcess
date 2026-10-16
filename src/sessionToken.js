@@ -18,11 +18,10 @@ function exportSessionToken(session) {
     stage: session.stage,
     scores: session.scores,
     categoryScores: session.categoryScores,
-    choice4Options: session.choice4Options,
-    choice2Options: session.choice2Options,
-    clarificationCount: session.clarificationCount || 0,
     completed: session.completed,
     totalQuestions: session.totalQuestions,
+    profilQcm: session.profilQcm,
+    profile: session.profile,
   };
   const body = Buffer.from(JSON.stringify(payload), 'utf8').toString('base64url');
   return `${body}.${sign(body)}`;
@@ -39,9 +38,11 @@ function importSessionToken(token) {
   if (a.length !== b.length || !crypto.timingSafeEqual(a, b)) return null;
   try {
     const payload = JSON.parse(Buffer.from(body, 'base64url').toString('utf8'));
+    const profilQcm = payload.profilQcm === 'technique' ? 'technique' : 'non-technique';
     return {
       ...payload,
-      scoring: getScoring(),
+      profilQcm,
+      scoring: getScoring(profilQcm),
       updatedAt: Date.now(),
     };
   } catch {

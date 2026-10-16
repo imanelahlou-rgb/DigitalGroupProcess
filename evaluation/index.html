@@ -25,17 +25,17 @@
       <div class="welcome-body">
         <p class="welcome-intro">
           <span class="welcome-hello">Bienvenue.</span><br><br>
-          Avant notre session, ce court échange nous permet de comprendre où vous en êtes — pour construire une formation qui s'adresse exactement à votre niveau, pas à une moyenne. Répondez simplement, avec vos mots : il n'y a pas de piège, seulement une photographie honnête de vos connaissances.
+          Avant notre session, ce QCM de 20 questions nous permet de situer votre niveau — pour construire une formation qui s'adresse exactement à vous, pas à une moyenne. Une seule réponse par question ; il n'y a pas de piège.
         </p>
 
         <div class="info-strip">
           <div class="info-cell">
-            <div class="info-num">25</div>
+            <div class="info-num">20</div>
             <div class="info-label">Questions</div>
           </div>
           <div class="info-sep" aria-hidden="true"></div>
           <div class="info-cell">
-            <div class="info-num">~15</div>
+            <div class="info-num">~10</div>
             <div class="info-label">Minutes</div>
           </div>
           <div class="info-sep" aria-hidden="true"></div>
@@ -95,6 +95,29 @@
             <label for="metier" class="name-label">Métier / fonction actuelle <span class="req">*</span></label>
             <input id="metier" name="metier" type="text" maxlength="160" autocomplete="organization-title" required />
           </div>
+          <div class="field">
+            <label for="niveauDeclare" class="name-label">Niveau de connaissance en IA <span class="req">*</span></label>
+            <select id="niveauDeclare" name="niveauDeclare" required>
+              <option value="" disabled selected>Sélectionnez votre niveau</option>
+              <option value="Débutant">Débutant</option>
+              <option value="Notions de base">Notions de base</option>
+              <option value="Confortable">Confortable</option>
+              <option value="Avancé">Avancé</option>
+            </select>
+          </div>
+          <fieldset class="field routing-field">
+            <legend class="name-label">Votre rôle implique-t-il des compétences techniques (développement, administration systèmes, réseaux, data) ? <span class="req">*</span></legend>
+            <div class="radio-row">
+              <label class="radio-option">
+                <input type="radio" name="roleTechnique" value="oui" required />
+                <span>Oui</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="roleTechnique" value="non" required />
+                <span>Non</span>
+              </label>
+            </div>
+          </fieldset>
           <button type="submit" class="btn-cta" id="start-btn">
             Commencer le quiz
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -107,56 +130,38 @@
       </div>
     </section>
 
-    <!-- Conversation / choix -->
-    <section id="chat-screen" class="shell chat-shell" hidden>
+    <!-- QCM -->
+    <section id="quiz-screen" class="shell chat-shell" hidden>
       <header class="chat-header">
         <div class="chat-brand">
           <div class="logo-mark">D</div>
           <div>
             <div class="chat-title">Quiz d'évaluation de niveau</div>
-            <div class="chat-subtitle">Digital Process Group</div>
+            <div class="chat-subtitle" id="quiz-profile-label">Digital Process Group</div>
           </div>
         </div>
         <div class="progress-badge" id="progress-badge" aria-live="polite">
           <span class="progress-num" id="progress-num">1</span>
-          <span class="progress-of">sur 25</span>
+          <span class="progress-of">sur 20</span>
         </div>
       </header>
 
       <div class="progress-track-wrap">
         <div class="progress-track">
-          <div class="progress-fill" id="progress-fill" style="width: 4%"></div>
+          <div class="progress-fill" id="progress-fill" style="width: 5%"></div>
         </div>
       </div>
 
-      <div id="messages" class="messages" role="log" aria-live="polite"></div>
+      <div class="qcm-body">
+        <div class="qcm-category" id="qcm-category"></div>
+        <h2 class="qcm-question" id="qcm-question"></h2>
+        <div id="choices" class="choices qcm-choices"></div>
+        <p id="choice-feedback" class="choice-hint" hidden></p>
+      </div>
 
       <div id="thinking" class="thinking" hidden>
         <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-        <span class="thinking-label">L'agent réfléchit…</span>
-      </div>
-
-      <div id="choices-wrap" class="choices-wrap" hidden>
-        <div id="choices" class="choices"></div>
-        <p id="choice-hint" class="choice-hint"></p>
-      </div>
-
-      <div id="composer" class="composer">
-        <form id="free-form" class="free-form">
-          <input
-            id="free-input"
-            type="text"
-            placeholder="Écrivez votre réponse…"
-            maxlength="2000"
-            autocomplete="off"
-            aria-label="Réponse libre"
-          />
-          <button type="submit" class="btn-send" id="send-btn" aria-label="Envoyer">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M4 12L20 4L13 20L11 13L4 12Z" stroke="#FFFFFF" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
-            </svg>
-          </button>
-        </form>
+        <span class="thinking-label">Enregistrement…</span>
       </div>
     </section>
 
@@ -180,7 +185,7 @@
           <div class="score-eyebrow">Niveau estimé</div>
           <div class="score-level" id="result-level">—</div>
           <div class="score-pill">
-            <span id="result-score">— / 25 points</span>
+            <span id="result-score">— / 20 points</span>
           </div>
         </div>
 
