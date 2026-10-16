@@ -17,3 +17,5 @@ service-account*.json
 /quiz/
 /lib/
 /server.js
+.vercel
+.env*
