@@ -1,206 +1,216 @@
 (() => {
   const welcome = document.getElementById('welcome');
-  const quizScreen = document.getElementById('quiz-screen');
+  const chatScreen = document.getElementById('chat-screen');
   const resultScreen = document.getElementById('result-screen');
   const startForm = document.getElementById('start-form');
+  const nameInput = document.getElementById('name-input');
   const startBtn = document.getElementById('start-btn');
-  const formError = document.getElementById('form-error');
+  const messagesEl = document.getElementById('messages');
   const progressNum = document.getElementById('progress-num');
   const progressFill = document.getElementById('progress-fill');
-  const quizSubtitle = document.getElementById('quiz-subtitle');
-  const resultSubtitle = document.getElementById('result-subtitle');
-  const qCategory = document.getElementById('q-category');
-  const qText = document.getElementById('q-text');
+  const thinkingEl = document.getElementById('thinking');
+  const choicesWrap = document.getElementById('choices-wrap');
   const choicesEl = document.getElementById('choices');
-  const feedbackEl = document.getElementById('feedback');
-  const feedbackStatus = document.getElementById('feedback-status');
-  const feedbackExplanation = document.getElementById('feedback-explanation');
-  const nextBtn = document.getElementById('next-btn');
+  const choiceHint = document.getElementById('choice-hint');
+  const composer = document.getElementById('composer');
+  const freeForm = document.getElementById('free-form');
+  const freeInput = document.getElementById('free-input');
+  const sendBtn = document.getElementById('send-btn');
   const resultClosing = document.getElementById('result-closing');
   const resultAdvice = document.getElementById('result-advice');
   const resultLevel = document.getElementById('result-level');
   const resultScore = document.getElementById('result-score');
-  const resultEyebrow = document.getElementById('result-eyebrow');
   const resultCategories = document.getElementById('result-categories');
-  const restartBtn = document.getElementById('restart-btn');
-
-  const STORAGE_KEY = 'dpg-qcm';
-  const LETTERS = 'ABCD';
-  const NIVEAUX = ['Débutant', 'Notions de base', 'Confortable', 'Avancé'];
 
   let sessionId = null;
   let sessionToken = null;
-  let profil = null;
   let busy = false;
-  let pendingQuestion = null;
-  let pendingSummary = null;
-  let pendingProgress = null;
+  let lastAgentWasQuestion = false;
 
-  function isEmail(value) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
-  }
-
-  function isPhone(value) {
-    if (!/^\+[1-9][\d\s().-]{7,20}$/.test(value)) return false;
-    const digits = value.replace(/\D/g, '');
-    return digits.length >= 8 && digits.length <= 15;
-  }
-
-  function showError(message) {
-    formError.hidden = !message;
-    formError.textContent = message || '';
-  }
-
-  function profileLabel(value) {
-    return value === 'technique' ? 'Profil technique' : 'Profil non-technique';
-  }
-
-  function persistSession() {
-    if (!sessionId || !sessionToken) return;
-    sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ sessionId, sessionToken }));
-  }
-
-  function clearSession() {
-    sessionId = null;
-    sessionToken = null;
-    profil = null;
-    sessionStorage.removeItem(STORAGE_KEY);
-  }
+  const LETTERS = 'ABCDEFGH';
 
   function setBusy(value) {
     busy = value;
+    thinkingEl.hidden = !value;
+    sendBtn.disabled = value;
+    freeInput.disabled = value;
     startBtn.disabled = value;
-    nextBtn.disabled = value;
+    choicesEl.querySelectorAll('button').forEach((b) => {
+      b.disabled = value;
+    });
+  }
+
+  function formatText(text) {
+    return String(text)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\n/g, '<br>');
+  }
+
+  function formatScore(n) {
+    const rounded = Math.round(Number(n) * 100) / 100;
+    return String(rounded).replace('.', ',');
+  }
+
+  function appendMessage(role, text, opts = {}) {
+    const row = document.createElement('div');
+    row.className = `msg-row ${role}`;
+
+    if (role === 'agent') {
+      const av = document.createElement('div');
+      av.className = 'msg-avatar';
+      av.textContent = 'D';
+      row.appendChild(av);
+    }
+
+    const bubble = document.createElement('div');
+    bubble.className = `bubble ${role}`;
+    if (opts.isQuestion) bubble.classList.add('question');
+    bubble.innerHTML = formatText(text);
+    row.appendChild(bubble);
+
+    messagesEl.appendChild(row);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  function agentBubbleHtml(text) {
+    return `
+      <div class="msg-avatar">D</div>
+      <div class="bubble agent">${formatText(text)}</div>
+    `;
   }
 
   function updateProgress(progress) {
     if (!progress) return;
-    progressNum.textContent = String(progress.current);
-    const of = document.querySelector('#quiz-screen .progress-of');
-    if (of) of.textContent = `sur ${progress.total}`;
-    const pct = Math.max(4, Math.round((progress.current / progress.total) * 100));
+    const cur = progress.displayCurrent;
+    const total = progress.total;
+    progressNum.textContent = String(cur);
+    const pct = Math.max(4, Math.round((cur / total) * 100));
     progressFill.style.width = `${pct}%`;
+    const of = document.querySelector('.progress-of');
+    if (of) of.textContent = `sur ${total}`;
   }
 
-  function showScreen(name) {
-    welcome.hidden = name !== 'welcome';
-    quizScreen.hidden = name !== 'quiz';
-    resultScreen.hidden = name !== 'result';
+  function setInputMode(mode, options, stage) {
+    if (mode === 'free') {
+      choicesWrap.hidden = true;
+      choicesEl.innerHTML = '';
+      composer.hidden = false;
+      freeInput.value = '';
+      freeInput.focus();
+    } else if (mode === 'choice') {
+      composer.hidden = true;
+      choicesWrap.hidden = false;
+      choicesEl.innerHTML = '';
+      (options || []).forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'choice-btn';
+        const letter = LETTERS[i] || String(i + 1);
+        btn.innerHTML = `<span class="choice-letter">${letter}</span><span>${escapeHtml(opt.text)}</span>`;
+        btn.addEventListener('click', () => onChoice(opt.id));
+        choicesEl.appendChild(btn);
+      });
+      if (stage === 'choice2') {
+        choiceHint.textContent = 'Indice utilisé · réponse validée à 0,25 point si correcte';
+      } else {
+        choiceHint.textContent = 'Indice utilisé · réponse validée à 0,5 point si correcte';
+      }
+    } else if (mode === 'done') {
+      composer.hidden = true;
+      choicesWrap.hidden = true;
+      choicesEl.innerHTML = '';
+    }
   }
 
-  function renderQuestion(question, progress) {
-    pendingQuestion = null;
-    pendingSummary = null;
-    pendingProgress = null;
-    feedbackEl.hidden = true;
-    nextBtn.hidden = false;
-    qCategory.textContent = question.category || '';
-    qText.textContent = question.question || '';
-    quizSubtitle.textContent = profileLabel(profil);
-    choicesEl.replaceChildren();
-    (question.options || []).forEach((opt, i) => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'choice-btn';
-      btn.dataset.optionId = opt.id;
-      const letter = document.createElement('span');
-      letter.className = 'choice-letter';
-      letter.textContent = LETTERS[i] || String(i + 1);
-      const text = document.createElement('span');
-      text.textContent = opt.text;
-      btn.append(letter, text);
-      btn.addEventListener('click', () => onChoice(opt.id));
-      choicesEl.appendChild(btn);
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function isLikelyQuestion(text, index, total) {
+    // Heuristic: last agent message in a turn that advances is often the next question;
+    // first turn has greeting then question. Treat non-feedback short-ish agent lines
+    // after user as question when it's the last agent message in the batch.
+    if (index !== total - 1) return false;
+    const t = String(text || '');
+    if (t.length < 8) return false;
+    // Feedback usually contains celebration words or "bonne réponse"
+    const feedbackish =
+      /exactement|très bien|c'est ça|parfait|tout à fait|bien vu|pas tout à fait|on y est|bonne réponse|coquille|enchaîne|valide|synthèse|merci pour/i.test(
+        t
+      );
+    return !feedbackish;
+  }
+
+  function applyMessages(messages) {
+    const list = messages || [];
+    list.forEach((m, i) => {
+      if (m.role === 'user') {
+        appendMessage('user', m.text);
+        lastAgentWasQuestion = false;
+      } else {
+        const isQuestion = isLikelyQuestion(m.text, i, list.length);
+        appendMessage('agent', m.text, { isQuestion });
+        lastAgentWasQuestion = isQuestion;
+      }
     });
-    updateProgress(progress);
-    showScreen('quiz');
   }
 
-  function renderFeedback(state) {
-    const feedback = state.feedback || {};
-    pendingQuestion = state.question || null;
-    pendingSummary = state.summary || null;
-    pendingProgress = state.progress || null;
-    choicesEl.querySelectorAll('button').forEach((btn) => {
-      btn.disabled = true;
-      btn.classList.add('is-locked');
-      const id = btn.dataset.optionId;
-      if (id === feedback.correctOptionId) btn.classList.add('is-correct');
-      else if (id === feedback.selectedOptionId) btn.classList.add('is-wrong');
-      else btn.classList.add('is-dimmed');
-    });
-    feedbackStatus.className = `feedback-status ${feedback.correct ? 'ok' : 'ko'}`;
-    feedbackStatus.textContent = feedback.correct
-      ? 'Bonne réponse — 1 point'
-      : 'Réponse incorrecte — 0 point';
-    feedbackExplanation.textContent = feedback.explanation || '';
-    nextBtn.hidden = false;
-    nextBtn.textContent = state.completed ? 'Voir mon résultat' : 'Question suivante';
-    feedbackEl.hidden = false;
-  }
+  function showResults(state) {
+    chatScreen.hidden = true;
+    resultScreen.hidden = false;
 
-  function agentBubble(text) {
-    const avatar = document.createElement('div');
-    avatar.className = 'msg-avatar';
-    avatar.textContent = 'D';
-    const bubble = document.createElement('div');
-    bubble.className = 'bubble agent';
-    bubble.textContent = text;
-    const row = document.createElement('div');
-    row.className = 'msg-row agent';
-    row.append(avatar, bubble);
-    return row;
-  }
+    const summary = state.summary || {};
+    const closingMsg =
+      (state.messages || []).filter((m) => m.role === 'agent').pop()?.text ||
+      'Voici votre synthèse.';
 
-  function showResults(summary) {
-    const data = summary || {};
-    const label = profileLabel(data.profil || profil);
-    resultSubtitle.textContent = label;
-    resultEyebrow.textContent = `Niveau estimé · ${label}`;
-    resultClosing.replaceChildren(
-      agentBubble(
-        data.prenom
-          ? `Merci ${data.prenom}. Votre évaluation est terminée.`
-          : 'Votre évaluation est terminée.'
-      )
+    resultClosing.innerHTML = agentBubbleHtml(closingMsg);
+    resultAdvice.innerHTML = agentBubbleHtml(
+      summary.advice || summary.recommendation || ''
     );
-    resultAdvice.replaceChildren(agentBubble(data.recommendation || ''));
-    resultLevel.textContent = data.level || '—';
-    resultScore.textContent = `${data.totalScore ?? '—'} / ${data.maxScore || 20} points`;
-    resultCategories.replaceChildren();
-    Object.entries(data.byCategory || {}).forEach(([name, cat]) => {
-      const pct = cat.max ? Math.round((cat.score / cat.max) * 100) : 0;
-      const wrap = document.createElement('div');
-      const labels = document.createElement('div');
-      labels.className = 'cat-row-label';
-      const left = document.createElement('span');
-      left.textContent = name;
-      const right = document.createElement('span');
-      right.textContent = `${cat.score} / ${cat.max}`;
-      labels.append(left, right);
-      const bar = document.createElement('div');
-      bar.className = 'cat-bar';
-      const fill = document.createElement('div');
-      fill.className = 'cat-bar-fill';
-      fill.style.width = `${pct}%`;
-      bar.appendChild(fill);
-      wrap.append(labels, bar);
-      resultCategories.appendChild(wrap);
+    resultLevel.textContent = summary.level || '—';
+    resultScore.textContent = `${formatScore(summary.totalScore)} / ${summary.maxScore || 25} points`;
+
+    resultCategories.innerHTML = '';
+    const cats = summary.byCategory || {};
+    // Only the 3 quiz categories — never show Cursor / GitHub lines
+    const forbidden = /cursor|github|d[ée]ploiement|d[ée]couvrir/i;
+    Object.entries(cats).forEach(([name, data]) => {
+      if (forbidden.test(name)) return;
+      const label =
+        name === 'Confidentialité et chiffrement'
+          ? 'Confidentialité & chiffrement'
+          : name;
+      const pct = data.max ? Math.round((data.score / data.max) * 100) : 0;
+      const row = document.createElement('div');
+      row.innerHTML = `
+        <div class="cat-row-label"><span>${escapeHtml(label)}</span><span>${formatScore(data.score)} / ${data.max}</span></div>
+        <div class="cat-bar"><div class="cat-bar-fill" style="width:${pct}%"></div></div>
+      `;
+      resultCategories.appendChild(row);
     });
-    showScreen('result');
   }
 
   function applyState(state) {
     sessionId = state.sessionId;
     if (state.sessionToken) sessionToken = state.sessionToken;
-    if (state.profil) profil = state.profil;
-    persistSession();
-    if (state.completed && state.summary) {
-      showResults(state.summary);
+    updateProgress(state.progress);
+    applyMessages(state.messages);
+
+    if (state.inputMode === 'done') {
+      // Don't duplicate closing in chat before switching — show result screen
+      showResults(state);
       return;
     }
-    if (!state.question) throw new Error('Question introuvable');
-    renderQuestion(state.question, state.progress);
+
+    setInputMode(state.inputMode, state.options, state.stage);
   }
 
   async function api(url, body) {
@@ -213,59 +223,41 @@
     });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(data.error || `Erreur ${res.status}`);
+    if (data.sessionToken) sessionToken = data.sessionToken;
     return data;
-  }
-
-  function readProfile() {
-    const prenom = startForm.prenom.value.trim();
-    const nom = startForm.nom.value.trim();
-    const email = startForm.email.value.trim();
-    const telephone = startForm.telephone.value.trim();
-    const metier = startForm.metier.value.trim();
-    const niveauDeclare = new FormData(startForm).get('niveauDeclare') || '';
-    const techniqueValue = new FormData(startForm).get('technique') || '';
-
-    if (!prenom) return { error: 'Le prénom est obligatoire.' };
-    if (!nom) return { error: 'Le nom est obligatoire.' };
-    if (!isEmail(email)) return { error: 'Indiquez un email professionnel valide.' };
-    if (!isPhone(telephone)) {
-      return { error: 'Indiquez un téléphone au format international, par exemple +212 612 345678.' };
-    }
-    if (!metier) return { error: 'Le métier ou la fonction est obligatoire.' };
-    if (!NIVEAUX.includes(niveauDeclare)) return { error: 'Choisissez un niveau de connaissance.' };
-    if (techniqueValue !== 'oui' && techniqueValue !== 'non') {
-      return { error: 'Indiquez si votre rôle implique des compétences techniques.' };
-    }
-
-    return {
-      value: {
-        prenom,
-        nom,
-        email,
-        telephone,
-        metier,
-        niveauDeclare,
-        technique: techniqueValue === 'oui',
-      },
-    };
   }
 
   startForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (busy) return;
-    const parsed = readProfile();
-    if (parsed.error) {
-      showError(parsed.error);
-      return;
-    }
-    showError('');
     setBusy(true);
     try {
-      clearSession();
-      const state = await api('/api/session/start', parsed.value);
+      const state = await api('/api/session/start', { name: nameInput.value.trim() });
+      welcome.hidden = true;
+      chatScreen.hidden = false;
+      resultScreen.hidden = true;
+      messagesEl.innerHTML = '';
       applyState(state);
     } catch (err) {
-      showError(err.message || "Impossible de démarrer l'évaluation");
+      alert(err.message || 'Impossible de démarrer le quiz');
+    } finally {
+      setBusy(false);
+    }
+  });
+
+  freeForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (busy || !sessionId) return;
+    const text = freeInput.value.trim();
+    if (!text) return;
+    setBusy(true);
+    freeInput.value = '';
+    try {
+      const state = await api(`/api/session/${sessionId}/answer`, { text });
+      applyState(state);
+    } catch (err) {
+      appendMessage('agent', err.message || 'Une erreur est survenue. Réessayez.');
+      setInputMode('free');
     } finally {
       setBusy(false);
     }
@@ -274,75 +266,13 @@
   async function onChoice(optionId) {
     if (busy || !sessionId) return;
     setBusy(true);
-    const buttons = Array.from(choicesEl.querySelectorAll('button'));
-    buttons.forEach((btn) => {
-      btn.disabled = true;
-    });
     try {
       const state = await api(`/api/session/${sessionId}/answer`, { optionId });
-      applyIdentity(state);
-      renderFeedback(state);
-      persistSession();
+      applyState(state);
     } catch (err) {
-      buttons.forEach((btn) => {
-        btn.disabled = false;
-      });
-      feedbackStatus.className = 'feedback-status ko';
-      feedbackStatus.textContent = err.message || 'Une erreur est survenue. Réessayez.';
-      feedbackExplanation.textContent = '';
-      nextBtn.hidden = true;
-      feedbackEl.hidden = false;
+      appendMessage('agent', err.message || 'Une erreur est survenue. Réessayez.');
     } finally {
       setBusy(false);
-    }
-  }
-
-  function applyIdentity(state) {
-    if (state.sessionId) sessionId = state.sessionId;
-    if (state.sessionToken) sessionToken = state.sessionToken;
-    if (state.profil) profil = state.profil;
-  }
-
-  nextBtn.addEventListener('click', () => {
-    if (pendingSummary && !pendingQuestion) {
-      showResults(pendingSummary);
-      return;
-    }
-    if (pendingQuestion) {
-      renderQuestion(pendingQuestion, pendingProgress);
-    }
-  });
-
-  restartBtn.addEventListener('click', () => {
-    clearSession();
-    pendingQuestion = null;
-    pendingSummary = null;
-    pendingProgress = null;
-    showError('');
-    startForm.reset();
-    showScreen('welcome');
-    window.scrollTo(0, 0);
-  });
-
-  const saved = sessionStorage.getItem(STORAGE_KEY);
-  if (saved) {
-    try {
-      const parsed = JSON.parse(saved);
-      sessionId = parsed.sessionId;
-      sessionToken = parsed.sessionToken;
-      api('/api/session/resume', { sessionId, sessionToken })
-        .then((state) => {
-          applyIdentity(state);
-          if (state.completed && state.summary) showResults(state.summary);
-          else if (state.question) renderQuestion(state.question, state.progress);
-          else clearSession();
-          persistSession();
-        })
-        .catch(() => {
-          clearSession();
-        });
-    } catch {
-      clearSession();
     }
   }
 })();

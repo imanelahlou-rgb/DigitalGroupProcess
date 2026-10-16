@@ -3,8 +3,8 @@ require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
-const { startQuiz, resumeQuiz, submitAnswer } = require('./quizEngine');
-const { listProfiles } = require('./knowledge');
+const { startQuiz, submitAnswer } = require('./quizEngine');
+const { getQuestions, getQuizTitle } = require('./knowledge');
 
 const app = express();
 const ROOT = path.join(__dirname, '..');
@@ -14,60 +14,47 @@ app.use(cors());
 app.use(express.json({ limit: '64kb' }));
 
 app.get('/api/health', (_req, res) => {
-  const profiles = listProfiles();
   res.json({
     ok: true,
-    format: 'qcm',
-    profiles,
-    questions: Object.values(profiles).reduce((sum, n) => sum + n, 0),
+    title: getQuizTitle(),
+    questions: getQuestions().length,
     hasGeminiKey: Boolean(process.env.GEMINI_API_KEY),
   });
 });
 
 app.post('/api/session/start', async (req, res) => {
   try {
-    const state = await startQuiz(req.body || {});
+    const name = req.body?.name || '';
+    const state = await startQuiz(name);
     res.json(state);
   } catch (err) {
-    const status = err.status || 500;
-    if (status >= 500) console.error('start error:', err.message);
-    res.status(status).json({ error: err.message || 'Erreur au démarrage' });
-  }
-});
-
-app.post('/api/session/resume', async (req, res) => {
-  try {
-    const state = await resumeQuiz(req.body?.sessionId, req.body?.sessionToken);
-    res.json(state);
-  } catch (err) {
-    console.error('resume error:', err.message);
-    res.status(err.status || 500).json({ error: err.message || 'Session introuvable' });
+    console.error('start error:', err);
+    res.status(500).json({ error: err.message || 'Erreur au démarrage' });
   }
 });
 
 app.post('/api/session/:id/answer', async (req, res) => {
   try {
     const state = await submitAnswer(req.params.id, {
+      text: req.body?.text,
       optionId: req.body?.optionId,
       sessionToken: req.body?.sessionToken,
     });
     res.json(state);
   } catch (err) {
+    console.error('answer error:', err);
     const status = err.status || 500;
-    if (status >= 500) console.error('answer error:', err.message);
     res.status(status).json({ error: err.message || 'Erreur lors de la réponse' });
   }
 });
 
-app.use(['/data', '/src', '/node_modules', '/lib', '/quiz'], (_req, res) => {
-  res.status(404).send('Not found');
-});
-
+// Quiz UI
 app.use('/evaluation', express.static(path.join(ROOT, 'evaluation')));
 app.get(['/evaluation', '/evaluation/'], (_req, res) => {
   res.sendFile(path.join(ROOT, 'evaluation', 'index.html'));
 });
 
+// Marketing site (static)
 app.get(['/', '/index.html'], (_req, res) => {
   res.sendFile(path.join(ROOT, 'index.html'));
 });
@@ -84,6 +71,7 @@ app.use(
   })
 );
 
+// SPA-style fallback only for evaluation deep links
 app.get('/evaluation/*', (_req, res) => {
   res.sendFile(path.join(ROOT, 'evaluation', 'index.html'));
 });
@@ -91,6 +79,9 @@ app.get('/evaluation/*', (_req, res) => {
 if (require.main === module) {
   app.listen(PORT, () => {
     console.log(`DPG site + quiz listening on port ${PORT}`);
+    if (!process.env.GEMINI_API_KEY) {
+      console.warn('WARNING: GEMINI_API_KEY is not set');
+    }
   });
 }
 

@@ -2,7 +2,6 @@
 .env
 .env.local
 .env.*.local
-!.env.example
 .vercel/
 dist/
 build/
@@ -12,13 +11,4 @@ Thumbs.db
 *.pem
 credentials*.json
 service-account*.json
-
-# Copie de travail obsolète à la racine (code actif : src/ + evaluation/ + api/)
-/quiz/
-/lib/
-/server.js
-.vercel
-.env*
-
-# Résultats d'évaluation (données personnelles)
-data/results.csv
+quiz/
