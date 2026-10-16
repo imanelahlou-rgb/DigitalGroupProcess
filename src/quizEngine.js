@@ -10,6 +10,7 @@ const {
 } = require('./knowledge');
 const gemini = require('./gemini');
 const { exportSessionToken, importSessionToken } = require('./sessionToken');
+const { saveEvaluationLead } = require('./airtable');
 
 const sessions = new Map();
 const SESSION_TTL_MS = 4 * 60 * 60 * 1000;
@@ -115,8 +116,49 @@ function roundScore(n) {
   return Math.round(n * 100) / 100;
 }
 
-async function startQuiz(name) {
-  const session = createSession(name);
+function cleanText(value, max) {
+  return String(value || '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, max);
+}
+
+function httpError(status, message) {
+  const err = new Error(message);
+  err.status = status;
+  return err;
+}
+
+function parseLead(body) {
+  const src = body || {};
+  const prenom = cleanText(src.prenom || src.name, 80);
+  const nom = cleanText(src.nom, 80);
+  const email = cleanText(src.email, 120).toLowerCase();
+  const telephone = cleanText(src.telephone, 30);
+  const metier = cleanText(src.metier, 160);
+  if (!prenom) throw httpError(400, 'Le prénom est obligatoire.');
+  if (!nom) throw httpError(400, 'Le nom est obligatoire.');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+    throw httpError(400, 'Indiquez un email professionnel valide.');
+  }
+  const digits = telephone.replace(/\D/g, '');
+  if (!/^\+[1-9][\d\s().-]{7,20}$/.test(telephone) || digits.length < 8 || digits.length > 15) {
+    throw httpError(400, 'Indiquez un téléphone au format international, par exemple +212 612 345678.');
+  }
+  if (!metier) throw httpError(400, 'Le métier ou la fonction est obligatoire.');
+  return { prenom, nom, email, telephone, metier };
+}
+
+async function startQuiz(body) {
+  const lead = parseLead(typeof body === 'string' ? { prenom: body } : body);
+  try {
+    await saveEvaluationLead(lead);
+  } catch (err) {
+    if (err.status === 400) throw err;
+    console.error('airtable lead error:', err.airtableType || err.status || err.message);
+    throw httpError(502, "Impossible d'enregistrer vos coordonnées pour le moment. Réessayez.");
+  }
+  const session = createSession(lead.prenom);
   const q = getQuestionByIndex(0);
   const greeting = session.name
     ? `Bonjour ${session.name} — bienvenue dans le quiz d'évaluation Digital Process Group. Je vais vous poser 25 questions, une par une. Répondez d'abord librement avec vos propres mots ; si besoin, je vous proposerai des choix. On commence.`

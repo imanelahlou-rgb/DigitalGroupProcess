@@ -12,3 +12,5 @@ Thumbs.db
 credentials*.json
 service-account*.json
 quiz/
+.vercel
+.env*

@@ -3,8 +3,8 @@
   const chatScreen = document.getElementById('chat-screen');
   const resultScreen = document.getElementById('result-screen');
   const startForm = document.getElementById('start-form');
-  const nameInput = document.getElementById('name-input');
   const startBtn = document.getElementById('start-btn');
+  const formError = document.getElementById('form-error');
   const messagesEl = document.getElementById('messages');
   const progressNum = document.getElementById('progress-num');
   const progressFill = document.getElementById('progress-fill');
@@ -227,19 +227,49 @@
     return data;
   }
 
+  function showFormError(message) {
+    formError.hidden = !message;
+    formError.textContent = message || '';
+  }
+
+  function readLead() {
+    const prenom = startForm.prenom.value.trim();
+    const nom = startForm.nom.value.trim();
+    const email = startForm.email.value.trim();
+    const telephone = startForm.telephone.value.trim();
+    const metier = startForm.metier.value.trim();
+    const digits = telephone.replace(/\D/g, '');
+    if (!prenom) return { error: 'Le prénom est obligatoire.' };
+    if (!nom) return { error: 'Le nom est obligatoire.' };
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      return { error: 'Indiquez un email professionnel valide.' };
+    }
+    if (!/^\+[1-9][\d\s().-]{7,20}$/.test(telephone) || digits.length < 8 || digits.length > 15) {
+      return { error: 'Indiquez un téléphone au format international, par exemple +212 612 345678.' };
+    }
+    if (!metier) return { error: 'Le métier ou la fonction est obligatoire.' };
+    return { value: { prenom, nom, email, telephone, metier } };
+  }
+
   startForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (busy) return;
+    const lead = readLead();
+    if (lead.error) {
+      showFormError(lead.error);
+      return;
+    }
+    showFormError('');
     setBusy(true);
     try {
-      const state = await api('/api/session/start', { name: nameInput.value.trim() });
+      const state = await api('/api/session/start', lead.value);
       welcome.hidden = true;
       chatScreen.hidden = false;
       resultScreen.hidden = true;
       messagesEl.innerHTML = '';
       applyState(state);
     } catch (err) {
-      alert(err.message || 'Impossible de démarrer le quiz');
+      showFormError(err.message || 'Impossible de démarrer le quiz');
     } finally {
       setBusy(false);
     }

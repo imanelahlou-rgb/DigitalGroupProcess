@@ -24,12 +24,12 @@ app.get('/api/health', (_req, res) => {
 
 app.post('/api/session/start', async (req, res) => {
   try {
-    const name = req.body?.name || '';
-    const state = await startQuiz(name);
+    const state = await startQuiz(req.body || {});
     res.json(state);
   } catch (err) {
-    console.error('start error:', err);
-    res.status(500).json({ error: err.message || 'Erreur au démarrage' });
+    const status = err.status || 500;
+    if (status >= 500) console.error('start error:', err.message);
+    res.status(status).json({ error: err.message || 'Erreur au démarrage' });
   }
 });
 

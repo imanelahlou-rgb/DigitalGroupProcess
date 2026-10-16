@@ -296,6 +296,45 @@ body {
   border-color: var(--gold);
 }
 
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.req {
+  color: var(--gold);
+}
+
+.field-hint,
+.form-error {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.field-hint {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.form-error {
+  color: #8c3a2a;
+}
+
+@media (max-width: 480px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 .btn-cta {
   margin-top: 4px;
   background: linear-gradient(135deg, #c9a84c, #b8860b);
