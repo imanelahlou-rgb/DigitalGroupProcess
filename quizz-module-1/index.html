@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Quizz du premier module : Modèles IA &amp; Apprentissage</title>
+  <meta name="description" content="Quizz du premier module : Modèles IA &amp; Apprentissage. Dix questions, une seule bonne réponse, correction et score sur 10." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/evaluation/css/styles.css" />
+  <link rel="stylesheet" href="/quizz-module-1/css/review.css" />
+</head>
+<body>
+  <div class="page">
+    <section id="quiz-screen" class="shell chat-shell module-quiz">
+      <header class="chat-header">
+        <div class="chat-brand">
+          <div class="logo-mark">D</div>
+          <div>
+            <h1 class="chat-title">Quizz du premier module : Modèles IA &amp; Apprentissage</h1>
+            <div class="chat-subtitle">Digital Process Group</div>
+          </div>
+        </div>
+        <div class="progress-badge" id="progress-badge" aria-live="polite">
+          <span class="progress-num" id="progress-num">1</span>
+          <span class="progress-of">sur 10</span>
+        </div>
+      </header>
+
+      <div class="progress-track-wrap">
+        <div class="progress-track" id="progress-track" role="progressbar" aria-valuemin="1" aria-valuemax="10" aria-valuenow="1" aria-label="Progression du quizz">
+          <div class="progress-fill" id="progress-fill" style="width: 10%"></div>
+        </div>
+      </div>
+
+      <div class="qcm-body">
+        <div class="qcm-category">Modèles IA &amp; Apprentissage</div>
+        <h2 class="qcm-question" id="qcm-question" aria-live="polite"></h2>
+        <div id="choices" class="choices qcm-choices"></div>
+        <noscript>
+          <p class="choice-hint">Activez JavaScript pour afficher le quizz.</p>
+        </noscript>
+      </div>
+    </section>
+
+    <section id="result-screen" class="shell result-shell module-quiz" hidden>
+      <header class="chat-header result-header">
+        <div class="chat-brand">
+          <div class="logo-mark">D</div>
+          <div>
+            <p class="chat-title">Quizz du premier module : Modèles IA &amp; Apprentissage</p>
+            <div class="chat-subtitle">Digital Process Group</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="result-body">
+        <div id="result-closing" class="msg-row agent"></div>
+
+        <div class="score-hero">
+          <div class="score-glow" aria-hidden="true"></div>
+          <div class="score-eyebrow">Score</div>
+          <div class="score-level" id="result-level">— / 10</div>
+          <div class="score-pill">
+            <span id="result-score">—</span>
+          </div>
+        </div>
+
+        <div id="result-advice" class="msg-row agent"></div>
+
+        <div class="categories-block">
+          <div class="categories-title">Correction</div>
+          <div id="review-list" class="review-list"></div>
+        </div>
+
+        <button type="button" class="btn-cta" id="restart-btn">
+          Recommencer le quizz
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="#0A0A0A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </section>
+  </div>
+  <script src="/quizz-module-1/js/questions.js"></script>
+  <script src="/quizz-module-1/js/app.js"></script>
+</body>
+</html>

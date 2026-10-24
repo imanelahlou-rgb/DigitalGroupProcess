@@ -56,6 +56,19 @@ app.get(['/evaluation', '/evaluation/'], (_req, res) => {
   res.sendFile(path.join(ROOT, 'evaluation', 'index.html'));
 });
 
+// Quizz module 1 — page statique, indépendante de /evaluation
+app.use('/quizz-module-1', express.static(path.join(ROOT, 'quizz-module-1'), {
+  setHeaders(res, filePath) {
+    if (filePath.endsWith('.html')) {
+      res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+    }
+  },
+}));
+app.get(['/quizz-module-1', '/quizz-module-1/'], (_req, res) => {
+  res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+  res.sendFile(path.join(ROOT, 'quizz-module-1', 'index.html'));
+});
+
 // Marketing site (static)
 app.get(['/', '/index.html'], (_req, res) => {
   res.sendFile(path.join(ROOT, 'index.html'));
