@@ -21,14 +21,15 @@
   let locked = false;
 
   function resultCopy(score) {
-    if (score >= 7) {
+    // Seuils alignés sur un quizz /20 (comme /evaluation/)
+    if (score >= 14) {
       return {
         level: 'Avancé',
         closing: 'Bravo — vous maîtrisez déjà solidement les fondamentaux.',
         advice: 'Vous pouvez vous appuyer sur ces fondamentaux pour la suite du parcours.',
       };
     }
-    if (score >= 4) {
+    if (score >= 7) {
       return {
         level: 'Intermédiaire',
         closing: 'Merci — un bon socle, avec des axes clairs à renforcer.',
@@ -38,7 +39,7 @@
     return {
       level: 'Débutant',
       closing: 'Merci — voici votre point de départ pour une montée en compétences ciblée.',
-      advice: 'Reprenez le support du module — définition de l’IA, modèles, apprentissage, RAG et fine-tuning.',
+      advice: 'Reprenez le support du module — définition de l’IA, modèles, apprentissage et fine-tuning.',
     };
   }
 
@@ -77,7 +78,9 @@
     const question = QUESTIONS[index];
     const total = QUESTIONS.length;
     progressNum.textContent = String(index + 1);
-    progressFill.style.width = `${Math.round(((index + 1) / total) * 100)}%`;
+    const progressOf = document.querySelector('.progress-of');
+    if (progressOf) progressOf.textContent = `sur ${total}`;
+    progressFill.style.width = `${Math.max(5, Math.round(((index + 1) / total) * 100))}%`;
     progressTrack.setAttribute('aria-valuenow', String(index + 1));
     progressTrack.setAttribute('aria-valuemax', String(total));
     qcmQuestion.textContent = question.text;
@@ -177,7 +180,7 @@
   }
 
   function questionsAreValid(list) {
-    if (!Array.isArray(list) || list.length !== 10) return false;
+    if (!Array.isArray(list) || list.length !== 20) return false;
     return list.every((question) => {
       if (!question || !String(question.text || '').trim()) return false;
       if (!Array.isArray(question.options) || question.options.length !== 4) return false;
