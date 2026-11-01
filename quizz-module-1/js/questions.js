@@ -10,7 +10,7 @@
   return [
     {
       id: 1,
-      text: "Selon le support, que fait exactement un modèle mathématique d'IA ?",
+      text: "Que fait exactement un modèle mathématique d'IA ?",
       options: [
         { id: 'A', text: 'Il copie des réponses humaines stockées dans une base de données' },
         { id: 'B', text: 'Il applique une fonction mathématique paramétrée qui apprend des relations à partir de données pour produire une sortie' },
@@ -43,7 +43,7 @@
     },
     {
       id: 4,
-      text: "Lequel des éléments suivants n'est PAS cité dans le support comme raison pour laquelle les LLMs sont devenus le point d'entrée des usages en entreprise ?",
+      text: "Lequel des éléments suivants n'est PAS une raison pour laquelle les LLMs sont devenus le point d'entrée des usages en entreprise ?",
       options: [
         { id: 'A', text: 'Le langage naturel comme interface' },
         { id: 'B', text: 'La polyvalence (un même modèle résume, rédige, répond)' },
@@ -54,7 +54,7 @@
     },
     {
       id: 5,
-      text: 'Quelle est une caractéristique correcte des modèles open-weight (Llama, Mistral, DeepSeek, Qwen) selon le support ?',
+      text: 'Quelle est une caractéristique correcte des modèles open-weight (Llama, Mistral, DeepSeek, Qwen) ?',
       options: [
         { id: 'A', text: 'Accès uniquement via API, zéro infrastructure à gérer' },
         { id: 'B', text: 'Poids et architecture confidentiels' },
@@ -65,7 +65,7 @@
     },
     {
       id: 6,
-      text: "Le support affirme que même avec des données d'entraînement parfaites, un LLM peut halluciner. Pourquoi ?",
+      text: "Même avec des données d'entraînement parfaites, un LLM peut halluciner. Pourquoi ?",
       options: [
         { id: 'A', text: 'Parce que le modèle choisit volontairement de mentir' },
         { id: 'B', text: "Parce que la sortie correspond à la probabilité la plus haute, ce qui crée une pression statistique qui n'est pas un défaut corrigible" },
@@ -109,7 +109,7 @@
     },
     {
       id: 10,
-      text: 'Quel événement le support cite-t-il comme déclencheur de la "révolution de l\'IA" dans l\'introduction ?',
+      text: 'Quel événement est cité comme déclencheur de la "révolution de l\'IA" dans l\'introduction ?',
       options: [
         { id: 'A', text: "Le lancement d'AlphaGo" },
         { id: 'B', text: "L'arrivée de ChatGPT" },
@@ -120,7 +120,7 @@
     },
     {
       id: 11,
-      text: "Qu'est-ce qui caractérise l'apprentissage supervisé selon le support ?",
+      text: "Qu'est-ce qui caractérise l'apprentissage supervisé ?",
       options: [
         { id: 'A', text: 'Le modèle reçoit des données sans aucune réponse fournie' },
         { id: 'B', text: 'Le modèle reçoit des exemples accompagnés de la réponse attendue, appelée étiquette ou label' },
@@ -131,7 +131,7 @@
     },
     {
       id: 12,
-      text: "Qu'est-ce qui caractérise l'apprentissage non-supervisé selon le support ?",
+      text: "Qu'est-ce qui caractérise l'apprentissage non-supervisé ?",
       options: [
         { id: 'A', text: 'Le modèle reçoit des données sans réponse explicitement fournie et doit apprendre les structures présentes (régularités, ressemblances, relations)' },
         { id: 'B', text: 'Le modèle reçoit systématiquement une récompense pour chaque bonne réponse' },
@@ -142,7 +142,7 @@
     },
     {
       id: 13,
-      text: "D'après le support, que donne le pré-entraînement d'un LLM, avant tout fine-tuning ?",
+      text: "Que donne le pré-entraînement d'un LLM, avant tout fine-tuning ?",
       options: [
         { id: 'A', text: 'Un modèle déjà spécialisé pour une tâche précise' },
         { id: 'B', text: "Un modèle généraliste qui sait manipuler le langage mais qui n'est pas spécialisé à une tâche particulière" },
@@ -153,7 +153,7 @@
     },
     {
       id: 14,
-      text: 'Quelle est la différence de mécanisme entre les Adapters classiques et LoRA, selon le support ?',
+      text: 'Quelle est la différence de mécanisme entre les Adapters classiques et LoRA ?',
       options: [
         { id: 'A', text: 'Les Adapters ajoutent de petits modules entraînables entre certaines couches du modèle, tandis que LoRA entraîne de petites matrices de correction appliquées aux poids de certaines couches (poids d\'origine gelés dans les deux cas)' },
         { id: 'B', text: 'Les Adapters modifient tous les poids du modèle, LoRA n\'en modifie aucun' },
@@ -164,7 +164,7 @@
     },
     {
       id: 15,
-      text: 'Quel est un avantage propre aux Adapters classiques (PEFT), mis en avant dans le support ?',
+      text: 'Quel est un avantage propre aux Adapters classiques (PEFT) ?',
       options: [
         { id: 'A', text: 'Ils permettent une adaptation plus profonde que le full fine-tuning' },
         { id: 'B', text: 'Un même modèle général peut utiliser plusieurs adapters interchangeables (traduction, synthèse, analyse de sentiments, etc.)' },
@@ -175,7 +175,7 @@
     },
     {
       id: 16,
-      text: 'Selon le support, dans quel cas faut-il choisir le Full Fine-Tuning plutôt que LoRA ou QLoRA ?',
+      text: 'Dans quel cas faut-il choisir le Full Fine-Tuning plutôt que LoRA ou QLoRA ?',
       options: [
         { id: 'A', text: "Quand on dispose de peu de données et d'un seul GPU grand public" },
         { id: 'B', text: "Quand le modèle ne possède pas réellement la capacité recherchée, que LoRA reste insuffisant, et qu'on dispose d'un très grand dataset, de plusieurs GPU et d'un budget important" },
@@ -186,7 +186,7 @@
     },
     {
       id: 17,
-      text: 'Selon le support, quand LoRA est-il généralement le "premier choix" ?',
+      text: 'Quand LoRA est-il généralement le "premier choix" ?',
       options: [
         { id: 'A', text: 'Lorsque le modèle ne sait pas du tout accomplir la tâche visée' },
         { id: 'B', text: 'Lorsque le modèle sait déjà globalement accomplir la tâche, mais doit être spécialisé, mieux suivre des instructions ou adopter un comportement particulier' },
@@ -197,7 +197,7 @@
     },
     {
       id: 18,
-      text: 'Selon le support, quand faut-il choisir QLoRA plutôt que LoRA ?',
+      text: 'Quand faut-il choisir QLoRA plutôt que LoRA ?',
       options: [
         { id: 'A', text: 'Lorsqu\'on veut un modèle plus précis que le full fine-tuning' },
         { id: 'B', text: "Lorsqu'on souhaite effectuer le même type d'adaptation qu'avec LoRA, mais que la mémoire GPU est insuffisante" },
@@ -219,7 +219,7 @@
     },
     {
       id: 20,
-      text: 'Comment le support définit-il un neurone artificiel ?',
+      text: 'Comment définit-on un neurone artificiel ?',
       options: [
         { id: 'A', text: "Une copie exacte d'un neurone biologique humain" },
         { id: 'B', text: 'Une petite fonction mathématique qui applique des paramètres appris à plusieurs entrées' },
