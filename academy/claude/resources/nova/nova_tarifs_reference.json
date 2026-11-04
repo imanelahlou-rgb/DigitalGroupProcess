@@ -1,0 +1,44 @@
+{
+  "entreprise": "NOVA Conseil",
+  "devise": "MAD",
+  "base": "HT",
+  "note": "Exemple fictif — ne pas utiliser pour une opération commerciale réelle",
+  "taxes": "à définir selon contexte",
+  "prestations": [
+    {
+      "code": "N01",
+      "prestation": "Diagnostic digital",
+      "description": "Audit initial et synthèse des priorités",
+      "prix_ht_mad": 4500,
+      "unite": "forfait"
+    },
+    {
+      "code": "N02",
+      "prestation": "Organisation documentaire",
+      "description": "Structuration de dossiers et modèles de documents",
+      "prix_ht_mad": 6500,
+      "unite": "forfait"
+    },
+    {
+      "code": "N03",
+      "prestation": "Atelier IA initiation",
+      "description": "Formation pratique de 3 heures",
+      "prix_ht_mad": 3000,
+      "unite": "session"
+    },
+    {
+      "code": "N04",
+      "prestation": "Cartographie de processus",
+      "description": "Analyse et représentation d'un processus métier",
+      "prix_ht_mad": 5500,
+      "unite": "forfait"
+    },
+    {
+      "code": "N05",
+      "prestation": "Accompagnement automatisation",
+      "description": "Cadrage et prototype d'automatisation",
+      "prix_ht_mad": 9000,
+      "unite": "forfait"
+    }
+  ]
+}

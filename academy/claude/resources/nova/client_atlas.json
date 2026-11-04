@@ -1,0 +1,12 @@
+{
+  "client_id": "CL001",
+  "entreprise": "Atlas Distribution",
+  "effectif": 15,
+  "contact": "Mme Nadia Exemple",
+  "besoin": "Améliorer l'organisation documentaire",
+  "budget_mad": 12000,
+  "delai_souhaite": "Sous deux mois",
+  "statut": "prospect",
+  "email": null,
+  "adresse_facturation": null
+}

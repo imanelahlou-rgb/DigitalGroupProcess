@@ -1,0 +1,16 @@
+Lis d'abord CLAUDE.md.
+
+Objectif : créer un petit calculateur de devis NOVA en TypeScript.
+
+À faire :
+1. Crée src/catalogue.ts avec le catalogue N01 à N05 (prix en MAD HT : 4500, 6500, 3000, 5500, 9000).
+2. Crée src/devis.ts avec une fonction calculerDevis(codes, budget) qui retourne : statut, offres, total, reliquat ou écart (MAD et pourcentage).
+3. Gère les cas : budget dépassé (ALERTE_BUDGET, aucune remise), budget absent (INFORMATIONS_MANQUANTES, pas de total), code inconnu (erreur explicite).
+4. Crée src/devis.test.ts avec au moins 5 tests : Atlas Distribution (N02, budget 12000), Rif Atelier (N03, budget 2500), Océan Services (N01 + N04, budget 11000), budget absent, code inconnu.
+5. Ajoute un README de 5 lignes maximum.
+
+Contraintes :
+- Montants en entiers, TypeScript strict.
+- Données fictives uniquement.
+- Montre-moi d'abord ton plan et attends ma validation avant d'écrire les fichiers.
+- Ne lance aucune commande hors npm test sans me la demander.

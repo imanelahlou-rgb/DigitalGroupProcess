@@ -2,6 +2,8 @@
 .env.*
 !.env.example
 node_modules
+academy-app/node_modules
+academy-app/test-results
 .vercel
 quiz
 *.log

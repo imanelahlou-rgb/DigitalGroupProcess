@@ -15,5 +15,6 @@ Allow: /
 
 User-agent: *
 Allow: /
+Disallow: /academy/
 
 Sitemap: https://digitalprocessgrp.com/sitemap.xml

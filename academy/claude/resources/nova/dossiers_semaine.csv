@@ -1,0 +1,5 @@
+id,client,offre,montant_mad_ht,statut,derniere_maj
+D-101,Atlas Distribution,N02,6500,valide,Mardi
+D-102,Rif Atelier,N03,3000,en_attente,Mercredi
+D-103,Océan Services,N01 + N04,10000,envoye,Jeudi
+D-104,Maroc Textile,,,en_attente,Lundi

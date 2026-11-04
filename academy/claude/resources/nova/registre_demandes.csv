@@ -1,0 +1,6 @@
+id,date,client,statut,montant_ht_mad
+D001,2026-10-03,Atlas Distribution,devis_brouillon,6500
+D002,2026-10-07,Rif Atelier,incomplet,
+D003,2026-10-10,Océan Services,devis_brouillon,10000
+D004,2026-10-14,Prospect anonyme,incomplet,
+D005,2026-10-17,Atlas Distribution,a_relancer,6500

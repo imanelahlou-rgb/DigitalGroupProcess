@@ -1,0 +1,6 @@
+code,prestation,description,prix_ht_mad,unite
+N01,Diagnostic digital,Audit initial et synthèse des priorités,4500,forfait
+N02,Organisation documentaire,Structuration de dossiers et modèles de documents,6500,forfait
+N03,Atelier IA initiation,Formation pratique de 3 heures,3000,session
+N04,Cartographie de processus,Analyse et représentation d'un processus métier,5500,forfait
+N05,Accompagnement automatisation,Cadrage et prototype d'automatisation,9000,forfait

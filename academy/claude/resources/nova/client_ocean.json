@@ -1,0 +1,13 @@
+{
+  "client_id": "CL003",
+  "entreprise": "Océan Services",
+  "effectif": 42,
+  "contact": "M. Karim Exemple",
+  "besoin": "Diagnostic digital et cartographie de processus",
+  "budget_mad": 11000,
+  "delai_souhaite": "Sous trois mois",
+  "statut": "prospect",
+  "email": "karim.exemple@ocean-services.example",
+  "adresse_facturation": null,
+  "note": "Exemple fictif — ne pas utiliser pour une opération commerciale réelle"
+}
