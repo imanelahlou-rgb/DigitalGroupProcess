@@ -23,7 +23,7 @@ export default function CertificatePreview({ name, onNameChange, scoreLabel }: P
       </div>
       <div className="certificate" id="certificate">
         <div className="certificate-inner">
-          <BrandMark size="md" />
+          <BrandMark size="md" logoOnly />
           <p className="eyebrow">Attestation de participation</p>
           <p className="cert-lead">DPG Academy atteste que</p>
           <p className="cert-name">{name.trim() || 'Prénom Nom'}</p>

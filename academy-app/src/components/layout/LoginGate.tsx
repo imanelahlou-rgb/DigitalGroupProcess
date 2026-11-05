@@ -34,7 +34,7 @@ function LoginPage() {
   return (
     <main className="login-page" id="main">
       <div className="login-card">
-        <BrandMark size="lg" stacked />
+        <BrandMark size="lg" stacked logoOnly />
         <p className="eyebrow">Espace participants</p>
         <h1 className="login-title">{COURSE_TITLE}</h1>
         <form onSubmit={onSubmit} noValidate className="stack-sm">

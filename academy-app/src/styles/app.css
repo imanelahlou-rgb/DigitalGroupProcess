@@ -398,10 +398,22 @@ select.input { appearance: auto; background: var(--dpg-black); }
 
 /* --------------------------------- marque --------------------------------- */
 .brand { display: flex; align-items: center; gap: 0.7rem; }
-.brand-stacked { flex-direction: column; text-align: center; }
+.brand-stacked { flex-direction: column; text-align: center; gap: 0.85rem; }
+.brand-logo {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 6px;
+}
+.brand-logo--sm { height: 40px; width: auto; max-width: 140px; }
+.brand-logo--md { height: 52px; width: auto; max-width: 180px; }
+.brand-logo--lg { height: auto; width: min(100%, 220px); }
 .brand-text { display: grid; line-height: 1.1; }
 .brand-name { font-family: var(--font-title); font-size: 1.05rem; color: var(--dpg-cream); font-weight: 600; letter-spacing: 0.02em; }
 .brand-sub { font-size: 0.68rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--dpg-gold-mid); }
+.brand-tagline { margin: 0; letter-spacing: 0.18em; text-transform: uppercase; }
 
 /* --------------------------------- hero --------------------------------- */
 .hero {

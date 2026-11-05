@@ -18,7 +18,7 @@ export default function CourseHero({ continueTo, started }: Props) {
   ]
   return (
     <section className="hero" aria-labelledby="hero-title">
-      <BrandMark size="lg" />
+      <BrandMark size="lg" logoOnly />
       <p className="eyebrow">Atelier Claude · fil rouge NOVA Conseil</p>
       <h1 id="hero-title" className="hero-title">
         {COURSE_TITLE}

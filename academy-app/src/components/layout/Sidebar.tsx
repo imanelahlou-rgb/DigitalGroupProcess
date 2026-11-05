@@ -27,7 +27,7 @@ export default function Sidebar({ open, onClose }: Props) {
       <div className={`scrim ${open ? 'is-open' : ''}`} onClick={onClose} aria-hidden="true" />
       <aside className={`sidebar ${open ? 'is-open' : ''}`} id="sidebar" aria-label="Navigation principale">
         <div className="sidebar-head">
-          <BrandMark size="sm" />
+          <BrandMark size="sm" logoOnly />
           <button type="button" className="icon-btn sidebar-close" onClick={onClose} aria-label="Fermer le menu">
             <X size={18} aria-hidden="true" />
           </button>
