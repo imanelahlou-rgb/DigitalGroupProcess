@@ -7,8 +7,29 @@
   <meta name="description" content="Module 2 de la DPG Academy : fichier, format, présentation, exécutable, coût en tokens et piège du PDF.">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400;500&display=swap">
   <link rel="stylesheet" href="css/dpg.css">
+  <script>
+    /* Masque la leçon avant affichage. Le contrôle du mot de passe est dans js/dpg.js. */
+    try {
+      if (sessionStorage.getItem("dpg-module-unlock") !== "1") {
+        document.documentElement.classList.add("dpg-locked");
+      }
+    } catch (err) {
+      document.documentElement.classList.add("dpg-locked");
+    }
+  </script>
 </head>
-<body data-nav="modules">
+<body data-nav="modules" data-module-lock="true">
+  <div class="dpg-lock" id="dpg-lock" role="dialog" aria-modal="true" aria-labelledby="dpg-lock-label">
+    <form class="dpg-lock-form" id="dpg-lock-form">
+      <p class="dpg-eyebrow" id="dpg-lock-label">Accès au module</p>
+      <div class="dpg-field">
+        <label for="dpg-lock-password">Mot de passe</label>
+        <input class="dpg-input" id="dpg-lock-password" type="password" autocomplete="current-password" required>
+      </div>
+      <p class="dpg-lock-error" id="dpg-lock-error" role="alert"></p>
+      <button class="dpg-btn-outline" type="submit">Accéder</button>
+    </form>
+  </div>
   <header class="dpg-header" id="dpg-header"></header>
   <main id="contenu">
     <div class="dpg-intro dpg-section-pad">

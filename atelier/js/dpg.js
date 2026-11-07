@@ -245,6 +245,76 @@
     }
   }
 
+  /*
+   * Verrou des pages module-1 et module-2.
+   * Protection côté client simple : le mot de passe est dans ce fichier et
+   * le déverrouillage n'est qu'un indicateur sessionStorage. Les outils
+   * développeur permettent de le contourner. Ce n'est pas une authentification
+   * sécurisée.
+   */
+  var LOCK_KEY = "dpg-module-unlock";
+  var LOCK_PASSWORD = "4321";
+
+  function isModuleUnlocked() {
+    try {
+      return window.sessionStorage.getItem(LOCK_KEY) === "1";
+    } catch (err) {
+      return false;
+    }
+  }
+
+  function rememberModuleUnlock() {
+    try {
+      window.sessionStorage.setItem(LOCK_KEY, "1");
+    } catch (err) {
+      /* sessionStorage indisponible : le verrou reste actif à chaque page */
+    }
+  }
+
+  function setLessonHidden(hidden) {
+    ["dpg-header", "contenu", "dpg-footer"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      if (hidden) el.setAttribute("aria-hidden", "true");
+      else el.removeAttribute("aria-hidden");
+    });
+  }
+
+  function mountLock() {
+    if (!document.body.hasAttribute("data-module-lock")) return;
+    var gate = document.getElementById("dpg-lock");
+    var form = document.getElementById("dpg-lock-form");
+    var input = document.getElementById("dpg-lock-password");
+    var error = document.getElementById("dpg-lock-error");
+    if (!gate || !form || !input) return;
+
+    if (isModuleUnlocked()) {
+      document.documentElement.classList.remove("dpg-locked");
+      setLessonHidden(false);
+      return;
+    }
+
+    document.documentElement.classList.add("dpg-locked");
+    setLessonHidden(true);
+    input.focus();
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      if ((input.value || "").trim() === LOCK_PASSWORD) {
+        rememberModuleUnlock();
+        document.documentElement.classList.remove("dpg-locked");
+        setLessonHidden(false);
+        input.removeAttribute("aria-invalid");
+        if (error) error.textContent = "";
+        return;
+      }
+      input.setAttribute("aria-invalid", "true");
+      if (error) error.textContent = "Mot de passe incorrect.";
+      input.focus();
+    });
+  }
+
+  mountLock();
   mountHeader();
   mountFooter();
   buildSommaire();
