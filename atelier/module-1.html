@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Module 1 — Découverte de Claude — DPG Academy</title>
+  <meta name="description" content="Module 1 de la DPG Academy : les cinq notions de l'interface Claude, la mémoire, et l'exercice fil rouge en trois prompts RISEN.">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="css/dpg.css">
+</head>
+<body data-nav="modules">
+  <header class="dpg-header" id="dpg-header"></header>
+  <main id="contenu">
+    <div class="dpg-intro dpg-section-pad" id="introduction" data-step="1" data-sommaire="Introduction">
+      <p class="dpg-eyebrow">Module 1</p>
+      <h1 class="dpg-serif">Découverte de Claude</h1>
+      <p class="dpg-chapeau">Ce module a un seul objectif : comprendre l'interface de Claude avant de s'en servir. Un outil mal compris est un outil mal exploité — on tape des prompts dans une simple fenêtre de conversation sans savoir qu'il existe des espaces de travail persistants, des livrables éditables, des automatisations programmées, un canevas visuel et une couche de personnalisation réutilisable.</p>
+      <p class="dpg-chapeau">Ce module passe en revue les 5 notions fondamentales de l'interface, explique comment fonctionne la mémoire de Claude, puis applique tout cela à un cas concret : monter, étape par étape, son propre cabinet de conseil en IA.</p>
+    </div>
+
+    <div class="dpg-module-structure dpg-section-pad">
+      <nav class="dpg-breadcrumb" aria-label="Fil d'Ariane">
+        <ol>
+          <li><a class="dpg-nav-link" href="index.html">Academy</a></li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page">Module 1 — Découverte de Claude</li>
+        </ol>
+      </nav>
+
+      <div class="dpg-row-wrap">
+        <aside class="dpg-sommaire" aria-label="Sommaire du module">
+          <p class="dpg-eyebrow">Sommaire</p>
+          <ul data-sommaire-list></ul>
+        </aside>
+
+        <div class="dpg-content">
+          <section class="dpg-section" id="projets" data-step="2" data-sommaire="Projets">
+            <h2 class="dpg-serif">Les 5 notions de l'interface Claude</h2>
+            <p>Cinq briques composent l'espace de travail Claude. Elles se combinent : un Projet héberge des conversations, qui produisent des Artefacts, qui peuvent être régénérés automatiquement par une Tâche planifiée, mise en forme visuellement dans Design, le tout piloté par des Skills réutilisables.</p>
+
+            <article class="dpg-lesson-card">
+              <div class="dpg-lesson-copy">
+                <p class="dpg-eyebrow">Concept</p>
+                <h3 class="dpg-serif">1. Les Projets</h3>
+                <p>Un Projet est un espace de travail persistant : un conteneur qui regroupe des conversations, des fichiers de référence, des instructions personnalisées et une mémoire partagée, tous propres à un même sujet.</p>
+                <p>Ce qui change concrètement par rapport à une conversation isolée : tout ce qu'on dépose dans un Projet (un brief de marque, un catalogue d'offres, le CV d'un associé) reste disponible pour <strong>toutes</strong> les conversations futures ouvertes dans ce Projet. On ne répète plus le contexte à chaque nouvelle discussion — Claude le connaît déjà.</p>
+                <p><strong>À quoi ça sert :</strong></p>
+                <ul>
+                  <li>Isoler un client, un dossier ou une activité dans son propre espace, avec ses propres règles</li>
+                  <li>Donner des instructions permanentes (ton, format, contraintes) qui s'appliquent à toutes les conversations du Projet</li>
+                  <li>Conserver des documents de référence consultables à tout moment, sans les rejoindre à chaque fois</li>
+                </ul>
+                <p><strong>Cas cabinet :</strong> un Projet « Digital Process Group » qui contient le brand brief, le catalogue des offres, les gabarits de devis. Chaque nouvelle conversation ouverte dans ce Projet — rédiger un post LinkedIn, préparer une proposition commerciale — part déjà de cette base, sans réexpliquer qui est le cabinet ni quelles sont ses couleurs de marque.</p>
+              </div>
+              <div class="dpg-visual" role="img" aria-label="Un projet regroupe des conversations, des fichiers de référence, des instructions et une mémoire partagée">Conversations · Fichiers · Instructions · Mémoire</div>
+            </article>
+          </section>
+
+          <section class="dpg-section" id="artefacts" data-step="3" data-sommaire="Artefacts">
+            <article class="dpg-lesson-card">
+              <div class="dpg-lesson-copy">
+                <p class="dpg-eyebrow">Concept</p>
+                <h3 class="dpg-serif">2. Les Artefacts</h3>
+                <p>Un Artefact est un livrable que Claude construit en dehors du fil de conversation : un document, une présentation, un tableur, un design visuel, un tableau de bord. Il vit sur sa propre page, avec son propre lien, modifiable et partageable indépendamment de la discussion qui l'a fait naître.</p>
+                <p>La différence avec une simple réponse dans le chat est fondamentale : une réponse de chat se lit une fois puis se perd dans le fil ; un Artefact est un objet qu'on retrouve, qu'on modifie, qu'on partage avec quelqu'un d'autre, qui garde son historique de versions.</p>
+                <p><strong>À quoi ça sert :</strong></p>
+                <ul>
+                  <li>Produire un livrable final (document, présentation, visuel) qui doit survivre à la conversation</li>
+                  <li>Itérer dessus sans tout régénérer : on demande une modification, l'Artefact se met à jour à la même adresse</li>
+                  <li>Partager le résultat avec un tiers via un simple lien, sans exporter de fichier</li>
+                </ul>
+                <p><strong>Cas cabinet :</strong> générer le one-pager de positionnement du cabinet comme Artefact Design, ou le catalogue des 3 offres comme Artefact Doc — un objet qu'on peut ensuite envoyer à un prospect ou réviser la semaine suivante sans repartir de zéro.</p>
+              </div>
+              <div class="dpg-visual" role="img" aria-label="Un artefact est un livrable distinct du fil de conversation, avec son propre lien">Document · Visuel · Lien propre</div>
+            </article>
+          </section>
+
+          <section class="dpg-section" id="taches" data-step="4" data-sommaire="Tâches planifiées">
+            <article class="dpg-lesson-card">
+              <div class="dpg-lesson-copy">
+                <p class="dpg-eyebrow">Concept</p>
+                <h3 class="dpg-serif">3. Les Tâches planifiées</h3>
+                <p>Une Tâche planifiée permet à Claude de s'exécuter seul, à intervalle régulier (chaque jour, chaque semaine) ou à une date précise, sans qu'on ait besoin d'être présent pour déclencher la demande. Chaque exécution part d'une session neuve, effectue le travail défini, puis livre le résultat — en général sous forme de document ou de notification.</p>
+                <p><strong>À quoi ça sert :</strong></p>
+                <ul>
+                  <li>Automatiser une veille, un suivi ou un rapport récurrent qu'on devrait sinon penser à demander chaque fois</li>
+                  <li>Garantir une régularité (le même jour, la même heure) sans dépendre de la mémoire humaine</li>
+                  <li>Déléguer une routine entière pour se concentrer sur ce qui demande un vrai jugement</li>
+                </ul>
+                <p><strong>Cas cabinet :</strong> une veille hebdomadaire programmée chaque lundi matin, qui va chercher les cas d'usage IA sectoriels récents et livre une synthèse prête à partager — sans qu'on ait à s'en souvenir soi-même.</p>
+              </div>
+              <div class="dpg-visual" role="img" aria-label="Une tâche planifiée s'exécute à intervalle régulier, sans présence de l'utilisateur">Jour · Semaine · Date précise</div>
+            </article>
+          </section>
+
+          <section class="dpg-section" id="design" data-step="5" data-sommaire="Design">
+            <article class="dpg-lesson-card">
+              <div class="dpg-lesson-copy">
+                <p class="dpg-eyebrow">Concept</p>
+                <h3 class="dpg-serif">4. Design</h3>
+                <p>Design est un canevas visuel : un espace où Claude construit des maquettes, pages, visuels ou mises en page sur un artboard, plutôt qu'une simple page de code HTML décrite en mots. C'est l'outil pour tout ce qui se juge d'abord à l'œil.</p>
+                <p><strong>À quoi ça sert :</strong></p>
+                <ul>
+                  <li>Produire des maquettes de site, d'écrans d'application, d'affiches ou de visuels réseaux sociaux</li>
+                  <li>Itérer visuellement : ajuster une couleur, une typographie, une disposition, sans tout redécrire</li>
+                  <li>Obtenir un rendu fidèle à l'identité de marque avant de passer à l'intégration technique</li>
+                </ul>
+                <p><strong>Cas cabinet :</strong> construire la maquette du site vitrine ou du one-pager de positionnement du cabinet, dans les couleurs et la typographie de la marque — un visuel qu'on peut ensuite transmettre à un outil de développement pour l'intégrer réellement au site.</p>
+              </div>
+              <div class="dpg-visual" role="img" aria-label="Design est un canevas visuel pour maquettes, pages et mises en page">Artboard · Maquette · Identité</div>
+            </article>
+          </section>
+
+          <section class="dpg-section" id="skills" data-step="6" data-sommaire="Skills">
+            <article class="dpg-lesson-card">
+              <div class="dpg-lesson-copy">
+                <p class="dpg-eyebrow">Concept</p>
+                <h3 class="dpg-serif">5. Skills (personnalisation)</h3>
+                <p>Une Skill est un ensemble d'instructions packagé et réutilisable, qui apprend à Claude à exécuter une tâche récurrente exactement selon une méthode définie une bonne fois pour toutes. C'est la couche de personnalisation : au lieu de retaper les mêmes consignes à chaque fois, on les enregistre une fois sous forme de Skill, puis on les invoque par leur nom — ou Claude les déclenche de lui-même quand la situation s'y prête.</p>
+                <p><strong>À quoi ça sert :</strong></p>
+                <ul>
+                  <li>Standardiser une tâche répétitive (générer un devis, rédiger dans un ton précis, produire un format de document toujours identique)</li>
+                  <li>Garantir la cohérence : la méthode ne varie pas d'une fois à l'autre</li>
+                  <li>Combiner avec une Tâche planifiée pour automatiser entièrement une routine (la Skill définit <em>comment</em> faire, la Tâche planifiée définit <em>quand</em>)</li>
+                </ul>
+                <p><strong>Cas cabinet :</strong> une Skill « rédiger une offre commerciale DPG » qui applique toujours le même ton de marque, la même structure et les mêmes couleurs — invoquée à chaque nouvelle proposition, ou automatiquement par la veille hebdomadaire programmée.</p>
+              </div>
+              <div class="dpg-visual" role="img" aria-label="Une skill est une méthode réutilisable, que l'on invoque par son nom">Méthode · Nom · Réutilisation</div>
+            </article>
+          </section>
+
+          <section class="dpg-section" id="memoire-projet" data-step="7" data-sommaire="Mémoire de projet">
+            <h2 class="dpg-serif">La mémoire dans Claude</h2>
+            <p>Une fois les 5 notions posées, une question se pose naturellement : qu'est-ce que Claude retient, et pendant combien de temps ? Il existe deux mémoires de nature très différente — les confondre est la source de la plupart des frustrations des débutants.</p>
+            <article class="dpg-lesson-card">
+              <div class="dpg-lesson-copy">
+                <p class="dpg-eyebrow">Concept</p>
+                <h3 class="dpg-serif">Mémoire de projet</h3>
+                <p>C'est la mémoire durable, attachée au Projet lui-même plutôt qu'à une seule conversation. Elle se construit progressivement : chaque document déposé, chaque fait établi dans une conversation du Projet devient disponible pour toutes les conversations futures ouvertes dans ce même Projet.</p>
+                <p>Trois propriétés à retenir :</p>
+                <ul>
+                  <li><strong>Elle persiste</strong> : fermer une conversation ne l'efface pas, elle reste attachée au Projet</li>
+                  <li><strong>Elle est partagée</strong> : toute nouvelle conversation démarrée dans le Projet en hérite immédiatement, sans rien redemander</li>
+                  <li><strong>Elle est cumulative</strong> : elle s'enrichit au fil des échanges, sans qu'on ait besoin de la mettre à jour manuellement à chaque fois</li>
+                </ul>
+                <p>C'est elle qui permet, par exemple, qu'un Projet « cabinet de conseil » se souvienne du positionnement de marque, des 3 offres et du ton éditorial, conversation après conversation, des semaines plus tard.</p>
+              </div>
+              <div class="dpg-visual" role="img" aria-label="La mémoire de projet persiste, est partagée et s'enrichit">Persiste · Partagée · Cumulative</div>
+            </article>
+          </section>
+
+          <section class="dpg-section" id="memoire-conversation" data-step="8" data-sommaire="Mémoire de conversation">
+            <article class="dpg-lesson-card">
+              <div class="dpg-lesson-copy">
+                <p class="dpg-eyebrow">Concept</p>
+                <h3 class="dpg-serif">Mémoire de conversation</h3>
+                <p>À l'intérieur d'un même fil de discussion, le contexte s'accumule tour après tour : chaque message, chaque réponse, chaque fichier partagé reste visible par Claude pour la suite de cet échange précis. C'est ce qui permet de dire « continue » ou « raccourcis-le » sans tout réexpliquer.</p>
+                <p>Mais cette mémoire-là est différente de la mémoire de Projet sur un point essentiel : elle est <strong>limitée à ce seul fil</strong>. Elle ne persiste pas automatiquement ailleurs, et surtout elle n'est pas extensible à l'infini. Plus une conversation s'allonge, plus le volume d'échanges à garder en tête grossit — avec deux conséquences concrètes : les réponses deviennent plus lentes à produire, et le fil peut « diluer » une instruction donnée beaucoup plus tôt, qui finit par se perdre dans la masse.</p>
+              </div>
+              <div class="dpg-visual" role="img" aria-label="La mémoire de conversation reste limitée au fil en cours">Un fil · Contexte accumulé · Limite</div>
+            </article>
+          </section>
+
+          <section class="dpg-section" id="prompt-recap" data-step="9" data-sommaire="Prompt récap">
+            <article class="dpg-lesson-card">
+              <div class="dpg-lesson-copy">
+                <p class="dpg-eyebrow">Concept</p>
+                <h3 class="dpg-serif">Pourquoi faire un prompt récap</h3>
+                <p>Dans une conversation qui s'allonge — une session de travail longue sur un même dossier — il devient utile de demander régulièrement à Claude un <strong>prompt récap</strong> : un résumé court des décisions prises, de l'état actuel du travail et des points encore ouverts.</p>
+                <p>Deux bénéfices concrets :</p>
+                <ul>
+                  <li><strong>Un ancrage compact</strong> : plutôt que de remonter tout le fil pour se rappeler où on en est, on dispose d'un résumé condensé à relire en quelques secondes</li>
+                  <li><strong>Une base saine pour la suite</strong> : ce récap peut ensuite servir de point de départ si l'on décide de poursuivre dans une nouvelle conversation (voir ci-dessous), sans perdre le fil du travail accompli</li>
+                </ul>
+                <p>En pratique, il suffit de demander : <em>« Fais-moi un récapitulatif de ce qu'on a décidé jusqu'ici et de ce qui reste à faire. »</em></p>
+              </div>
+              <div class="dpg-visual" role="img" aria-label="Le prompt récap condense les décisions, l'état du travail et les points ouverts">Décisions · État · Points ouverts</div>
+            </article>
+          </section>
+
+          <section class="dpg-section" id="nouvelle-conversation" data-step="10" data-sommaire="Nouvelle conversation">
+            <article class="dpg-lesson-card">
+              <div class="dpg-lesson-copy">
+                <p class="dpg-eyebrow">Concept</p>
+                <h3 class="dpg-serif">Quand ouvrir une nouvelle conversation</h3>
+                <p>Lorsqu'une conversation devient très longue, certains signes ne trompent pas : les réponses ralentissent, le fil devient difficile à suivre, une consigne donnée au tout début semble « oubliée ». C'est le signal qu'il est temps d'arrêter d'empiler et de repartir sur un fil neuf.</p>
+                <p>La bonne méthode n'est pas de perdre ce qui a été construit, mais de :</p>
+                <ol>
+                  <li>Demander un <strong>prompt récap</strong> (voir ci-dessus) dans la conversation actuelle</li>
+                  <li>Ouvrir une <strong>nouvelle conversation</strong>, à l'intérieur du <strong>même Projet</strong></li>
+                  <li>Coller ce récap en ouverture de la nouvelle conversation pour repartir avec l'essentiel, sans le poids de tout l'historique</li>
+                </ol>
+                <p>Ceci montre tout l'intérêt de travailler dans un Projet plutôt que dans une conversation isolée : même si une conversation sature et qu'on en ouvre une nouvelle, la mémoire de Projet (documents, contexte durable) reste intacte et continue d'alimenter la suite — seul le fil de discussion ponctuel change.</p>
+              </div>
+              <div class="dpg-visual" role="img" aria-label="Trois gestes : demander un récap, ouvrir une conversation dans le même projet, coller le récap">Récap · Nouveau fil · Même projet</div>
+            </article>
+          </section>
+
+          <section class="dpg-section" id="exercice" data-step="11" data-sommaire="Exercice fil rouge">
+            <h2 class="dpg-serif">Exercice — Créer son cabinet de conseil avec Claude</h2>
+            <p>Mise en pratique directe des notions vues plus haut : en 3 prompts, structurés selon le framework <strong>RISEN</strong> (Role, Input, Steps, Expectation, Narrowing), on pose les fondations d'un cabinet de conseil en IA — un Projet qui le structure, un Artefact qui l'habille visuellement, une Skill qui automatise sa veille.</p>
+            <p>Chaque étape mobilise une notion différente — c'est volontaire : l'exercice sert aussi à sentir, en les utilisant l'une après l'autre, ce qui distingue un Projet, un Artefact/Design et une Skill.</p>
+
+            <figure class="dpg-result-table">
+              <figcaption class="dpg-result-caption">Synthèse des 3 étapes</figcaption>
+              <div class="dpg-table-scroll">
+                <table class="dpg-token-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Étape</th>
+                      <th scope="col">Notion mobilisée</th>
+                      <th scope="col">Résultat obtenu</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="dpg-token-cell">1</td>
+                      <td>Projet</td>
+                      <td>Le cabinet structuré en 3 pôles, mémoire durable activée</td>
+                    </tr>
+                    <tr>
+                      <td class="dpg-token-cell">2</td>
+                      <td>Artefact / Design</td>
+                      <td>Le one-pager de positionnement, visuel et réutilisable</td>
+                    </tr>
+                    <tr>
+                      <td class="dpg-token-cell">3</td>
+                      <td>Skill / Tâche planifiée</td>
+                      <td>La veille hebdomadaire sectorielle, automatisée</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </figure>
+
+            <h3 class="dpg-serif">Étape 1 — Créer le Projet du cabinet</h3>
+            <p>On commence par créer un <strong>Projet</strong> : c'est le socle qui portera la mémoire durable de tout ce qui suivra.</p>
+            <div class="dpg-demo-block">
+              <p class="dpg-eyebrow">Exemple de prompt</p>
+              <p class="dpg-demo-kicker">Prompt à utiliser (créer un nouveau Projet, puis coller ceci dans sa première conversation) :</p>
+              <blockquote class="dpg-serif dpg-demo-quote">« Je veux structurer un cabinet de conseil en intelligence artificielle. Agis comme un consultant senior en stratégie de cabinets de conseil (<span class="dpg-risen">Role</span>). Voici les informations de base : le cabinet s'organise autour de 3 pôles — Formation IA (initiation, prompt engineering, systèmes agentiques), Conseil en IA (accompagnement stratégique, audit de maturité IA) et Ingénierie IA (développement d'automatisations et de systèmes agentiques sur mesure) (<span class="dpg-risen">Input</span>). Procède en 4 étapes (<span class="dpg-risen">Steps</span>) : 1) propose une structure claire qui articule les 3 pôles entre eux et explique leur complémentarité commerciale, 2) identifie pour chaque pôle 2 à 3 offres concrètes, 3) propose un modèle de tarification cohérent pour chaque pôle, 4) rédige une phrase de positionnement unique qui couvre les 3 pôles. Le résultat attendu est une structure prête à devenir la mémoire de référence du cabinet dans ce Projet — synthétique, actionnable, pas un essai théorique (<span class="dpg-risen">Expectation</span>). Limite-toi à une page maximum, pas de jargon de conseil creux, reste concret et orienté client final (<span class="dpg-risen">Narrowing</span>). »</blockquote>
+              <p>Une fois la réponse obtenue, on la garde directement dans ce Projet : c'est elle qui deviendra la mémoire de référence que toutes les conversations futures du cabinet pourront consulter.</p>
+            </div>
+
+            <h3 class="dpg-serif">Étape 2 — Produire le one-pager de positionnement (Artefact / Design)</h3>
+            <p>Dans la même conversation — ou une nouvelle, toujours dans ce Projet — on demande maintenant un livrable visuel concret, en s'appuyant sur ce que le Projet sait déjà du cabinet.</p>
+            <div class="dpg-demo-block">
+              <p class="dpg-eyebrow">Exemple de prompt</p>
+              <p class="dpg-demo-kicker">Prompt à utiliser :</p>
+              <blockquote class="dpg-serif dpg-demo-quote">« Agis comme un directeur artistique spécialisé en identité de marque pour cabinets de conseil haut de gamme (<span class="dpg-risen">Role</span>). Appuie-toi sur la structure du cabinet définie juste avant dans ce Projet — les 3 pôles, les offres, la phrase de positionnement (<span class="dpg-risen">Input</span>). Construis un one-pager de positionnement en Design : 1) un en-tête avec le nom du cabinet et la phrase de positionnement, 2) une présentation synthétique des 3 pôles avec leurs offres phares, 3) un bloc « pourquoi nous » avec 3 arguments de différenciation, 4) un bloc contact (<span class="dpg-risen">Steps</span>). Le résultat doit être un Artefact visuel, prêt à être montré à un prospect ou intégré ensuite à un site — pas un simple texte dans le chat (<span class="dpg-risen">Expectation</span>). Reste sur un registre sobre et premium : pas de superlatifs marketing, pas de mot « révolution » ou « disruption », une mise en page aérée (<span class="dpg-risen">Narrowing</span>). »</blockquote>
+              <p>Le résultat est un Artefact : il garde son propre lien, on peut y revenir, le modifier, le partager — sans jamais retaper le brief.</p>
+            </div>
+
+            <h3 class="dpg-serif">Étape 3 — Automatiser la veille hebdomadaire (Skill / Tâche planifiée)</h3>
+            <p>Dernière étape : transformer une bonne pratique manuelle (chercher des cas d'usage sectoriels) en routine automatique, grâce à une Skill pilotée par une Tâche planifiée.</p>
+            <div class="dpg-demo-block">
+              <p class="dpg-eyebrow">Exemple de prompt</p>
+              <p class="dpg-demo-kicker">Prompt à utiliser :</p>
+              <blockquote class="dpg-serif dpg-demo-quote">« Agis comme un veilleur spécialisé en cas d'usage IA appliqués aux secteurs d'activité des clients du cabinet (<span class="dpg-risen">Role</span>). Le cabinet cible les secteurs définis dans sa structure — industrie, logistique, services, éducation, finance (<span class="dpg-risen">Input</span>). Chaque semaine : 1) identifie 3 à 5 cas d'usage IA récents et concrets dans ces secteurs, 2) pour chacun, résume en 2 phrases le problème résolu et la technologie utilisée, 3) classe-les par pôle du cabinet (Formation / Conseil / Ingénierie) auquel ils pourraient le mieux servir d'exemple client (<span class="dpg-risen">Steps</span>). Le résultat attendu est une synthèse courte, prête à être réutilisée telle quelle dans un post LinkedIn ou une relance commerciale — pas une revue de presse exhaustive (<span class="dpg-risen">Expectation</span>). Exclu toute source non vérifiable ou plus vieille qu'un an ; une seule page ; aucun cas d'usage dupliqué d'une semaine à l'autre (<span class="dpg-risen">Narrowing</span>). »</blockquote>
+              <p>On enregistre ces instructions comme <strong>Skill</strong>, puis on la programme via une <strong>Tâche planifiée</strong> hebdomadaire (par exemple chaque lundi matin) : la veille arrive désormais sans qu'on ait à y repenser.</p>
+            </div>
+          </section>
+
+          <section class="dpg-section" id="conclusion" data-step="12" data-sommaire="Conclusion">
+            <h2 class="dpg-serif">À la fin de l'exercice</h2>
+            <p>En 3 prompts, le cabinet dispose de :</p>
+            <ul>
+              <li>un <strong>Projet</strong> qui porte en mémoire sa structure, ses offres et son positionnement — disponible pour toute conversation future, sans jamais le réexpliquer</li>
+              <li>un <strong>Artefact Design</strong> présentable, modifiable et partageable : le one-pager de positionnement</li>
+              <li>une <strong>Skill</strong> automatisée par une <strong>Tâche planifiée</strong>, qui livre chaque semaine une veille sectorielle prête à l'emploi</li>
+            </ul>
+            <p>La suite logique — approfondie dans un prochain module — consiste à enrichir ce même Projet avec des Skills et Tâches planifiées supplémentaires, appliquées aux vrais livrables du cabinet.</p>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer id="dpg-footer"></footer>
+  <script src="js/dpg.js"></script>
+</body>
+</html>

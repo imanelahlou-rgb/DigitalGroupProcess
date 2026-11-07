@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Module 2 — Formats &amp; coût IA — DPG Academy</title>
+  <meta name="description" content="Module 2 de la DPG Academy : fichier, format, présentation, exécutable, coût en tokens et piège du PDF.">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="css/dpg.css">
+</head>
+<body data-nav="modules">
+  <header class="dpg-header" id="dpg-header"></header>
+  <main id="contenu">
+    <div class="dpg-intro dpg-section-pad">
+      <p class="dpg-eyebrow">Module 2</p>
+      <h1 class="dpg-serif">Formats &amp; coût IA</h1>
+      <p class="dpg-chapeau">Avant de comparer les coûts, il faut distinguer quatre notions souvent confondues.</p>
+    </div>
+
+    <div class="dpg-module-structure dpg-section-pad">
+      <nav class="dpg-breadcrumb" aria-label="Fil d'Ariane">
+        <ol>
+          <li><a class="dpg-nav-link" href="index.html">Academy</a></li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page">Module 2 — Formats &amp; coût IA</li>
+        </ol>
+      </nav>
+
+      <div class="dpg-row-wrap">
+        <aside class="dpg-sommaire" aria-label="Sommaire du module">
+          <p class="dpg-eyebrow">Sommaire</p>
+          <ul data-sommaire-list></ul>
+        </aside>
+
+        <div class="dpg-content">
+          <section class="dpg-section" id="notions" data-step="13" data-sommaire="Quatre notions">
+            <h2 class="dpg-serif">01 — Quatre notions à clarifier d'abord</h2>
+            <h3 class="dpg-serif">Fichier, format, présentation et exécutable : quatre notions différentes</h3>
+
+            <article class="dpg-lesson-card">
+              <div class="dpg-lesson-copy">
+                <p class="dpg-eyebrow">Concept</p>
+                <h3 class="dpg-serif">1. Le fichier : ce que l'on transmet</h3>
+                <p>Un fichier est un ensemble de données enregistré sur un support numérique. Il peut contenir du texte, des chiffres, des images, du son ou d'autres informations.</p>
+                <p><strong>Exemple :</strong> <code>tarifs_nova.csv</code> est un fichier contenant les prix des prestations d'un cabinet de conseil.</p>
+                <p>Un fichier possède généralement un nom et une extension. L'extension donne une indication sur son format, sans suffire à garantir sa structure réelle.</p>
+              </div>
+              <div class="dpg-visual" role="img" aria-label="Un fichier est l'élément numérique transmis, avec un nom et une extension">Nom · Extension · Données</div>
+            </article>
+
+            <article class="dpg-lesson-card">
+              <div class="dpg-lesson-copy">
+                <p class="dpg-eyebrow">Concept</p>
+                <h3 class="dpg-serif">2. Le format : comment les données sont organisées</h3>
+                <p>Le format définit la manière dont les informations sont représentées et organisées dans un fichier. Un même ensemble de données peut être enregistré en <code>.txt</code>, <code>.md</code>, <code>.csv</code>, <code>.json</code> ou <code>.pdf</code>. Le contenu métier reste identique. En revanche, sa représentation change.</p>
+                <p><strong>Exemple :</strong> une grille tarifaire peut être représentée par des lignes de texte, un tableau CSV, un tableau Markdown ou une liste d'objets JSON.</p>
+                <p>Ces représentations ne nécessitent pas forcément le même nombre de tokens pour transmettre les mêmes informations.</p>
+              </div>
+              <div class="dpg-visual" role="img" aria-label="Un même contenu peut être représenté en txt, md, csv, json ou pdf">TXT · MD · CSV · JSON · PDF</div>
+            </article>
+
+            <article class="dpg-lesson-card">
+              <div class="dpg-lesson-copy">
+                <p class="dpg-eyebrow">Concept</p>
+                <h3 class="dpg-serif">3. La présentation : ce que l'on voit</h3>
+                <p>La présentation correspond à l'apparence visuelle des informations. Elle comprend notamment les couleurs, les polices, les alignements, les espacements et la disposition des éléments. Il faut distinguer la présentation de la structure des données.</p>
+                <p><strong>Exemple :</strong> un tableau avec des bordures bleues et un tableau sans bordures peuvent contenir exactement les mêmes informations. Changer uniquement leur apparence dans un logiciel ne change pas nécessairement le texte envoyé au LLM. En revanche, si la présentation nécessite du balisage supplémentaire, des images ou une mise en page complexe à traiter, elle peut avoir un effet sur le coût.</p>
+                <p><strong>À retenir :</strong> un LLM ne facture pas directement la beauté d'un document. Il traite des tokens issus du contenu et, selon le mode utilisé, des éléments visuels.</p>
+              </div>
+              <div class="dpg-visual" role="img" aria-label="La présentation est l'apparence : couleurs, polices, alignements, espacements">Couleur · Police · Alignement</div>
+            </article>
+
+            <article class="dpg-lesson-card">
+              <div class="dpg-lesson-copy">
+                <p class="dpg-eyebrow">Concept</p>
+                <h3 class="dpg-serif">4. L'exécutable : ce qui réalise une action</h3>
+                <p>Un exécutable est un programme, ou un fichier pouvant être exécuté dans un environnement approprié, pour réaliser des opérations. Il ne sert pas simplement à conserver des informations. Il contient des instructions destinées à être exécutées.</p>
+                <p><strong>Exemples :</strong></p>
+                <ul>
+                  <li>Un fichier <code>.csv</code> contient une grille tarifaire.</li>
+                  <li>Un fichier <code>.json</code> contient des données structurées.</li>
+                  <li>Un programme <code>.exe</code> peut ouvrir une application et effectuer des opérations.</li>
+                </ul>
+                <p>Un fichier JSON peut être lu par un programme, mais il n'est pas lui-même un programme exécutable. De même, demander à Claude d'analyser du code n'est pas la même chose que faire exécuter ce code.</p>
+              </div>
+              <div class="dpg-visual" role="img" aria-label="Un exécutable contient des instructions destinées à être exécutées, contrairement à un CSV ou un JSON">CSV · JSON · EXE</div>
+            </article>
+
+            <figure class="dpg-result-table">
+              <figcaption class="dpg-result-caption">Synthèse — Les quatre notions</figcaption>
+              <div class="dpg-table-scroll">
+                <table class="dpg-token-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Notion</th>
+                      <th scope="col">Question à se poser</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Fichier</td>
+                      <td>Quel élément numérique est transmis ?</td>
+                    </tr>
+                    <tr>
+                      <td>Format</td>
+                      <td>Comment les informations sont-elles représentées ?</td>
+                    </tr>
+                    <tr>
+                      <td>Présentation</td>
+                      <td>Comment apparaissent-elles à l'écran ?</td>
+                    </tr>
+                    <tr>
+                      <td>Exécutable</td>
+                      <td>Quelles instructions peuvent être exécutées ?</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </figure>
+            <p><strong>Idée essentielle :</strong> pour comprendre le coût d'une interaction avec un LLM, il faut examiner ce qui est réellement transmis et traité, et non uniquement ce qui apparaît à l'écran.</p>
+          </section>
+
+          <section class="dpg-section" id="cout" data-step="14" data-sommaire="Coût en tokens">
+            <h2 class="dpg-serif">02 — Le coût en tokens selon le format</h2>
+            <h3 class="dpg-serif">Un même contenu, des coûts différents</h3>
+            <p>Un modèle de langage ne mesure pas directement la longueur d'un document en pages ou en caractères. Il traite des unités appelées <strong>tokens</strong>. Un token peut correspondre à un mot entier, une partie de mot, un nombre ou un signe de ponctuation. Le découpage dépend du tokenizer utilisé par le modèle.</p>
+            <p>Dans une API de LLM, le volume de tokens traités intervient dans le calcul du coût. Les tokens d'entrée et les tokens de sortie peuvent avoir des tarifs différents. Plus un fichier nécessite de tokens d'entrée, plus son traitement peut coûter cher, à conditions tarifaires identiques.</p>
+            <p><strong>Exemple : la grille tarifaire NOVA Conseil</strong></p>
+            <p>Prenons une même grille tarifaire fictive, enregistrée sous cinq représentations. Le contenu métier est identique dans chaque version. Le nombre de tokens a été mesuré avec le tokenizer <code>o200k_base</code>.</p>
+
+            <figure class="dpg-result-table">
+              <figcaption class="dpg-result-caption">Tokens mesurés pour la grille NOVA Conseil</figcaption>
+              <div class="dpg-table-scroll">
+                <table class="dpg-token-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Représentation</th>
+                      <th class="is-num" scope="col">Tokens mesurés</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>CSV</td>
+                      <td class="dpg-token-cell is-num">59</td>
+                    </tr>
+                    <tr>
+                      <td>Texte extrait d'un PDF</td>
+                      <td class="dpg-token-cell is-num">61</td>
+                    </tr>
+                    <tr>
+                      <td>TXT</td>
+                      <td class="dpg-token-cell is-num">74</td>
+                    </tr>
+                    <tr>
+                      <td>Markdown</td>
+                      <td class="dpg-token-cell is-num">89</td>
+                    </tr>
+                    <tr>
+                      <td>JSON</td>
+                      <td class="dpg-token-cell is-num">168</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="dpg-table-legend">Légende : comptage fourni pour les cinq représentations de la grille NOVA Conseil, selon l'encodage o200k_base. Ces chiffres concernent le contenu textuel testé, et non le coût complet d'une requête API Claude.</p>
+            </figure>
+
+            <h3 class="dpg-serif">Comment interpréter ces résultats ?</h3>
+            <p><strong>Le CSV : 59 tokens</strong> — Le CSV est compact pour représenter des données tabulaires. Les informations sont organisées en lignes et en colonnes, sans répétition systématique des noms de champs à chaque ligne. Il convient particulièrement aux listes, aux tableaux de prix et aux jeux de données réguliers.</p>
+            <p><strong>Le PDF avec texte extrait : 61 tokens</strong> — Ici, on ne mesure pas le fichier PDF original. On mesure uniquement le texte qui en a été extrait avant son envoi au tokenizer. Le résultat est proche du CSV parce que cette extraction produit une représentation textuelle relativement compacte.</p>
+            <p><strong>Le TXT : 74 tokens</strong> — Le texte brut contient peu de balisage imposé par le format. Cependant, le nombre de tokens dépend de la façon dont les informations sont rédigées. Des phrases complètes peuvent être plus longues qu'une représentation tabulaire.</p>
+            <p><strong>Le Markdown : 89 tokens</strong> — Le Markdown utilise des caractères pour représenter des titres, des listes et des tableaux. Il permet de structurer un document tout en restant lisible sous forme de texte. Dans cet exemple, il consomme plus de tokens que le TXT. Cela ne signifie pas qu'il sera toujours plus coûteux.</p>
+            <p><strong>Le JSON : 168 tokens</strong> — Le JSON représente les données à l'aide de clés et de valeurs. Dans une liste d'objets, les noms des champs sont généralement répétés pour chaque objet. Cette répétition explique une part importante de l'écart observé. Pour la grille NOVA Conseil, le JSON consomme environ 2,85 fois autant de tokens que le CSV.</p>
+
+            <h3 class="dpg-serif">Une idée reçue à corriger</h3>
+            <p><strong>Le Markdown n'est pas automatiquement moins coûteux que le texte brut.</strong> Il n'existe pas de classement universel des formats selon leur consommation de tokens. Le coût dépend :</p>
+            <ul>
+              <li>du contenu exact ;</li>
+              <li>de la façon dont les données sont représentées ;</li>
+              <li>du tokenizer utilisé ;</li>
+              <li>du traitement appliqué au fichier avant son arrivée dans le modèle.</li>
+            </ul>
+            <p>Dans notre exemple, le CSV est le plus compact. Le JSON est le plus long. Mais cet ordre peut changer avec un autre contenu ou une autre représentation.</p>
+
+            <h3 class="dpg-serif">Pourquoi utiliser JSON s'il consomme plus de tokens ?</h3>
+            <p>Parce que le nombre de tokens n'est pas le seul critère. Lorsqu'une réponse doit être utilisée par un programme, <strong>la fiabilité de la structure devient essentielle</strong>. Le JSON permet de représenter explicitement les champs, leurs valeurs et leurs relations. Un système peut imposer un schéma précisant :</p>
+            <ul>
+              <li>les champs obligatoires ;</li>
+              <li>les types de données attendus ;</li>
+              <li>les valeurs autorisées ;</li>
+              <li>les relations entre les objets.</li>
+            </ul>
+            <p>Avec des mécanismes comme les sorties structurées et le <em>function calling</em>, un LLM peut produire des données destinées à être contrôlées puis exploitées automatiquement. Le JSON n'est donc pas choisi parce qu'il consomme moins de tokens. Il est choisi parce qu'il convient à des échanges de données structurés entre logiciels.</p>
+
+            <h3 class="dpg-serif">Attention à la validité des données</h3>
+            <p>Un JSON mal formé peut provoquer une erreur de lecture et interrompre un traitement automatique. Un CSV mal formé peut également provoquer une erreur ou décaler des colonnes. Un Markdown incorrect peut modifier la façon dont les informations sont interprétées. La différence réside surtout dans la possibilité d'imposer un schéma précis et de valider les données avant leur utilisation.</p>
+            <p><strong>À retenir :</strong></p>
+            <p>Pour transmettre un tableau simple, le CSV peut être un choix économique. Pour transmettre un document structuré destiné à être lu par un humain et un LLM, le Markdown peut être pratique. Pour faire communiquer un LLM avec un programme, le JSON accompagné d'une validation de schéma est souvent préférable.</p>
+            <p><strong>Le format le plus compact n'est pas nécessairement le format le plus adapté.</strong></p>
+          </section>
+
+          <section class="dpg-section" id="pdf" data-step="15" data-sommaire="Le piège du PDF">
+            <h2 class="dpg-serif">03 — Le piège du PDF</h2>
+            <h3 class="dpg-serif">Deux façons de traiter un PDF, deux coûts très différents</h3>
+            <p>Le PDF est largement utilisé dans les entreprises. Il permet de conserver une présentation stable : pages, tableaux, graphiques, images, polices et disposition des éléments. Mais lorsqu'on envoie un PDF à un LLM, il faut distinguer deux situations.</p>
+
+            <article class="dpg-lesson-card">
+              <div class="dpg-lesson-copy">
+                <p class="dpg-eyebrow">Concept</p>
+                <h3 class="dpg-serif">Situation A — Le texte est extrait avant l'envoi</h3>
+                <p>Le document est d'abord traité par un outil d'extraction de texte. Seul le contenu textuel obtenu est ensuite transmis au modèle. Dans notre exemple NOVA Conseil, ce texte représente <strong>61 tokens</strong> avec le tokenizer utilisé. Le coût peut donc être proche de celui d'un simple fichier TXT.</p>
+                <p>Cependant, cette méthode peut perdre certaines informations :</p>
+                <ul>
+                  <li>les images ;</li>
+                  <li>les graphiques ;</li>
+                  <li>les relations visuelles entre des éléments ;</li>
+                  <li>une partie de la structure des tableaux.</li>
+                </ul>
+                <p>L'extraction peut également produire des erreurs d'ordre de lecture ou supprimer des informations importantes.</p>
+                <p><strong>Conclusion :</strong> extraire le texte d'un PDF peut réduire le coût, à condition que les informations nécessaires soient correctement préservées.</p>
+              </div>
+              <div class="dpg-visual" role="img" aria-label="Situation A : seul le texte extrait est envoyé, mesuré à 61 tokens sur l'exemple NOVA Conseil">Texte extrait · 61 tokens</div>
+            </article>
+
+            <article class="dpg-lesson-card">
+              <div class="dpg-lesson-copy">
+                <p class="dpg-eyebrow">Concept</p>
+                <h3 class="dpg-serif">Situation B — Le PDF est envoyé directement à Claude</h3>
+                <p>Avec le traitement visuel des PDF dans l'API Claude, le fonctionnement est différent. Le système extrait le texte du document et convertit chaque page en image. Claude peut ainsi analyser à la fois le contenu textuel et les éléments visuels. Cette capacité est utile pour comprendre des graphiques, des tableaux complexes ou des documents dont la mise en page porte une information importante. Mais elle augmente le nombre de tokens traités.</p>
+              </div>
+              <div class="dpg-visual" role="img" aria-label="Situation B : le PDF est envoyé directement, texte et image de chaque page">Texte · Image de page</div>
+            </article>
+
+            <h3 class="dpg-serif">Ce qu'indique la documentation Anthropic</h3>
+            <p>Anthropic indique qu'une page PDF utilise généralement <strong>1 500 à 3 000 tokens pour sa partie textuelle</strong>, selon la densité de son contenu. À cela s'ajoute le coût du traitement visuel des pages converties en images. Il faut donc éviter d'interpréter cette fourchette comme un coût total fixe par page. Le nombre réel de tokens dépend du document et de son traitement.</p>
+
+            <h3 class="dpg-serif">Comparaison des deux situations</h3>
+            <figure class="dpg-result-table">
+              <figcaption class="dpg-result-caption">Texte extrait et PDF envoyé directement</figcaption>
+              <div class="dpg-table-scroll">
+                <table class="dpg-token-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Méthode</th>
+                      <th scope="col">Traitement</th>
+                      <th scope="col">Conséquence</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Texte extrait du PDF</td>
+                      <td>Texte uniquement</td>
+                      <td>Coût potentiellement faible, perte possible d'informations visuelles</td>
+                    </tr>
+                    <tr>
+                      <td>PDF envoyé directement</td>
+                      <td>Texte et images des pages</td>
+                      <td>Coût potentiellement plus élevé, accès aux éléments visuels</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="dpg-table-legend">Légende : la comparaison porte sur le mode de traitement. Les 61 tokens de l'exemple NOVA Conseil ne correspondent pas au coût d'un PDF envoyé directement à Claude.</p>
+            </figure>
+
+            <h3 class="dpg-serif">Quelle méthode choisir ?</h3>
+            <ul>
+              <li><strong>Si le document contient essentiellement du texte :</strong> il peut être pertinent d'extraire le texte et de vérifier son intégrité avant de le transmettre au modèle.</li>
+              <li><strong>Si le document contient des graphiques ou des informations visuelles importantes :</strong> il peut être préférable de transmettre directement le PDF pour conserver l'accès à ces éléments.</li>
+              <li><strong>Si le document est composé de tableaux simples :</strong> une extraction contrôlée vers CSV peut être utile, notamment pour réaliser des calculs ou automatiser un traitement.</li>
+            </ul>
+
+            <h3 class="dpg-serif">Point de vigilance</h3>
+            <p>Dire qu'un PDF ne coûte que 61 tokens serait incorrect. Cela confondrait le coût du texte extrait avec le coût du traitement du fichier PDF original.</p>
+            <p><strong>À retenir : un PDF contenant peu de texte peut néanmoins entraîner un coût important lorsqu'il est traité visuellement.</strong></p>
+            <p>Avant de choisir un mode de transmission, il faut identifier les informations dont le LLM a réellement besoin.</p>
+          </section>
+
+          <section class="dpg-section" id="verification" data-step="16" data-sommaire="Exercice de vérification">
+            <h2 class="dpg-serif">04 — Exercice de vérification</h2>
+            <h3 class="dpg-serif">Tester cinq formats avec un même contenu</h3>
+            <p><strong>Objectif de l'exercice</strong></p>
+            <p>Cet exercice permet de vérifier deux éléments :</p>
+            <ol>
+              <li>Le nombre de tokens consommés selon le format.</li>
+              <li>La qualité et l'exactitude des réponses produites par le LLM.</li>
+            </ol>
+            <p>L'objectif n'est pas de désigner un format gagnant à l'avance. Il s'agit de comparer des résultats mesurés et de comprendre les écarts observés.</p>
+
+            <h3 class="dpg-serif">Étape 1 — Préparer les fichiers</h3>
+            <p>Utiliser la grille tarifaire fictive NOVA Conseil. Créer cinq versions contenant exactement les mêmes données : <code>tarifs.txt</code>, <code>tarifs.md</code>, <code>tarifs.json</code>, <code>tarifs.csv</code>, <code>tarifs.pdf</code>.</p>
+            <p>Vérifier que les prestations, les prix, les unités et les conditions tarifaires sont identiques. Aucune information métier ne doit être ajoutée ou supprimée entre les versions.</p>
+
+            <h3 class="dpg-serif">Étape 2 — Définir les questions de vérification</h3>
+            <p>Préparer des questions dont la réponse est connue à l'avance.</p>
+            <ul>
+              <li><strong>Question A — Extraction :</strong> « Quel est le tarif de la prestation X ? »</li>
+              <li><strong>Question B — Comparaison :</strong> « Quelle est la prestation la moins chère ? »</li>
+              <li><strong>Question C — Calcul :</strong> « Quel est le montant total de deux prestations X et d'une prestation Y ? »</li>
+              <li><strong>Question D — Vérification des données :</strong> « Indique les prestations présentes dans le document et leurs tarifs. N'ajoute aucune information absente du fichier. »</li>
+            </ul>
+            <p>Remplacer X et Y par les prestations figurant réellement dans la grille. Préparer les réponses attendues avant d'interroger le modèle.</p>
+
+            <h3 class="dpg-serif">Étape 3 — Mesurer les tokens</h3>
+            <p>Mesurer le contenu textuel de chaque format avec le même tokenizer. Reporter les résultats dans un premier tableau. Utiliser ensuite le même modèle Claude et la même instruction pour chaque test. Pour l'essai API, relever si possible le nombre réel de tokens d'entrée communiqué par le service.</p>
+            <p><strong>Attention :</strong> le comptage local avec <code>o200k_base</code> n'est pas nécessairement identique au comptage effectué par Claude. Il faut présenter ces deux mesures séparément.</p>
+            <p>Pour le PDF, comparer également : la version texte extrait ; le PDF envoyé directement, avec son traitement visuel.</p>
+
+            <h3 class="dpg-serif">Étape 4 — Vérifier les réponses</h3>
+            <p>Envoyer les mêmes questions, dans le même ordre, pour chaque format. Effectuer chaque test dans une nouvelle conversation, ou avec un contexte API indépendant. Ne pas donner au modèle les réponses précédemment obtenues. Comparer chaque réponse avec les valeurs de référence.</p>
+            <p>Pour chaque critère, attribuer :</p>
+            <ul>
+              <li><strong>✓ Conforme</strong> : la réponse respecte entièrement le résultat attendu.</li>
+              <li><strong>✗ Non conforme</strong> : la réponse contient une erreur, une omission ou une information inventée.</li>
+            </ul>
+            <p>Une réponse plausible n'est pas nécessairement exacte. Une réponse bien présentée n'est pas nécessairement correcte.</p>
+
+            <h3 class="dpg-serif">Étape 5 — Compléter le tableau de vérification</h3>
+            <figure class="dpg-result-table">
+              <figcaption class="dpg-result-caption">Tableau de vérification à compléter</figcaption>
+              <div class="dpg-table-scroll">
+                <table class="dpg-token-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Format</th>
+                      <th class="is-num" scope="col">Tokens de référence</th>
+                      <th scope="col">Réponse exacte</th>
+                      <th scope="col">Données complètes</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>CSV</td>
+                      <td class="dpg-token-cell is-num">59</td>
+                      <td>À tester</td>
+                      <td>À tester</td>
+                    </tr>
+                    <tr>
+                      <td>PDF — texte extrait</td>
+                      <td class="dpg-token-cell is-num">61</td>
+                      <td>À tester</td>
+                      <td>À tester</td>
+                    </tr>
+                    <tr>
+                      <td>TXT</td>
+                      <td class="dpg-token-cell is-num">74</td>
+                      <td>À tester</td>
+                      <td>À tester</td>
+                    </tr>
+                    <tr>
+                      <td>Markdown</td>
+                      <td class="dpg-token-cell is-num">89</td>
+                      <td>À tester</td>
+                      <td>À tester</td>
+                    </tr>
+                    <tr>
+                      <td>JSON</td>
+                      <td class="dpg-token-cell is-num">168</td>
+                      <td>À tester</td>
+                      <td>À tester</td>
+                    </tr>
+                    <tr>
+                      <td>PDF — fichier direct</td>
+                      <td>À mesurer</td>
+                      <td>À tester</td>
+                      <td>À tester</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="dpg-table-legend">Légende : les valeurs de référence concernent le contenu textuel mesuré avec o200k_base. Les colonnes de qualité doivent être complétées à partir des réponses réelles du LLM. Aucun résultat de qualité ne doit être considéré comme acquis avant le test.</p>
+            </figure>
+
+            <h3 class="dpg-serif">Étape 6 — Interpréter les résultats</h3>
+            <ol>
+              <li><strong>Quel format consomme le moins de tokens ?</strong> Comparer les mesures obtenues et identifier l'écart entre les représentations.</li>
+              <li><strong>Le format le plus compact fournit-il toujours la réponse la plus exacte ?</strong> Observer les résultats sans supposer qu'un nombre réduit de tokens améliore automatiquement la qualité.</li>
+              <li><strong>Le JSON apporte-t-il un avantage ?</strong> Examiner sa capacité à conserver des champs explicites et à produire une structure exploitable par un programme.</li>
+              <li><strong>Que se passe-t-il lorsque le PDF est envoyé directement ?</strong> Comparer le coût et la qualité obtenus avec ceux du texte préalablement extrait.</li>
+              <li><strong>Quel format choisir pour un traitement répété ?</strong> Prendre en compte le nombre de tokens, la qualité des réponses et les contraintes de l'automatisation.</li>
+            </ol>
+
+            <form class="dpg-exercise-block" data-exercise data-answer="csv" aria-labelledby="ex-q">
+              <p class="dpg-eyebrow">Exercice</p>
+              <h3 class="dpg-serif" id="ex-q">Quel format consomme le moins de tokens ?</h3>
+              <p>Comparez les mesures de la grille NOVA Conseil (CSV, texte extrait d'un PDF, TXT, Markdown, JSON) et indiquez la représentation la plus compacte.</p>
+              <div class="dpg-exercise-form">
+                <div class="dpg-field">
+                  <label for="dpg-ex-format">Votre réponse</label>
+                  <input class="dpg-input" id="dpg-ex-format" name="format" type="text" autocomplete="off" placeholder="Ex. : CSV, JSON…" aria-describedby="dpg-ex-live">
+                </div>
+                <button class="dpg-btn-outline" type="submit">Vérifier</button>
+              </div>
+              <p class="dpg-eyebrow" style="font-size:10px; margin-bottom:16px;">États de validation</p>
+              <p class="dpg-live" id="dpg-ex-live" data-exercise-live role="status"></p>
+              <div class="dpg-status-row dpg-row-wrap">
+                <div class="dpg-status dpg-status-ok">
+                  <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="none" stroke="#E8C87A" stroke-width="1.4"></circle><path d="M6 10.2L8.6 12.8L14 7" fill="none" stroke="#E8C87A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                  <p><strong>Exact.</strong> Sur la grille NOVA Conseil mesurée avec o200k_base, le CSV est la représentation la plus compacte : 59 tokens.</p>
+                </div>
+                <div class="dpg-status dpg-status-ko">
+                  <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="none" stroke="rgba(245,240,232,0.45)" stroke-width="1.4"></circle><path d="M7 7L13 13M13 7L7 13" stroke="rgba(245,240,232,0.45)" stroke-width="1.4" stroke-linecap="round"></path></svg>
+                  <p><strong>Pas tout à fait.</strong> Relisez le tableau : le CSV est à 59 tokens, devant le texte extrait du PDF (61).</p>
+                </div>
+              </div>
+            </form>
+
+            <h3 class="dpg-serif">Critères de réussite</h3>
+            <p>L'exercice est validé si l'apprenant est capable :</p>
+            <ul>
+              <li>de distinguer le format du contenu et de sa présentation ;</li>
+              <li>d'expliquer les écarts de tokens observés ;</li>
+              <li>de comprendre pourquoi Markdown n'est pas systématiquement moins coûteux que TXT ;</li>
+              <li>d'expliquer l'intérêt du JSON dans une automatisation ;</li>
+              <li>de distinguer un PDF transmis directement de son texte extrait ;</li>
+              <li>d'évaluer une réponse sur son exactitude, et pas seulement sur son apparence ;</li>
+              <li>de justifier le choix d'un format selon les besoins du traitement.</li>
+            </ul>
+
+            <h3 class="dpg-serif">Conclusion du module</h3>
+            <p><strong>Choisir un format pour un LLM consiste à trouver un équilibre entre trois exigences :</strong></p>
+            <ul>
+              <li><strong>Le coût</strong> — Combien de tokens sont nécessaires pour traiter les informations ?</li>
+              <li><strong>La qualité</strong> — Le modèle peut-il retrouver, comprendre et utiliser correctement les données ?</li>
+              <li><strong>La fiabilité</strong> — Les résultats peuvent-ils être vérifiés et exploités par un système automatique ?</li>
+            </ul>
+            <p>Un format compact peut réduire le coût. Un format structuré peut faciliter le contrôle des données. Un format visuel peut préserver des informations que le texte seul ne permet pas de représenter. Le bon choix dépend donc de la tâche à réaliser.</p>
+            <p><strong>Principe final : transmettre au LLM les informations nécessaires, dans une représentation adaptée à leur traitement, en mesurant à la fois le coût et l'exactitude du résultat.</strong></p>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer id="dpg-footer"></footer>
+  <script src="js/dpg.js"></script>
+</body>
+</html>
