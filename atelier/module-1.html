@@ -7,6 +7,52 @@
   <meta name="description" content="Module 1 de la DPG Academy : les cinq notions de l'interface Claude, la mémoire, et l'exercice fil rouge en trois prompts RISEN.">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400;500&display=swap">
   <link rel="stylesheet" href="css/dpg.css">
+  <style>
+    #exercice .dpg-demo-block { position: relative; }
+    #exercice .dpg-demo-block > .dpg-eyebrow { padding-right: 108px; }
+    #exercice .prompt-source { white-space: pre-wrap; }
+    .prompt-copy-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      font-family: "Inter", sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: 0.03em;
+      color: var(--dpg-cream);
+      background: transparent;
+      border: 1px solid var(--dpg-gold);
+      border-radius: 2px;
+      padding: 8px 14px;
+      cursor: pointer;
+    }
+    .prompt-copy-btn:hover {
+      background: rgba(184, 134, 11, 0.14);
+      color: var(--dpg-gold-light);
+    }
+    .prompt-copy-btn:focus-visible {
+      outline: 1px solid var(--dpg-gold-accent);
+      outline-offset: 3px;
+    }
+    #exercice .dpg-resource {
+      border: 1px solid var(--dpg-hairline);
+      background: var(--dpg-surface);
+      padding: 28px 32px;
+      margin: 8px 0 36px;
+    }
+    #exercice .dpg-resource .dpg-eyebrow { margin-bottom: 12px; }
+    #exercice .dpg-resource-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 18px 0 0;
+    }
+    #exercice .dpg-resource-links a.dpg-btn-outline { display: inline-block; }
+    @media (max-width: 760px) {
+      .prompt-copy-btn { top: 12px; right: 12px; }
+      #exercice .dpg-resource { padding: 22px; }
+    }
+  </style>
   <script>
     /* Masque la leçon avant affichage. Le contrôle du mot de passe est dans js/dpg.js. */
     try {
@@ -219,11 +265,11 @@
 
           <section class="dpg-section" id="exercice" data-step="11" data-sommaire="Exercice fil rouge">
             <h2 class="dpg-serif">Exercice — Créer son cabinet de conseil avec Claude</h2>
-            <p>Mise en pratique directe des notions vues plus haut : en 3 prompts, structurés selon le framework <strong>RISEN</strong> (Role, Input, Steps, Expectation, Narrowing), on pose les fondations d'un cabinet de conseil en IA — un Projet qui le structure, un Artefact qui l'habille visuellement, une Skill qui automatise sa veille.</p>
+            <p>Mise en pratique directe des notions vues plus haut : en cinq étapes, structurées selon le framework <strong>RISEN</strong> (Role, Input, Steps, Expectation, Narrowing), on pose les fondations d'un cabinet de conseil en IA — un Projet qui le structure, un Artefact qui l'habille visuellement, une Skill qui automatise sa veille.</p>
             <p>Chaque étape mobilise une notion différente — c'est volontaire : l'exercice sert aussi à sentir, en les utilisant l'une après l'autre, ce qui distingue un Projet, un Artefact/Design et une Skill.</p>
 
             <figure class="dpg-result-table">
-              <figcaption class="dpg-result-caption">Synthèse des 3 étapes</figcaption>
+              <figcaption class="dpg-result-caption">Synthèse des 5 étapes</figcaption>
               <div class="dpg-table-scroll">
                 <table class="dpg-token-table">
                   <thead>
@@ -249,46 +295,123 @@
                       <td>Skill / Tâche planifiée</td>
                       <td>La veille hebdomadaire sectorielle, automatisée</td>
                     </tr>
+                    <tr>
+                      <td class="dpg-token-cell">4</td>
+                      <td>Artefact / Design</td>
+                      <td>Maquette de la page d'accueil du cabinet</td>
+                    </tr>
+                    <tr>
+                      <td class="dpg-token-cell">5</td>
+                      <td>Skill</td>
+                      <td>Générateur de devis réutilisable + un devis généré</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
             </figure>
 
+            <aside class="dpg-resource" aria-label="Ressource">
+              <p class="dpg-eyebrow">Ressource</p>
+              <p>Pour vous entraîner sans partir de zéro, voici un exemple de brand book déjà prêt pour un cabinet fictif, NOVA (identité volontairement différente de celle de Digital Process Group, pour que vous appreniez à adapter vos prompts à une marque différente).</p>
+              <div class="dpg-resource-links">
+                <a class="dpg-btn-outline" href="assets/exemples/brand-book-nova.html" download="brand-book-nova.html">Télécharger le brand book (HTML)</a>
+                <a class="dpg-btn-outline" href="assets/exemples/brand-book-nova.pptx" download="brand-book-nova.pptx">Télécharger le brand book (PowerPoint)</a>
+              </div>
+            </aside>
+
             <h3 class="dpg-serif">Étape 1 — Créer le Projet du cabinet</h3>
             <p>On commence par créer un <strong>Projet</strong> : c'est le socle qui portera la mémoire durable de tout ce qui suivra.</p>
             <div class="dpg-demo-block">
+              <button class="prompt-copy-btn" type="button" data-prompt-target="prompt-etape-1" aria-label="Copier le prompt">Copier</button>
               <p class="dpg-eyebrow">Exemple de prompt</p>
               <p class="dpg-demo-kicker">Prompt à utiliser (créer un nouveau Projet, puis coller ceci dans sa première conversation) :</p>
-              <blockquote class="dpg-serif dpg-demo-quote">« Je veux structurer un cabinet de conseil en intelligence artificielle. Agis comme un consultant senior en stratégie de cabinets de conseil (<span class="dpg-risen">Role</span>). Voici les informations de base : le cabinet s'organise autour de 3 pôles — Formation IA (initiation, prompt engineering, systèmes agentiques), Conseil en IA (accompagnement stratégique, audit de maturité IA) et Ingénierie IA (développement d'automatisations et de systèmes agentiques sur mesure) (<span class="dpg-risen">Input</span>). Procède en 4 étapes (<span class="dpg-risen">Steps</span>) : 1) propose une structure claire qui articule les 3 pôles entre eux et explique leur complémentarité commerciale, 2) identifie pour chaque pôle 2 à 3 offres concrètes, 3) propose un modèle de tarification cohérent pour chaque pôle, 4) rédige une phrase de positionnement unique qui couvre les 3 pôles. Le résultat attendu est une structure prête à devenir la mémoire de référence du cabinet dans ce Projet — synthétique, actionnable, pas un essai théorique (<span class="dpg-risen">Expectation</span>). Limite-toi à une page maximum, pas de jargon de conseil creux, reste concret et orienté client final (<span class="dpg-risen">Narrowing</span>). »</blockquote>
+              <blockquote class="dpg-serif dpg-demo-quote" id="prompt-etape-1">« Je veux structurer un cabinet de conseil en intelligence artificielle. Agis comme un consultant senior en stratégie de cabinets de conseil (<span class="dpg-risen">Role</span>). Voici les informations de base : le cabinet s'organise autour de 3 pôles — Formation IA (initiation, prompt engineering, systèmes agentiques), Conseil en IA (accompagnement stratégique, audit de maturité IA) et Ingénierie IA (développement d'automatisations et de systèmes agentiques sur mesure) (<span class="dpg-risen">Input</span>). Procède en 4 étapes (<span class="dpg-risen">Steps</span>) : 1) propose une structure claire qui articule les 3 pôles entre eux et explique leur complémentarité commerciale, 2) identifie pour chaque pôle 2 à 3 offres concrètes, 3) propose un modèle de tarification cohérent pour chaque pôle, 4) rédige une phrase de positionnement unique qui couvre les 3 pôles. Le résultat attendu est une structure prête à devenir la mémoire de référence du cabinet dans ce Projet — synthétique, actionnable, pas un essai théorique (<span class="dpg-risen">Expectation</span>). Limite-toi à une page maximum, pas de jargon de conseil creux, reste concret et orienté client final (<span class="dpg-risen">Narrowing</span>). »</blockquote>
               <p>Une fois la réponse obtenue, on la garde directement dans ce Projet : c'est elle qui deviendra la mémoire de référence que toutes les conversations futures du cabinet pourront consulter.</p>
             </div>
 
             <h3 class="dpg-serif">Étape 2 — Produire le one-pager de positionnement (Artefact / Design)</h3>
             <p>Dans la même conversation — ou une nouvelle, toujours dans ce Projet — on demande maintenant un livrable visuel concret, en s'appuyant sur ce que le Projet sait déjà du cabinet.</p>
             <div class="dpg-demo-block">
+              <button class="prompt-copy-btn" type="button" data-prompt-target="prompt-etape-2" aria-label="Copier le prompt">Copier</button>
               <p class="dpg-eyebrow">Exemple de prompt</p>
               <p class="dpg-demo-kicker">Prompt à utiliser :</p>
-              <blockquote class="dpg-serif dpg-demo-quote">« Agis comme un directeur artistique spécialisé en identité de marque pour cabinets de conseil haut de gamme (<span class="dpg-risen">Role</span>). Appuie-toi sur la structure du cabinet définie juste avant dans ce Projet — les 3 pôles, les offres, la phrase de positionnement (<span class="dpg-risen">Input</span>). Construis un one-pager de positionnement en Design : 1) un en-tête avec le nom du cabinet et la phrase de positionnement, 2) une présentation synthétique des 3 pôles avec leurs offres phares, 3) un bloc « pourquoi nous » avec 3 arguments de différenciation, 4) un bloc contact (<span class="dpg-risen">Steps</span>). Le résultat doit être un Artefact visuel, prêt à être montré à un prospect ou intégré ensuite à un site — pas un simple texte dans le chat (<span class="dpg-risen">Expectation</span>). Reste sur un registre sobre et premium : pas de superlatifs marketing, pas de mot « révolution » ou « disruption », une mise en page aérée (<span class="dpg-risen">Narrowing</span>). »</blockquote>
+              <blockquote class="dpg-serif dpg-demo-quote" id="prompt-etape-2">« Agis comme un directeur artistique spécialisé en identité de marque pour cabinets de conseil haut de gamme (<span class="dpg-risen">Role</span>). Appuie-toi sur la structure du cabinet définie juste avant dans ce Projet — les 3 pôles, les offres, la phrase de positionnement (<span class="dpg-risen">Input</span>). Construis un one-pager de positionnement en Design : 1) un en-tête avec le nom du cabinet et la phrase de positionnement, 2) une présentation synthétique des 3 pôles avec leurs offres phares, 3) un bloc « pourquoi nous » avec 3 arguments de différenciation, 4) un bloc contact (<span class="dpg-risen">Steps</span>). Le résultat doit être un Artefact visuel, prêt à être montré à un prospect ou intégré ensuite à un site — pas un simple texte dans le chat (<span class="dpg-risen">Expectation</span>). Reste sur un registre sobre et premium : pas de superlatifs marketing, pas de mot « révolution » ou « disruption », une mise en page aérée (<span class="dpg-risen">Narrowing</span>). »</blockquote>
               <p>Le résultat est un Artefact : il garde son propre lien, on peut y revenir, le modifier, le partager — sans jamais retaper le brief.</p>
             </div>
 
             <h3 class="dpg-serif">Étape 3 — Automatiser la veille hebdomadaire (Skill / Tâche planifiée)</h3>
-            <p>Dernière étape : transformer une bonne pratique manuelle (chercher des cas d'usage sectoriels) en routine automatique, grâce à une Skill pilotée par une Tâche planifiée.</p>
+            <p>On transforme une bonne pratique manuelle (chercher des cas d'usage sectoriels) en routine automatique, grâce à une Skill pilotée par une Tâche planifiée.</p>
             <div class="dpg-demo-block">
+              <button class="prompt-copy-btn" type="button" data-prompt-target="prompt-etape-3" aria-label="Copier le prompt">Copier</button>
               <p class="dpg-eyebrow">Exemple de prompt</p>
               <p class="dpg-demo-kicker">Prompt à utiliser :</p>
-              <blockquote class="dpg-serif dpg-demo-quote">« Agis comme un veilleur spécialisé en cas d'usage IA appliqués aux secteurs d'activité des clients du cabinet (<span class="dpg-risen">Role</span>). Le cabinet cible les secteurs définis dans sa structure — industrie, logistique, services, éducation, finance (<span class="dpg-risen">Input</span>). Chaque semaine : 1) identifie 3 à 5 cas d'usage IA récents et concrets dans ces secteurs, 2) pour chacun, résume en 2 phrases le problème résolu et la technologie utilisée, 3) classe-les par pôle du cabinet (Formation / Conseil / Ingénierie) auquel ils pourraient le mieux servir d'exemple client (<span class="dpg-risen">Steps</span>). Le résultat attendu est une synthèse courte, prête à être réutilisée telle quelle dans un post LinkedIn ou une relance commerciale — pas une revue de presse exhaustive (<span class="dpg-risen">Expectation</span>). Exclu toute source non vérifiable ou plus vieille qu'un an ; une seule page ; aucun cas d'usage dupliqué d'une semaine à l'autre (<span class="dpg-risen">Narrowing</span>). »</blockquote>
+              <blockquote class="dpg-serif dpg-demo-quote" id="prompt-etape-3">« Agis comme un veilleur spécialisé en cas d'usage IA appliqués aux secteurs d'activité des clients du cabinet (<span class="dpg-risen">Role</span>). Le cabinet cible les secteurs définis dans sa structure — industrie, logistique, services, éducation, finance (<span class="dpg-risen">Input</span>). Chaque semaine : 1) identifie 3 à 5 cas d'usage IA récents et concrets dans ces secteurs, 2) pour chacun, résume en 2 phrases le problème résolu et la technologie utilisée, 3) classe-les par pôle du cabinet (Formation / Conseil / Ingénierie) auquel ils pourraient le mieux servir d'exemple client (<span class="dpg-risen">Steps</span>). Le résultat attendu est une synthèse courte, prête à être réutilisée telle quelle dans un post LinkedIn ou une relance commerciale — pas une revue de presse exhaustive (<span class="dpg-risen">Expectation</span>). Exclu toute source non vérifiable ou plus vieille qu'un an ; une seule page ; aucun cas d'usage dupliqué d'une semaine à l'autre (<span class="dpg-risen">Narrowing</span>). »</blockquote>
               <p>On enregistre ces instructions comme <strong>Skill</strong>, puis on la programme via une <strong>Tâche planifiée</strong> hebdomadaire (par exemple chaque lundi matin) : la veille arrive désormais sans qu'on ait à y repenser.</p>
+            </div>
+
+            <h3 class="dpg-serif">Étape 4 — Concevoir le site du cabinet (Artefact / Design)</h3>
+            <p>On mobilise à nouveau Artefact et Design, cette fois pour concevoir une page d'accueil complète à partir du brand book fourni, celui de NOVA, cabinet d'exemple.</p>
+            <div class="dpg-demo-block">
+              <button class="prompt-copy-btn" type="button" data-prompt-target="prompt-etape-4" aria-label="Copier le prompt">Copier</button>
+              <p class="dpg-eyebrow">Exemple de prompt</p>
+              <p class="dpg-demo-kicker">Prompt à utiliser :</p>
+              <blockquote class="dpg-serif dpg-demo-quote prompt-source" id="prompt-etape-4">Rôle : Tu es directeur artistique et designer web, spécialisé dans les sites de cabinets de conseil.
+
+Input : Voici l'identité de marque de NOVA (brand book joint) : positionnement « On ne forme pas des équipes à l'IA. On les transforme en équipes qui pensent IA. », valeurs Audace / Agilité / Créativité, palette Violet électrique #7C3AED, Corail #FF6B4A, Menthe #00D9A3 sur fond clair #FAFAFA, typographies Space Grotesk (titres) et Inter (texte).
+
+Étapes :
+1. Propose la structure d'une page d'accueil en une seule page : hero (accroche + positionnement + CTA), bloc des 3 offres, bloc des 3 valeurs, bloc preuve ("pourquoi nous"), bloc contact.
+2. Construis cette page comme un Artefact Design, en respectant strictement la palette et les typographies du brand book.
+3. Utilise des formes géométriques franches (pas de dégradés mous) pour rappeler l'ambiance "énergique et contrastée" de la marque.
+
+Attendu : Une maquette desktop d'une page d'accueil, cohérente de bout en bout avec le brand book, sans logo réel ni texte de remplissage long.
+
+Narrowing : Une seule page, pas de sous-pages, pas de vraies photos ni de noms de clients réels — uniquement des placeholders clairement identifiés comme tels.</blockquote>
+            </div>
+
+            <h3 class="dpg-serif">Étape 5 — Créer une Skill devis et générer un devis (Skill)</h3>
+            <p>On mobilise le concept de Skill pour créer un générateur de devis réutilisable, puis on l'utilise avec un client fictif.</p>
+            <div class="dpg-demo-block">
+              <button class="prompt-copy-btn" type="button" data-prompt-target="prompt-etape-5a" aria-label="Copier le prompt">Copier</button>
+              <p class="dpg-eyebrow">Exemple de prompt</p>
+              <p class="dpg-demo-kicker">Prompt A — Créer la Skill</p>
+              <blockquote class="dpg-serif dpg-demo-quote prompt-source" id="prompt-etape-5a">Rôle : Tu es consultant opérationnel chargé d'outiller le cabinet NOVA pour accélérer la vente.
+
+Input : La grille tarifaire des 3 offres du cabinet (Sprints IA, Studio d'automatisation, Créa générative), définie à l'Étape 1.
+
+Étapes :
+1. Crée une Skill nommée "generateur-devis" qui prend en entrée : nom du client, secteur, offre(s) choisie(s), volume/durée, et renvoie un devis structuré (objet, prestations, prix, conditions de validité, modalités de paiement).
+2. Le devis doit être généré au format .docx, aux couleurs et à la typographie du brand book NOVA.
+3. Les montants doivent rester cohérents avec la grille tarifaire définie à l'Étape 1.
+
+Attendu : Une Skill réutilisable, décrite clairement (déclencheurs, champs requis, format de sortie).
+
+Narrowing : Pas de mentions légales inventées (SIRET, IBAN...), uniquement les champs commerciaux utiles à un devis d'exercice.</blockquote>
+            </div>
+            <div class="dpg-demo-block">
+              <button class="prompt-copy-btn" type="button" data-prompt-target="prompt-etape-5b" aria-label="Copier le prompt">Copier</button>
+              <p class="dpg-eyebrow">Exemple de prompt</p>
+              <p class="dpg-demo-kicker">Prompt B — Générer le devis</p>
+              <blockquote class="dpg-serif dpg-demo-quote prompt-source" id="prompt-etape-5b">Génère un devis avec la Skill "generateur-devis" pour le client suivant :
+- Client : Atelier Nour — boutique e-commerce de décoration (12 salariés)
+- Secteur : Retail
+- Besoin : automatiser la réponse aux avis clients et la génération de fiches produits
+- Offre retenue : Studio d'automatisation, 1 agent IA, mise en service en 2 semaines
+- Budget indicatif évoqué par le client : à définir par la Skill selon la grille tarifaire
+
+Produis le devis au format .docx, prêt à être envoyé par email.</blockquote>
             </div>
           </section>
 
           <section class="dpg-section" id="conclusion" data-step="12" data-sommaire="Conclusion">
             <h2 class="dpg-serif">À la fin de l'exercice</h2>
-            <p>En 3 prompts, le cabinet dispose de :</p>
+            <p>En cinq étapes, le cabinet dispose de :</p>
             <ul>
               <li>un <strong>Projet</strong> qui porte en mémoire sa structure, ses offres et son positionnement — disponible pour toute conversation future, sans jamais le réexpliquer</li>
               <li>un <strong>Artefact Design</strong> présentable, modifiable et partageable : le one-pager de positionnement</li>
               <li>une <strong>Skill</strong> automatisée par une <strong>Tâche planifiée</strong>, qui livre chaque semaine une veille sectorielle prête à l'emploi</li>
+              <li>une <strong>maquette</strong> de la page d'accueil du cabinet, produite en Design à partir du brand book d'exemple</li>
+              <li>une <strong>Skill devis</strong> réutilisable, utilisée pour générer un devis sur un cas client fictif</li>
             </ul>
             <p>La suite logique — approfondie dans un prochain module — consiste à enrichir ce même Projet avec des Skills et Tâches planifiées supplémentaires, appliquées aux vrais livrables du cabinet.</p>
           </section>
@@ -298,5 +421,59 @@
   </main>
   <footer id="dpg-footer"></footer>
   <script src="js/dpg.js"></script>
+  <script>
+    (function () {
+      var section = document.getElementById("exercice");
+      if (!section) return;
+      var timer = null;
+      var active = null;
+
+      function fallbackCopy(text) {
+        var area = document.createElement("textarea");
+        area.value = text;
+        area.setAttribute("readonly", "");
+        area.style.position = "fixed";
+        area.style.top = "0";
+        area.style.left = "-9999px";
+        document.body.appendChild(area);
+        area.focus();
+        area.select();
+        var copied = false;
+        try {
+          copied = document.execCommand("copy");
+        } catch (err) {
+          copied = false;
+        }
+        document.body.removeChild(area);
+        return copied;
+      }
+
+      function writeClipboard(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+          return navigator.clipboard.writeText(text);
+        }
+        return fallbackCopy(text) ? Promise.resolve() : Promise.reject(new Error("copy"));
+      }
+
+      section.addEventListener("click", function (event) {
+        var node = event.target && event.target.nodeType === 1 ? event.target : event.target.parentElement;
+        var button = node && node.closest ? node.closest(".prompt-copy-btn") : null;
+        if (!button || !section.contains(button)) return;
+        var target = document.getElementById(button.getAttribute("data-prompt-target"));
+        if (!target) return;
+        var text = (target.innerText || target.textContent || "").replace(/\u00a0/g, " ").trim();
+        writeClipboard(text).then(function () {
+          if (timer) window.clearTimeout(timer);
+          if (active && active !== button) active.textContent = "Copier";
+          active = button;
+          button.textContent = "Copié ✓";
+          timer = window.setTimeout(function () {
+            button.textContent = "Copier";
+            active = null;
+          }, 1500);
+        }).catch(function () {});
+      });
+    })();
+  </script>
 </body>
 </html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Book — NOVA</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root{
+  --bg:#FAFAFA;
+  --ink:#15152B;
+  --ink-soft:#4A4A63;
+  --muted:#8A8AA0;
+  --violet:#7C3AED;
+  --corail:#FF6B4A;
+  --menthe:#00D9A3;
+  --card:#FFFFFF;
+  --border:#E7E4F5;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--bg);
+  font-family:'Inter',sans-serif;
+  color:var(--ink);
+}
+.bb{ max-width: 920px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+
+.bb-cover{
+  background: var(--ink);
+  border-radius: 20px;
+  padding: 3rem 2.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.bb-cover::before{
+  content:"";
+  position:absolute; top:-60px; right:-60px;
+  width:220px; height:220px; border-radius:50%;
+  background: var(--violet);
+  opacity:.85;
+}
+.bb-cover::after{
+  content:"";
+  position:absolute; bottom:-80px; left:-40px;
+  width:180px; height:180px;
+  background: var(--corail);
+  transform: rotate(18deg);
+  opacity:.9;
+}
+.bb-tag{
+  font-size:11px; letter-spacing:.28em; text-transform:uppercase;
+  color:var(--menthe); font-weight:600; margin-bottom:.9rem; position:relative; z-index:2;
+}
+.bb-name{
+  font-family:'Space Grotesk',sans-serif; font-weight:700;
+  font-size:44px; line-height:1; color:#fff; letter-spacing:-0.01em;
+  margin-bottom:.5rem; position:relative; z-index:2;
+}
+.bb-name span{ color: var(--corail); }
+.bb-sub{
+  font-size:13px; color:#B7B4D6; letter-spacing:.05em; position:relative; z-index:2;
+}
+
+.bb-positioning{
+  background: var(--card);
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1.25rem;
+}
+.bb-positioning .bb-label{ color:var(--violet); }
+.bb-positioning-quote{
+  font-family:'Space Grotesk',sans-serif;
+  font-weight:600;
+  font-size:21px;
+  line-height:1.35;
+  color:var(--ink);
+  margin: .6rem 0 .5rem;
+}
+.bb-positioning-note{ font-size:11px; color:var(--muted); }
+
+.bb-label{
+  font-size:10px; font-weight:700; letter-spacing:.22em; text-transform:uppercase;
+  margin-bottom:.75rem; color:var(--violet);
+}
+
+.bb-section{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1.1rem;
+}
+
+.bb-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1.1rem; }
+.bb-grid-3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:.85rem; margin-bottom:1.1rem; }
+
+.bb-cible-tag{
+  display:inline-block; font-size:12px; font-weight:600;
+  padding:5px 12px; border-radius:999px; margin:3px 4px 3px 0;
+  background:#F1EEFC; color:var(--violet); border:1px solid #DCD3F9;
+}
+.bb-cible-tag.alt{ background:#FFEDE7; color:var(--corail); border-color:#FFD9C9; }
+
+.bb-offer{
+  border-left:3px solid var(--menthe);
+  padding:.2rem 0 .2rem .9rem;
+  margin-bottom:.9rem;
+}
+.bb-offer-name{ font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:14px; color:var(--ink); margin-bottom:2px;}
+.bb-offer-desc{ font-size:13px; color:var(--ink-soft); line-height:1.5; }
+
+.bb-value{
+  border-radius:12px; padding:1.1rem;
+  background:#FBFAFE;
+  border:1px solid var(--border);
+  border-top:3px solid var(--violet);
+}
+.bb-value:nth-child(2){ border-top-color:var(--corail); }
+.bb-value:nth-child(3){ border-top-color:var(--menthe); }
+.bb-value-name{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:14px; margin-bottom:5px; }
+.bb-value-desc{ font-size:12.5px; color:var(--ink-soft); line-height:1.55; }
+
+.bb-tone-item{ display:flex; gap:10px; align-items:flex-start; margin-bottom:9px; }
+.bb-tone-dot{ width:7px; height:7px; background:var(--menthe); margin-top:6px; flex-shrink:0; transform:rotate(45deg); }
+.bb-tone-dot.off{ background:var(--muted); }
+.bb-tone-text{ font-size:13px; color:var(--ink-soft); line-height:1.5; }
+.bb-tone-text.off{ color:var(--muted); }
+
+.bb-palette-row{ display:flex; gap:8px; margin-top:.8rem; flex-wrap:wrap; }
+.bb-swatch{
+  flex:1; min-width:110px; height:56px; border-radius:10px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  font-size:10px; font-weight:700; gap:2px;
+}
+.bb-swatch small{ font-weight:500; font-size:9px; opacity:.85; }
+
+.bb-type-sample{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:26px; color:var(--ink); }
+.bb-type-sample.body{ font-family:'Inter',sans-serif; font-weight:500; font-size:16px; }
+.bb-type-note{ font-size:11px; color:var(--muted); margin-top:5px; }
+
+.bb-footer{
+  text-align:center; padding-top:1.2rem; margin-top:.5rem;
+  border-top:1px solid var(--border);
+  font-size:10px; color:var(--muted); letter-spacing:.18em;
+}
+
+@media (max-width:620px){
+  .bb-grid, .bb-grid-3 { grid-template-columns: 1fr; }
+  .bb-name{ font-size:32px; }
+}
+</style>
+</head>
+<body>
+<div class="bb">
+
+  <div class="bb-cover">
+    <div class="bb-tag">Brand Book · Exemple d'exercice — Academy</div>
+    <div class="bb-name">NOVA</div>
+    <div class="bb-sub">Cabinet de conseil en IA appliquée · Identité de marque · Nov. 2026</div>
+  </div>
+
+  <div class="bb-positioning">
+    <div class="bb-label">Positionnement</div>
+    <div class="bb-positioning-quote">« On ne forme pas des équipes à l'IA. On les transforme en équipes qui pensent IA. »</div>
+    <div class="bb-positioning-note">Phrase de positionnement principale · site, pitch, signature email</div>
+  </div>
+
+  <div class="bb-grid">
+    <div class="bb-section">
+      <div class="bb-label">Cibles prioritaires</div>
+      <div style="margin-bottom:10px;">
+        <span class="bb-cible-tag">Startups & scale-ups</span>
+        <span class="bb-cible-tag alt">Équipes marketing & produit</span>
+      </div>
+      <div style="margin-bottom:6px; font-size:10px; font-weight:700; color:var(--muted); letter-spacing:.14em; text-transform:uppercase;">Secteurs visés</div>
+      <span class="bb-cible-tag">Tech</span>
+      <span class="bb-cible-tag">Retail</span>
+      <span class="bb-cible-tag">Media</span>
+      <span class="bb-cible-tag">Santé digitale</span>
+      <span class="bb-cible-tag">Education</span>
+    </div>
+    <div class="bb-section">
+      <div class="bb-label">Offres</div>
+      <div class="bb-offer">
+        <div class="bb-offer-name">Sprints IA</div>
+        <div class="bb-offer-desc">Ateliers intensifs de 2 jours pour prototyper un cas d'usage concret, de l'idée au test réel.</div>
+      </div>
+      <div class="bb-offer">
+        <div class="bb-offer-name">Studio d'automatisation</div>
+        <div class="bb-offer-desc">Agents et workflows IA sur mesure, conçus et livrés en 2 semaines.</div>
+      </div>
+      <div class="bb-offer">
+        <div class="bb-offer-name">Créa générative</div>
+        <div class="bb-offer-desc">Contenus, visuels et campagnes produits avec l'IA, pensés pour la performance.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bb-section">
+    <div class="bb-label">3 valeurs de marque</div>
+    <div class="bb-grid-3">
+      <div class="bb-value">
+        <div class="bb-value-name">Audace</div>
+        <div class="bb-value-desc">On teste avant de théoriser. L'IA se comprend en la pratiquant, pas en la commentant.</div>
+      </div>
+      <div class="bb-value">
+        <div class="bb-value-name">Agilité</div>
+        <div class="bb-value-desc">Des cycles courts, des livrables concrets chaque semaine, zéro usine à gaz.</div>
+      </div>
+      <div class="bb-value">
+        <div class="bb-value-name">Créativité</div>
+        <div class="bb-value-desc">L'IA comme terrain de jeu — on explore les usages que personne n'a encore essayés.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bb-section">
+    <div class="bb-label">Ton de marque</div>
+    <div class="bb-grid">
+      <div>
+        <div style="font-size:12px; font-weight:700; color:var(--ink); margin-bottom:10px;">On parle comme ça</div>
+        <div class="bb-tone-item"><div class="bb-tone-dot"></div><div class="bb-tone-text">Direct, énergique, jamais ennuyeux</div></div>
+        <div class="bb-tone-item"><div class="bb-tone-dot"></div><div class="bb-tone-text">On tutoie nos clients, quand le contexte le permet</div></div>
+        <div class="bb-tone-item"><div class="bb-tone-dot"></div><div class="bb-tone-text">On montre, on ne promet pas</div></div>
+        <div class="bb-tone-item"><div class="bb-tone-dot"></div><div class="bb-tone-text">Des punchlines plutôt que des paragraphes</div></div>
+      </div>
+      <div>
+        <div style="font-size:12px; font-weight:700; color:var(--ink); margin-bottom:10px;">On évite absolument</div>
+        <div class="bb-tone-item"><div class="bb-tone-dot off"></div><div class="bb-tone-text off">Le jargon corporate creux</div></div>
+        <div class="bb-tone-item"><div class="bb-tone-dot off"></div><div class="bb-tone-text off">Les études de cas interminables</div></div>
+        <div class="bb-tone-item"><div class="bb-tone-dot off"></div><div class="bb-tone-text off">Se prendre trop au sérieux</div></div>
+        <div class="bb-tone-item"><div class="bb-tone-dot off"></div><div class="bb-tone-text off">Les présentations à 40 slides</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bb-section">
+    <div class="bb-label">Palette de couleurs</div>
+    <div class="bb-palette-row">
+      <div class="bb-swatch" style="background:#FAFAFA; color:#15152B; border:1px solid #E7E4F5;">#FAFAFA<small>Blanc cassé</small></div>
+      <div class="bb-swatch" style="background:#15152B; color:#fff;">#15152B<small>Encre</small></div>
+      <div class="bb-swatch" style="background:#7C3AED; color:#fff;">#7C3AED<small>Violet électrique</small></div>
+      <div class="bb-swatch" style="background:#FF6B4A; color:#fff;">#FF6B4A<small>Corail</small></div>
+      <div class="bb-swatch" style="background:#00D9A3; color:#15152B;">#00D9A3<small>Menthe</small></div>
+    </div>
+  </div>
+
+  <div class="bb-section">
+    <div class="bb-label">Typographie</div>
+    <div class="bb-grid">
+      <div>
+        <div class="bb-type-sample">Space Grotesk</div>
+        <div class="bb-type-note">600 / 700 · Titres, nom de marque, accroches</div>
+      </div>
+      <div>
+        <div class="bb-type-sample body">Inter</div>
+        <div class="bb-type-note">400 / 500 / 600 · Corps de texte, UI, labels</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bb-section">
+    <div class="bb-label">Ambiance visuelle</div>
+    <div class="bb-offer-desc" style="font-size:13px;">Énergique et contrastée — fond clair, formes géométriques franches, couleurs vives posées en aplats (jamais en dégradé mou). Référence visuelle : studio créatif tech, pas cabinet feutré. L'opposé volontaire d'un positionnement "luxe sobre" : ici, la marque se veut vive, directe, un peu provocante.</div>
+  </div>
+
+  <div class="bb-footer">
+    NOVA · BRAND BOOK · EXEMPLE ACADEMY · NOV. 2026
+  </div>
+</div>
+</body>
+</html>
